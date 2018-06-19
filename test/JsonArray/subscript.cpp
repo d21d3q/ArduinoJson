@@ -8,7 +8,7 @@
 
 TEST_CASE("JsonArray::operator[]") {
   DynamicJsonDocument doc;
-  JsonArray& _array = doc.to<JsonArray>();
+  JsonArrayRef _array = doc.to<JsonArray>();
   _array.add(0);
 
   SECTION("int") {

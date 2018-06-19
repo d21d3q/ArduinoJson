@@ -17,6 +17,21 @@ class JsonArrayRef {
     return _array->add(value);
   }
 
+  template <typename T, size_t N>
+  bool copyFrom(T (&array)[N]) {
+    return _array->copyFrom(array, N);
+  }
+
+  template <typename T>
+  bool copyFrom(T* array, size_t len) {
+    return _array->copyFrom(array, len);
+  }
+
+  template <typename T, size_t N1, size_t N2>
+  bool copyFrom(T (&array)[N1][N2]) {
+    return _array->copyFrom(array);
+  }
+
   JsonArrayRef createNestedArray() {
     return _array->createNestedArray();
   }
@@ -39,6 +54,11 @@ class JsonArrayRef {
 
   bool success() const {
     return _array->success();
+  }
+
+  template <typename Visitor>
+  void visit(Visitor& visitor) const {
+    return _array->visit(visitor);
   }
 
  private:

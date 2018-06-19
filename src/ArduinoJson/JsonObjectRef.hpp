@@ -89,17 +89,9 @@ class JsonObjectRef {
     return _object->operator[](key);
   }
 
-  // const Internals::JsonObjectSubscript operator[](size_t index) const {
-  //   return _object->operator[](index);
-  // }
-
-  // Internals::JsonObjectSubscript operator[](size_t index) {
-  //   return _object->operator[](index);
-  // }
-
-  // bool operator==(const JsonObjectRef& rhs) const {
-  //   return _object == rhs._object;
-  // }
+  bool operator==(const JsonObjectRef& rhs) const {
+    return _object == rhs._object;
+  }
 
   void remove(iterator it) {
     _object->remove(it);
@@ -132,8 +124,8 @@ class JsonObjectRef {
   JsonObject* _object;
 };
 
-// inline JsonVariant::JsonVariant(JsonObjectRef Object) {
-//   _content.asObject = Object._object;
-//   _type = Internals::JSON_Object;
-// }
+inline JsonVariant::JsonVariant(JsonObjectRef object) {
+  _content.asObject = object._object;
+  _type = Internals::JSON_OBJECT;
+}
 }  // namespace ArduinoJson

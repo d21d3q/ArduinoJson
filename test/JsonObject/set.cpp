@@ -8,7 +8,7 @@
 
 TEST_CASE("JsonObject::set()") {
   DynamicJsonDocument doc;
-  JsonObject& obj = doc.to<JsonObject>();
+  JsonObjectRef obj = doc.to<JsonObject>();
 
   SECTION("int") {
     obj.set("hello", 123);
@@ -44,29 +44,29 @@ TEST_CASE("JsonObject::set()") {
 
   SECTION("nested array") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
 
     obj.set("hello", arr);
 
-    REQUIRE(&arr == &obj["hello"].as<JsonArray>());
+    REQUIRE(arr == obj["hello"].as<JsonArray>());
     REQUIRE(obj["hello"].is<JsonArray&>());
     REQUIRE_FALSE(obj["hello"].is<JsonObject&>());
   }
 
   SECTION("nested object") {
     DynamicJsonDocument doc2;
-    JsonObject& obj2 = doc2.to<JsonObject>();
+    JsonObjectRef obj2 = doc2.to<JsonObject>();
 
     obj.set("hello", obj2);
 
-    REQUIRE(&obj2 == &obj["hello"].as<JsonObject>());
+    REQUIRE(obj2 == obj["hello"].as<JsonObject>());
     REQUIRE(obj["hello"].is<JsonObject&>());
     REQUIRE_FALSE(obj["hello"].is<JsonArray&>());
   }
 
   SECTION("array subscript") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
     arr.add(42);
 
     obj.set("a", arr[0]);
@@ -76,7 +76,7 @@ TEST_CASE("JsonObject::set()") {
 
   SECTION("object subscript") {
     DynamicJsonDocument doc2;
-    JsonObject& obj2 = doc2.to<JsonObject>();
+    JsonObjectRef obj2 = doc2.to<JsonObject>();
     obj2.set("x", 42);
 
     obj.set("a", obj2["x"]);

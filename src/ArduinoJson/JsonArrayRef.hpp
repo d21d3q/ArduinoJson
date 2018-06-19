@@ -17,8 +17,28 @@ class JsonArrayRef {
     return _array->add(value);
   }
 
+  JsonArrayRef createNestedArray() {
+    return _array->createNestedArray();
+  }
+
+  JsonObject& createNestedObject() {
+    return _array->createNestedObject();
+  }
+
   const Internals::JsonArraySubscript operator[](size_t index) const {
     return _array->operator[](index);
+  }
+
+  bool operator==(const JsonArrayRef& rhs) const {
+    return _array == rhs._array;
+  }
+
+  size_t size() const {
+    return _array->size();
+  }
+
+  bool success() const {
+    return _array->success();
   }
 
  private:

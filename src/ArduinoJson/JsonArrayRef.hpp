@@ -32,6 +32,22 @@ class JsonArrayRef {
     return _array->copyFrom(array);
   }
 
+  template <typename T, size_t N>
+  size_t copyTo(T (&array)[N]) const {
+    return _array->copyTo(array, N);
+  }
+
+  template <typename T>
+  size_t copyTo(T* array, size_t len) const {
+    return _array->copyTo(array, len);
+  }
+
+  // Exports a 2D array
+  template <typename T, size_t N1, size_t N2>
+  void copyTo(T (&array)[N1][N2]) const {
+    return _array->copyTo(array);
+  }
+
   JsonArrayRef createNestedArray() {
     return _array->createNestedArray();
   }

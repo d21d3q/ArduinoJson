@@ -91,6 +91,11 @@ class JsonArrayRef {
     _array->remove(index);
   }
 
+  template <typename T>
+  bool set(size_t index, const T& value) {
+    return _array->set(index, value);
+  }
+
   size_t size() const {
     return _array->size();
   }

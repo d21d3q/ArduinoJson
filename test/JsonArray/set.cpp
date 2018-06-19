@@ -9,7 +9,7 @@ using namespace Catch::Matchers;
 
 TEST_CASE("JsonArray::set()") {
   DynamicJsonDocument doc;
-  JsonArray& _array = doc.to<JsonArray>();
+  JsonArrayRef _array = doc.to<JsonArray>();
   _array.add(0);
 
   SECTION("int") {
@@ -46,7 +46,7 @@ TEST_CASE("JsonArray::set()") {
 
     _array.set(0, arr);
 
-    REQUIRE(&arr == &_array[0].as<JsonArray&>());
+    REQUIRE(arr == _array[0].as<JsonArray>());
     REQUIRE(_array[0].is<JsonArray&>());
     REQUIRE_FALSE(_array[0].is<int>());
   }

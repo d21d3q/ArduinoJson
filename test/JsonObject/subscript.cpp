@@ -53,14 +53,14 @@ TEST_CASE("JsonObject::operator[]") {
 
   SECTION("array") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
 
     obj["hello"] = arr;
 
-    REQUIRE(&arr == &obj["hello"].as<JsonArray&>());
-    REQUIRE(&arr == &obj["hello"].as<JsonArray>());  // <- short hand
-    REQUIRE(&arr == &obj["hello"].as<const JsonArray&>());
-    REQUIRE(&arr == &obj["hello"].as<const JsonArray>());  // <- short hand
+    REQUIRE(arr == obj["hello"].as<JsonArray&>());
+    REQUIRE(arr == obj["hello"].as<JsonArray>());  // <- short hand
+    // REQUIRE(arr == obj["hello"].as<const JsonArray&>());
+    // REQUIRE(arr == obj["hello"].as<const JsonArray>());  // <- short hand
     REQUIRE(true == obj["hello"].is<JsonArray&>());
     REQUIRE(true == obj["hello"].is<JsonArray>());
     REQUIRE(true == obj["hello"].is<const JsonArray&>());
@@ -87,7 +87,7 @@ TEST_CASE("JsonObject::operator[]") {
 
   SECTION("array subscript") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
     arr.add(42);
 
     obj["a"] = arr[0];

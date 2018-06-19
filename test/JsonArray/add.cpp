@@ -40,12 +40,12 @@ TEST_CASE("JsonArray::add()") {
 
   SECTION("nested array") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
 
     _array.add(arr);
 
-    REQUIRE(&arr == &_array[0].as<JsonArray&>());
-    REQUIRE(_array[0].is<JsonArray&>());
+    REQUIRE(arr == _array[0].as<JsonArray>());
+    REQUIRE(_array[0].is<JsonArray>());
     REQUIRE_FALSE(_array[0].is<int>());
   }
 

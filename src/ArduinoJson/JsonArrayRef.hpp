@@ -9,6 +9,8 @@
 namespace ArduinoJson {
 
 class JsonArrayRef {
+  friend class JsonVariant;
+
  public:
   typedef JsonArray::iterator iterator;
   typedef JsonArray::const_iterator const_iterator;
@@ -116,4 +118,9 @@ class JsonArrayRef {
  private:
   JsonArray* _array;
 };
+
+inline JsonVariant::JsonVariant(JsonArrayRef array) {
+  _content.asArray = array._array;
+  _type = Internals::JSON_ARRAY;
+}
 }  // namespace ArduinoJson

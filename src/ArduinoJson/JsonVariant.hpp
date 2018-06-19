@@ -18,6 +18,7 @@ namespace ArduinoJson {
 
 // Forward declarations.
 class JsonArray;
+class JsonArrayRef;
 class JsonObject;
 
 // A variant that can be a any value serializable to a JSON value.
@@ -113,6 +114,8 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
   // CAUTION: we are lying about constness, because the object can be modified
   // if the variant is converted back to a JsonObject&
   JsonVariant(const JsonObject &object);
+
+  JsonVariant(JsonArrayRef array);
 
   JsonVariant(JsonArray *array) {
     _content.asArray = array;

@@ -13,7 +13,7 @@ TEST_CASE("JsonArray::invalid()") {
   }
 
   SECTION("AddFails") {
-    JsonArray& array = JsonArray::invalid();
+    JsonArrayRef array = JsonArray::invalid();
     array.add(1);
     REQUIRE(0 == array.size());
   }

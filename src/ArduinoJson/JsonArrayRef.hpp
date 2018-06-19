@@ -17,6 +17,22 @@ class JsonArrayRef {
     return _array->add(value);
   }
 
+  JsonArray::iterator begin() {
+    return _array->begin();
+  }
+
+  JsonArray::const_iterator begin() const {
+    return _array->begin();
+  }
+
+  JsonArray::iterator end() {
+    return _array->end();
+  }
+
+  JsonArray::const_iterator end() const {
+    return _array->end();
+  }
+
   template <typename T, size_t N>
   bool copyFrom(T (&array)[N]) {
     return _array->copyFrom(array, N);

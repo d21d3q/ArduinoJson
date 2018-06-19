@@ -10,6 +10,9 @@ namespace ArduinoJson {
 
 class JsonArrayRef {
  public:
+  typedef JsonArray::iterator iterator;
+  typedef JsonArray::const_iterator const_iterator;
+
   JsonArrayRef(JsonArray& arr) : _array(&arr) {}
 
   template <typename T>
@@ -17,19 +20,19 @@ class JsonArrayRef {
     return _array->add(value);
   }
 
-  JsonArray::iterator begin() {
+  iterator begin() {
     return _array->begin();
   }
 
-  JsonArray::const_iterator begin() const {
+  const_iterator begin() const {
     return _array->begin();
   }
 
-  JsonArray::iterator end() {
+  iterator end() {
     return _array->end();
   }
 
-  JsonArray::const_iterator end() const {
+  const_iterator end() const {
     return _array->end();
   }
 
@@ -78,6 +81,14 @@ class JsonArrayRef {
 
   bool operator==(const JsonArrayRef& rhs) const {
     return _array == rhs._array;
+  }
+
+  void remove(iterator it) {
+    _array->remove(it);
+  }
+
+  void remove(size_t index) {
+    _array->remove(index);
   }
 
   size_t size() const {

@@ -54,6 +54,11 @@ class JsonObjectRef {
     return _object->get<TValue>(key);
   }
 
+  template <typename TValue, typename TString>
+  bool is(const TString& key) const {
+    return _object->is<TValue>(key);
+  }
+
   // Gets or sets the value associated with the specified key.
   //
   // JsonObjectSubscript operator[](TKey)

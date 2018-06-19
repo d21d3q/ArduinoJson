@@ -63,7 +63,7 @@ TEST_CASE("JsonArray::add()") {
   SECTION("array subscript") {
     const char* str = "hello";
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
     arr.add(str);
 
     _array.add(arr[0]);

@@ -42,12 +42,12 @@ TEST_CASE("JsonArray::set()") {
 
   SECTION("nested array") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
 
     _array.set(0, arr);
 
     REQUIRE(arr == _array[0].as<JsonArray>());
-    REQUIRE(_array[0].is<JsonArray&>());
+    REQUIRE(_array[0].is<JsonArray>());
     REQUIRE_FALSE(_array[0].is<int>());
   }
 
@@ -64,7 +64,7 @@ TEST_CASE("JsonArray::set()") {
 
   SECTION("array subscript") {
     DynamicJsonDocument doc2;
-    JsonArray& arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArray>();
     arr.add("hello");
 
     _array.set(0, arr[0]);

@@ -19,3 +19,4 @@
 #include "ArduinoJson/JsonVariantImpl.hpp"
 
 #include "ArduinoJson/JsonArrayRef.hpp"
+#include "ArduinoJson/JsonObjectRef.hpp"

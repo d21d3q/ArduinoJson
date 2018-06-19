@@ -7,7 +7,7 @@
 
 TEST_CASE("JsonArray::add()") {
   DynamicJsonDocument doc;
-  JsonArray& _array = doc.to<JsonArray>();
+  JsonArrayRef _array = doc.to<JsonArray>();
 
   SECTION("int") {
     _array.add(123);

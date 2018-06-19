@@ -79,6 +79,10 @@ class JsonArrayRef {
     return _array->operator[](index);
   }
 
+  Internals::JsonArraySubscript operator[](size_t index) {
+    return _array->operator[](index);
+  }
+
   bool operator==(const JsonArrayRef& rhs) const {
     return _array == rhs._array;
   }

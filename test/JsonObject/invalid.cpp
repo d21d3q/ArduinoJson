@@ -8,7 +8,7 @@
 using namespace Catch::Matchers;
 
 TEST_CASE("JsonObject::invalid()") {
-  JsonObject& obj = JsonObject::invalid();
+  JsonObjectRef obj = JsonObject::invalid();
 
   SECTION("SubscriptFails") {
     REQUIRE_FALSE(obj["key"].success());

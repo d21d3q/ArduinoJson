@@ -38,18 +38,55 @@ class JsonObjectRef {
     return _object->end();
   }
 
-  // JsonObjectRef createNestedObject() {
-  //   return _object->createNestedObject();
-  // }
+  template <typename TKey>
+  JsonArrayRef createNestedArray(const TKey& key) {
+    return _object->createNestedArray(key);
+  }
 
-  // JsonObject& createNestedObject() {
-  //   return _object->createNestedObject();
-  // }
+  template <typename TKey>
+  JsonObjectRef createNestedObject(const TKey& key) {
+    return _object->createNestedObject(key);
+  }
 
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(
       const TString& key) const {
     return _object->get<TValue>(key);
+  }
+
+  // Gets or sets the value associated with the specified key.
+  //
+  // JsonObjectSubscript operator[](TKey)
+  // TKey = const std::string&, const String&
+  template <typename TString>
+  Internals::JsonObjectSubscript<const TString&> operator[](
+      const TString& key) {
+    return _object->operator[](key);
+  }
+  //
+  // JsonObjectSubscript operator[](TKey)
+  // TKey = char*, const char*, char[], const char[N], const FlashStringHelper*
+  template <typename TString>
+  Internals::JsonObjectSubscript<TString*> operator[](TString* key) {
+    return _object->operator[](key);
+  }
+
+  // Gets the value associated with the specified key.
+  //
+  // const JsonObjectSubscript operator[](TKey) const;
+  // TKey = const std::string&, const String&
+  template <typename TString>
+  const Internals::JsonObjectSubscript<const TString&> operator[](
+      const TString& key) const {
+    return _object->operator[](key);
+  }
+  //
+  // const JsonObjectSubscript operator[](TKey) const;
+  // TKey = const char*, const char[N], const FlashStringHelper*
+  template <typename TString>
+  const Internals::JsonObjectSubscript<TString*> operator[](
+      TString* key) const {
+    return _object->operator[](key);
   }
 
   // const Internals::JsonObjectSubscript operator[](size_t index) const {
@@ -78,9 +115,9 @@ class JsonObjectRef {
     return _object->set(key, value);
   }
 
-  // size_t size() const {
-  //   return _object->size();
-  // }
+  size_t size() const {
+    return _object->size();
+  }
 
   bool success() const {
     return _object->success();

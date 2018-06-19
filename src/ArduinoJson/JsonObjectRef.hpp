@@ -46,6 +46,12 @@ class JsonObjectRef {
   //   return _object->createNestedObject();
   // }
 
+  template <typename TValue, typename TString>
+  typename Internals::JsonVariantAs<TValue>::type get(
+      const TString& key) const {
+    return _object->get<TValue>(key);
+  }
+
   // const Internals::JsonObjectSubscript operator[](size_t index) const {
   //   return _object->operator[](index);
   // }

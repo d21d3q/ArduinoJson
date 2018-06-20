@@ -33,7 +33,7 @@ TEST_CASE("JsonVariant::success()") {
   }
 
   SECTION("ReturnsFalse_WhenInvalidArray") {
-    JsonVariant variant = JsonArray::invalid();
+    JsonVariant variant = JsonArrayRef();
     REQUIRE(false == variant.success());
   }
 

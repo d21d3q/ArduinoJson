@@ -5,11 +5,14 @@
 #pragma once
 
 #include "./JsonArray.hpp"
-#include "JsonArraySubscript.hpp"
 
 namespace ArduinoJson {
 
 class JsonObjectRef;
+
+namespace Internals {
+class JsonArraySubscript;
+}
 
 class JsonArrayRef {
   friend class JsonVariant;
@@ -107,18 +110,26 @@ class JsonArrayRef {
 
   JsonObjectRef createNestedObject();
 
-  const Internals::JsonArraySubscript operator[](size_t index) const {
-    if (!_array) return Internals::JsonArraySubscript(JsonArray::invalid(), 0);
-    return _array->operator[](index);
-  }
+  Internals::JsonArraySubscript operator[](size_t index);
 
-  Internals::JsonArraySubscript operator[](size_t index) {
-    if (!_array) return Internals::JsonArraySubscript(JsonArray::invalid(), 0);
-    return _array->operator[](index);
-  }
+  const Internals::JsonArraySubscript operator[](size_t index) const;
 
   bool operator==(const JsonArrayRef& rhs) const {
     return _array == rhs._array;
+  }
+
+  // Gets the value at the specified index.
+  template <typename T>
+  typename Internals::JsonVariantAs<T>::type get(size_t index) const {
+    const_iterator it = begin() += index;
+    return it != end() ? it->as<T>() : Internals::JsonVariantDefault<T>::get();
+  }
+
+  // Check the type of the value at specified index.
+  template <typename T>
+  bool is(size_t index) const {
+    const_iterator it = begin() += index;
+    return it != end() ? it->is<T>() : false;
   }
 
   void remove(iterator it) {

@@ -7,7 +7,7 @@
 
 TEST_CASE("JsonArray::add()") {
   DynamicJsonDocument doc;
-  JsonArrayRef _array = doc.to<JsonArray>();
+  JsonArrayRef _array = doc.to<JsonArrayRef>();
 
   SECTION("int") {
     _array.add(123);
@@ -40,12 +40,12 @@ TEST_CASE("JsonArray::add()") {
 
   SECTION("nested array") {
     DynamicJsonDocument doc2;
-    JsonArrayRef arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArrayRef>();
 
     _array.add(arr);
 
-    REQUIRE(arr == _array[0].as<JsonArray>());
-    REQUIRE(_array[0].is<JsonArray>());
+    REQUIRE(arr == _array[0].as<JsonArrayRef>());
+    REQUIRE(_array[0].is<JsonArrayRef>());
     REQUIRE_FALSE(_array[0].is<int>());
   }
 
@@ -63,7 +63,7 @@ TEST_CASE("JsonArray::add()") {
   SECTION("array subscript") {
     const char* str = "hello";
     DynamicJsonDocument doc2;
-    JsonArrayRef arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArrayRef>();
     arr.add(str);
 
     _array.add(arr[0]);

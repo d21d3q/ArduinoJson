@@ -8,7 +8,7 @@
 TEST_CASE("JsonArray::copyFrom()") {
   SECTION("OneDimension") {
     DynamicJsonDocument doc;
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     char json[32];
     int source[] = {1, 2, 3};
 
@@ -22,7 +22,7 @@ TEST_CASE("JsonArray::copyFrom()") {
   SECTION("OneDimension_JsonBufferTooSmall") {
     const size_t SIZE = JSON_ARRAY_SIZE(2);
     StaticJsonDocument<SIZE> doc;
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     char json[32];
     int source[] = {1, 2, 3};
 
@@ -35,7 +35,7 @@ TEST_CASE("JsonArray::copyFrom()") {
 
   SECTION("TwoDimensions") {
     DynamicJsonDocument doc;
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     char json[32];
     int source[][3] = {{1, 2, 3}, {4, 5, 6}};
 
@@ -50,7 +50,7 @@ TEST_CASE("JsonArray::copyFrom()") {
     const size_t SIZE =
         JSON_ARRAY_SIZE(2) + JSON_ARRAY_SIZE(3) + JSON_ARRAY_SIZE(2);
     StaticJsonDocument<SIZE> doc;
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     char json[32];
     int source[][3] = {{1, 2, 3}, {4, 5, 6}};
 

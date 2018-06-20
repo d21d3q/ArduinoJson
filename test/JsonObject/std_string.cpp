@@ -60,7 +60,7 @@ TEST_CASE("std::string") {
   SECTION("set(JsonArraySubscript)") {
     JsonObjectRef obj = doc.to<JsonObjectRef>();
     DynamicJsonDocument doc2;
-    JsonArray &arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArrayRef>();
     arr.add("world");
 
     obj.set(std::string("hello"), arr[0]);

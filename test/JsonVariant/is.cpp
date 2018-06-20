@@ -6,10 +6,10 @@
 #include <catch.hpp>
 
 void checkIsArray(JsonVariant var) {
-  REQUIRE(var.is<JsonArray>());
-  REQUIRE(var.is<JsonArray&>());
-  REQUIRE(var.is<const JsonArray>());
-  REQUIRE(var.is<const JsonArray&>());
+  REQUIRE(var.is<JsonArrayRef>());
+  REQUIRE(var.is<JsonArrayRef>());
+  REQUIRE(var.is<const JsonArrayRef>());
+  REQUIRE(var.is<const JsonArrayRef>());
 
   REQUIRE_FALSE(var.is<bool>());
   REQUIRE_FALSE(var.is<double>());
@@ -28,7 +28,7 @@ void checkIsBool(JsonVariant var) {
   REQUIRE_FALSE(var.is<int>());
   REQUIRE_FALSE(var.is<long>());
   REQUIRE_FALSE(var.is<const char*>());
-  REQUIRE_FALSE(var.is<JsonArray>());
+  REQUIRE_FALSE(var.is<JsonArrayRef>());
   REQUIRE_FALSE(var.is<JsonObjectRef>());
 }
 
@@ -40,7 +40,7 @@ void checkIsFloat(JsonVariant var) {
   REQUIRE_FALSE(var.is<int>());
   REQUIRE_FALSE(var.is<long>());
   REQUIRE_FALSE(var.is<const char*>());
-  REQUIRE_FALSE(var.is<JsonArray>());
+  REQUIRE_FALSE(var.is<JsonArrayRef>());
   REQUIRE_FALSE(var.is<JsonObjectRef>());
 }
 
@@ -52,7 +52,7 @@ void checkIsInteger(JsonVariant var) {
 
   REQUIRE_FALSE(var.is<bool>());
   REQUIRE_FALSE(var.is<const char*>());
-  REQUIRE_FALSE(var.is<JsonArray>());
+  REQUIRE_FALSE(var.is<JsonArrayRef>());
   REQUIRE_FALSE(var.is<JsonObjectRef>());
 }
 
@@ -64,14 +64,14 @@ void checkIsString(JsonVariant var) {
   REQUIRE_FALSE(var.is<double>());
   REQUIRE_FALSE(var.is<float>());
   REQUIRE_FALSE(var.is<long>());
-  REQUIRE_FALSE(var.is<JsonArray>());
+  REQUIRE_FALSE(var.is<JsonArrayRef>());
   REQUIRE_FALSE(var.is<JsonObjectRef>());
 }
 
 TEST_CASE("JsonVariant::is()") {
   SECTION("JsonArray") {
     DynamicJsonDocument doc;
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     checkIsArray(array);
   }
 

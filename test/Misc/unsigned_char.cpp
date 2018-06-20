@@ -231,7 +231,7 @@ TEST_CASE("unsigned char[]") {
       unsigned char value[] = "world";
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArray>();
+      JsonArrayRef arr = doc.to<JsonArrayRef>();
       arr.add(value);
 
       REQUIRE(std::string("world") == arr[0]);
@@ -241,7 +241,7 @@ TEST_CASE("unsigned char[]") {
       unsigned char value[] = "world";
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArray>();
+      JsonArrayRef arr = doc.to<JsonArrayRef>();
       arr.add("hello");
       arr.set(0, value);
 
@@ -254,7 +254,7 @@ TEST_CASE("unsigned char[]") {
       unsigned char value[] = "world";
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArray>();
+      JsonArrayRef arr = doc.to<JsonArrayRef>();
       arr.add("hello");
       arr[0].set(value);
 
@@ -265,7 +265,7 @@ TEST_CASE("unsigned char[]") {
       unsigned char value[] = "world";
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArray>();
+      JsonArrayRef arr = doc.to<JsonArrayRef>();
       arr.add("hello");
       arr[0] = value;
 

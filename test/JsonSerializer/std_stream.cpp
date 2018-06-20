@@ -45,7 +45,7 @@ TEST_CASE("operator<<(std::ostream)") {
   }
 
   SECTION("JsonArray") {
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     array.add("value");
 
     os << array;
@@ -54,7 +54,7 @@ TEST_CASE("operator<<(std::ostream)") {
   }
 
   SECTION("JsonArraySubscript") {
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     array.add("value");
 
     os << array[0];

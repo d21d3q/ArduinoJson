@@ -207,8 +207,10 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
   //
   // JsonArrayRef as<JsonArrayRef>();
   template <typename T>
-  typename Internals::enable_if<Internals::is_same<T, JsonArrayRef>::value,
-                                JsonArrayRef>::type
+  typename Internals::enable_if<
+      Internals::is_same<typename Internals::remove_const<T>::type,
+                         JsonArrayRef>::value,
+      JsonArrayRef>::type
   as() const {
     return variantAsArray();
   }
@@ -301,12 +303,16 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
   // bool is<JsonArray> const;
   // bool is<JsonArray&> const;
   // bool is<const JsonArray&> const;
+  // bool is<JsonArrayRef> const;
+  // bool is<const JsonArrayRef> const;
   template <typename T>
   typename Internals::enable_if<
       Internals::is_same<
           typename Internals::remove_const<
               typename Internals::remove_reference<T>::type>::type,
-          JsonArray>::value,
+          JsonArray>::value ||
+          Internals::is_same<typename Internals::remove_const<T>::type,
+                             JsonArrayRef>::value,
       bool>::type
   is() const {
     return variantIsArray();

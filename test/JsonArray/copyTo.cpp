@@ -12,7 +12,7 @@ TEST_CASE("JsonArray::copyTo()") {
     char json[] = "[1,2,3]";
     DeserializationError err = deserializeJson(doc, json);
     REQUIRE(err == DeserializationError::Ok);
-    JsonArrayRef array = doc.as<JsonArray>();
+    JsonArrayRef array = doc.as<JsonArrayRef>();
 
     int destination[4] = {0};
     size_t result = array.copyTo(destination);
@@ -28,7 +28,7 @@ TEST_CASE("JsonArray::copyTo()") {
     char json[] = "[1,2,3]";
     DeserializationError err = deserializeJson(doc, json);
     REQUIRE(err == DeserializationError::Ok);
-    JsonArrayRef array = doc.as<JsonArray>();
+    JsonArrayRef array = doc.as<JsonArrayRef>();
 
     int destination[2] = {0};
     size_t result = array.copyTo(destination);
@@ -43,7 +43,7 @@ TEST_CASE("JsonArray::copyTo()") {
 
     DeserializationError err = deserializeJson(doc, json);
     REQUIRE(err == DeserializationError::Ok);
-    JsonArrayRef array = doc.as<JsonArray>();
+    JsonArrayRef array = doc.as<JsonArrayRef>();
 
     int destination[3][2] = {{0}};
     array.copyTo(destination);

@@ -60,7 +60,7 @@ TEST_CASE("serializeJsonPretty(JsonObject)") {
     JsonObjectRef nested1 = obj.createNestedObject("key1");
     nested1["a"] = 1;
 
-    JsonArray& nested2 = obj.createNestedArray("key2");
+    JsonArrayRef nested2 = obj.createNestedArray("key2");
     nested2.add(2);
 
     check(obj,

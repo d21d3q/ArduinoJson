@@ -8,7 +8,7 @@
 TEST_CASE("JsonVariant::operator[]") {
   SECTION("Array") {
     DynamicJsonDocument doc;
-    JsonArrayRef array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArrayRef>();
     array.add("element at index 0");
     array.add("element at index 1");
 
@@ -64,7 +64,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("ArraySetValue") {
     DynamicJsonDocument doc;
-    JsonArrayRef arr = doc.to<JsonArray>();
+    JsonArrayRef arr = doc.to<JsonArrayRef>();
     arr.add("hello");
     JsonVariant var = arr;
     var[0] = "world";

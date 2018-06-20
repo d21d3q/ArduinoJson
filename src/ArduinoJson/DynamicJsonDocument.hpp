@@ -44,10 +44,10 @@ class DynamicJsonDocument {
     return *object;
   }
 
-  // JsonArray& to<JsonArray>()
+  // JsonArrayRef to<JsonArrayRef>()
   template <typename T>
-  typename Internals::enable_if<Internals::is_same<T, JsonArray>::value,
-                                JsonArray&>::type
+  typename Internals::enable_if<Internals::is_same<T, JsonArrayRef>::value,
+                                JsonArrayRef>::type
   to() {
     clear();
     JsonArray* array = new (&_buffer) JsonArray(&_buffer);

@@ -28,7 +28,7 @@ static void check(const JsonArrayRef array, const char (&expected_data)[N]) {
 
 TEST_CASE("serialize MsgPack array") {
   DynamicJsonDocument doc;
-  JsonArrayRef array = doc.to<JsonArray>();
+  JsonArrayRef array = doc.to<JsonArrayRef>();
 
   SECTION("empty") {
     check(array, "\x90");

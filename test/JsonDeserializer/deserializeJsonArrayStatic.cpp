@@ -68,7 +68,7 @@ TEST_CASE("deserialize JSON array with a StaticJsonDocument") {
     deserializeJson(doc, input);
     deserializeJson(doc, "[]");
 
-    JsonArrayRef arr = doc.as<JsonArray>();
+    JsonArrayRef arr = doc.as<JsonArrayRef>();
     REQUIRE(arr.size() == 0);
     REQUIRE(doc.memoryUsage() == JSON_ARRAY_SIZE(0));
   }
@@ -78,10 +78,10 @@ TEST_CASE("deserialize JSON array with a StaticJsonDocument") {
     char input[] = "[1,2]";
 
     DeserializationError err = deserializeJson(doc, input);
-    JsonArrayRef arr = doc.as<JsonArray>();
+    JsonArrayRef arr = doc.as<JsonArrayRef>();
 
     REQUIRE(err == DeserializationError::Ok);
-    REQUIRE(doc.is<JsonArray>());
+    REQUIRE(doc.is<JsonArrayRef>());
     REQUIRE(doc.memoryUsage() == JSON_ARRAY_SIZE(2));
     REQUIRE(arr[0] == 1);
     REQUIRE(arr[1] == 2);

@@ -7,7 +7,7 @@
 
 TEST_CASE("serialize JsonArray to std::string") {
   DynamicJsonDocument doc;
-  JsonArray &array = doc.to<JsonArray>();
+  JsonArrayRef array = doc.to<JsonArrayRef>();
   array.add(4);
   array.add(2);
 

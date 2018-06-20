@@ -7,7 +7,7 @@
 
 TEST_CASE("JsonArray::size()") {
   DynamicJsonDocument doc;
-  JsonArrayRef _array = doc.to<JsonArray>();
+  JsonArrayRef _array = doc.to<JsonArrayRef>();
 
   SECTION("increases after add()") {
     _array.add("hello");

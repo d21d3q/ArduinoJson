@@ -8,7 +8,7 @@
 
 TEST_CASE("JsonArray::operator[]") {
   DynamicJsonDocument doc;
-  JsonArrayRef _array = doc.to<JsonArray>();
+  JsonArrayRef _array = doc.to<JsonArrayRef>();
   _array.add(0);
 
   SECTION("int") {
@@ -53,15 +53,15 @@ TEST_CASE("JsonArray::operator[]") {
 
   SECTION("nested array") {
     DynamicJsonDocument doc2;
-    JsonArrayRef arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArrayRef>();
 
     _array[0] = arr;
 
-    REQUIRE(arr == _array[0].as<JsonArray&>());
-    REQUIRE(arr == _array[0].as<JsonArray>());  // <- short hand
-    // REQUIRE(arr == _array[0].as<const JsonArray&>());
-    // REQUIRE(arr == _array[0].as<const JsonArray>());  // <- short hand
-    REQUIRE(true == _array[0].is<JsonArray>());
+    REQUIRE(arr == _array[0].as<JsonArrayRef>());
+    REQUIRE(arr == _array[0].as<JsonArrayRef>());  // <- short hand
+    // REQUIRE(arr == _array[0].as<const JsonArrayRef>());
+    // REQUIRE(arr == _array[0].as<const JsonArrayRef>());  // <- short hand
+    REQUIRE(true == _array[0].is<JsonArrayRef>());
     REQUIRE(false == _array[0].is<int>());
   }
 
@@ -79,7 +79,7 @@ TEST_CASE("JsonArray::operator[]") {
 
   SECTION("array subscript") {
     DynamicJsonDocument doc2;
-    JsonArrayRef arr = doc2.to<JsonArray>();
+    JsonArrayRef arr = doc2.to<JsonArrayRef>();
     const char* str = "hello";
 
     arr.add(str);

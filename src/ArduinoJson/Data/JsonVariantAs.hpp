@@ -5,6 +5,8 @@
 #pragma once
 
 namespace ArduinoJson {
+class JsonArrayRef;
+
 namespace Internals {
 
 // A metafunction that returns the type of the value returned by
@@ -25,6 +27,11 @@ struct JsonVariantAs<JsonArray> {
 };
 
 template <>
+struct JsonVariantAs<JsonArrayRef> {
+  typedef JsonArrayRef type;
+};
+
+template <>
 struct JsonVariantAs<const JsonArray> {
   typedef const JsonArray& type;
 };
@@ -38,5 +45,5 @@ template <>
 struct JsonVariantAs<const JsonObject> {
   typedef const JsonObject& type;
 };
-}
-}
+}  // namespace Internals
+}  // namespace ArduinoJson

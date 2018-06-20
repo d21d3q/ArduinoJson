@@ -15,6 +15,7 @@ class JsonArrayRef {
   typedef JsonArray::iterator iterator;
   typedef JsonArray::const_iterator const_iterator;
 
+  JsonArrayRef() : _array(&JsonArray::invalid()) {}
   JsonArrayRef(JsonArray& arr) : _array(&arr) {}
 
   template <typename T>

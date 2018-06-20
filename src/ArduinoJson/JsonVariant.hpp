@@ -205,6 +205,14 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return variantAsArray();
   }
   //
+  // JsonArrayRef as<JsonArrayRef>();
+  template <typename T>
+  typename Internals::enable_if<Internals::is_same<T, JsonArrayRef>::value,
+                                JsonArrayRef>::type
+  as() const {
+    return variantAsArray();
+  }
+  //
   // JsonObject& as<JsonObject> const;
   // JsonObject& as<JsonObject&> const;
   template <typename T>

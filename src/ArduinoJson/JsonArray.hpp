@@ -102,14 +102,6 @@ class JsonArray : public Internals::ReferenceType,
   }
   using Internals::List<JsonVariant>::remove;
 
-  // Returns a reference an invalid JsonArray.
-  // This object is meant to replace a NULL pointer.
-  // This is used when memory allocation or JSON parsing fail.
-  static JsonArray &invalid() {
-    static JsonArray instance(NULL);
-    return instance;
-  }
-
   template <typename Visitor>
   void visit(Visitor &visitor) const {
     return visitor.acceptArray(*this);

@@ -50,7 +50,7 @@ TEST_CASE("JsonObject::set()") {
 
     REQUIRE(arr == obj["hello"].as<JsonArray>());
     REQUIRE(obj["hello"].is<JsonArray&>());
-    REQUIRE_FALSE(obj["hello"].is<JsonObject&>());
+    REQUIRE_FALSE(obj["hello"].is<JsonObjectRef>());
   }
 
   SECTION("nested object") {
@@ -60,7 +60,7 @@ TEST_CASE("JsonObject::set()") {
     obj.set("hello", obj2);
 
     REQUIRE(obj2 == obj["hello"].as<JsonObjectRef>());
-    REQUIRE(obj["hello"].is<JsonObject&>());
+    REQUIRE(obj["hello"].is<JsonObjectRef>());
     REQUIRE_FALSE(obj["hello"].is<JsonArray&>());
   }
 

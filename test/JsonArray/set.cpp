@@ -57,8 +57,8 @@ TEST_CASE("JsonArray::set()") {
 
     _array.set(0, obj);
 
-    REQUIRE(obj == _array[0].as<JsonObject&>());
-    REQUIRE(_array[0].is<JsonObject&>());
+    REQUIRE(obj == _array[0].as<JsonObjectRef>());
+    REQUIRE(_array[0].is<JsonObjectRef>());
     REQUIRE_FALSE(_array[0].is<int>());
   }
 

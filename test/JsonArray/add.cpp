@@ -55,8 +55,8 @@ TEST_CASE("JsonArray::add()") {
 
     _array.add(obj);
 
-    REQUIRE(obj == _array[0].as<JsonObject&>());
-    REQUIRE(_array[0].is<JsonObject&>());
+    REQUIRE(obj == _array[0].as<JsonObjectRef>());
+    REQUIRE(_array[0].is<JsonObjectRef>());
     REQUIRE_FALSE(_array[0].is<int>());
   }
 

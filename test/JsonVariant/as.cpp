@@ -225,7 +225,7 @@ TEST_CASE("JsonVariant::as()") {
     JsonObjectRef obj = doc.to<JsonObjectRef>();
 
     JsonVariant variant = obj;
-    REQUIRE(obj == variant.as<JsonObject&>());
+    REQUIRE(obj == variant.as<JsonObjectRef>());
     REQUIRE(obj == variant.as<JsonObjectRef>());  // <- shorthand
   }
 }

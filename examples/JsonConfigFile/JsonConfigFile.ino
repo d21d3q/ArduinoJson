@@ -40,7 +40,7 @@ void loadConfiguration(const char *filename, Config &config) {
     Serial.println(F("Failed to read file, using default configuration"));
 
   // Get the root object in the document
-  JsonObject &root = doc.as<JsonObject>();
+  JsonObjectRef root = doc.as<JsonObject>();
 
   // Copy values from the JsonObject to the Config
   config.port = root["port"] | 2731;
@@ -70,7 +70,7 @@ void saveConfiguration(const char *filename, const Config &config) {
   StaticJsonDocument<256> doc;
 
   // Make our document contain an object
-  JsonObject &root = doc.to<JsonObject>();
+  JsonObjectRef root = doc.to<JsonObject>();
 
   // Set the values in the object
   root["hostname"] = config.hostname;

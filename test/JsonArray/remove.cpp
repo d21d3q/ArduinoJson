@@ -37,7 +37,7 @@ TEST_CASE("JsonArray::remove()") {
   }
 
   SECTION("RemoveFirstByIterator") {
-    JsonArray::iterator it = _array.begin();
+    JsonArrayRef::iterator it = _array.begin();
     _array.remove(it);
 
     REQUIRE(2 == _array.size());
@@ -46,7 +46,7 @@ TEST_CASE("JsonArray::remove()") {
   }
 
   SECTION("RemoveMiddleByIterator") {
-    JsonArray::iterator it = _array.begin();
+    JsonArrayRef::iterator it = _array.begin();
     ++it;
     _array.remove(it);
 
@@ -56,7 +56,7 @@ TEST_CASE("JsonArray::remove()") {
   }
 
   SECTION("RemoveLastByIterator") {
-    JsonArray::iterator it = _array.begin();
+    JsonArrayRef::iterator it = _array.begin();
     ++it;
     ++it;
     _array.remove(it);

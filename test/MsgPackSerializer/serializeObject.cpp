@@ -29,7 +29,7 @@ static void check(const JsonObjectRef object, const char (&expected_data)[N]) {
 
 TEST_CASE("serialize MsgPack object") {
   DynamicJsonDocument doc;
-  JsonObjectRef object = doc.to<JsonObject>();
+  JsonObjectRef object = doc.to<JsonObjectRef>();
 
   SECTION("empty") {
     check(object, "\x80");

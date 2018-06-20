@@ -26,7 +26,7 @@ TEST_CASE("JsonVariant::success()") {
 
   SECTION("ReturnsTrue_WhenEmptyObject") {
     DynamicJsonDocument doc;
-    JsonObjectRef obj = doc.to<JsonObject>();
+    JsonObjectRef obj = doc.to<JsonObjectRef>();
 
     JsonVariant variant = obj;
     REQUIRE(true == variant.success());

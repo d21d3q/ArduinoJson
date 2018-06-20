@@ -7,7 +7,7 @@
 
 TEST_CASE("measureMsgPack()") {
   DynamicJsonDocument doc;
-  JsonObject &object = doc.to<JsonObject>();
+  JsonObjectRef object = doc.to<JsonObjectRef>();
   object["hello"] = "world";
 
   REQUIRE(measureMsgPack(doc) == 13);

@@ -32,10 +32,10 @@ class DynamicJsonDocument {
     return _root.as<T>();
   }
 
-  // JsonObject& to<JsonObject>()
+  // JsonObjectRef to<JsonObjectRef>()
   template <typename T>
-  typename Internals::enable_if<Internals::is_same<T, JsonObject>::value,
-                                JsonObject&>::type
+  typename Internals::enable_if<Internals::is_same<T, JsonObjectRef>::value,
+                                JsonObjectRef>::type
   to() {
     clear();
     JsonObject* object = new (&_buffer) JsonObject(&_buffer);

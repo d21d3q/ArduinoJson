@@ -8,7 +8,7 @@
 
 TEST_CASE("JsonObject::set()") {
   DynamicJsonDocument doc;
-  JsonObjectRef obj = doc.to<JsonObject>();
+  JsonObjectRef obj = doc.to<JsonObjectRef>();
 
   SECTION("int") {
     obj.set("hello", 123);
@@ -55,11 +55,11 @@ TEST_CASE("JsonObject::set()") {
 
   SECTION("nested object") {
     DynamicJsonDocument doc2;
-    JsonObjectRef obj2 = doc2.to<JsonObject>();
+    JsonObjectRef obj2 = doc2.to<JsonObjectRef>();
 
     obj.set("hello", obj2);
 
-    REQUIRE(obj2 == obj["hello"].as<JsonObject>());
+    REQUIRE(obj2 == obj["hello"].as<JsonObjectRef>());
     REQUIRE(obj["hello"].is<JsonObject&>());
     REQUIRE_FALSE(obj["hello"].is<JsonArray&>());
   }
@@ -76,7 +76,7 @@ TEST_CASE("JsonObject::set()") {
 
   SECTION("object subscript") {
     DynamicJsonDocument doc2;
-    JsonObjectRef obj2 = doc2.to<JsonObject>();
+    JsonObjectRef obj2 = doc2.to<JsonObjectRef>();
     obj2.set("x", 42);
 
     obj.set("a", obj2["x"]);
@@ -86,14 +86,14 @@ TEST_CASE("JsonObject::set()") {
 
   SECTION("returns true when allocation succeeds") {
     StaticJsonDocument<JSON_OBJECT_SIZE(1) + 15> doc2;
-    JsonObjectRef obj2 = doc2.to<JsonObject>();
+    JsonObjectRef obj2 = doc2.to<JsonObjectRef>();
 
     REQUIRE(true == obj2.set(std::string("hello"), std::string("world")));
   }
 
   SECTION("returns false when allocation fails") {
     StaticJsonDocument<JSON_OBJECT_SIZE(1) + 10> doc2;
-    JsonObjectRef obj2 = doc2.to<JsonObject>();
+    JsonObjectRef obj2 = doc2.to<JsonObjectRef>();
 
     REQUIRE(false == obj2.set(std::string("hello"), std::string("world")));
   }

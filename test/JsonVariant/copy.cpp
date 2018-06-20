@@ -43,13 +43,13 @@ TEST_CASE("JsonVariant copy") {
 
   SECTION("ObjectsAreCopiedByReference") {
     DynamicJsonDocument doc;
-    JsonObjectRef object = doc.to<JsonObject>();
+    JsonObjectRef object = doc.to<JsonObjectRef>();
 
     _variant1 = object;
 
     object["hello"] = "world";
 
-    REQUIRE(1 == _variant1.as<JsonObject>().size());
+    REQUIRE(1 == _variant1.as<JsonObjectRef>().size());
   }
 
   SECTION("ArraysAreCopiedByReference") {

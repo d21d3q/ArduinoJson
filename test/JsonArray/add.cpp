@@ -51,7 +51,7 @@ TEST_CASE("JsonArray::add()") {
 
   SECTION("nested object") {
     DynamicJsonDocument doc2;
-    JsonObjectRef obj = doc2.to<JsonObject>();
+    JsonObjectRef obj = doc2.to<JsonObjectRef>();
 
     _array.add(obj);
 
@@ -74,7 +74,7 @@ TEST_CASE("JsonArray::add()") {
   SECTION("object subscript") {
     const char* str = "hello";
     DynamicJsonDocument doc2;
-    JsonObjectRef obj = doc2.to<JsonObject>();
+    JsonObjectRef obj = doc2.to<JsonObjectRef>();
     obj["x"] = str;
 
     _array.add(obj["x"]);

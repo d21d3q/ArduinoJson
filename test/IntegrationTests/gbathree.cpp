@@ -20,7 +20,7 @@ TEST_CASE("Gbathree") {
       "\"measlights\":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,"
       "15,15]],\"measlights2\":[[15,15,15,15],[15,15,15,15],[15,15,15,15],"
       "[15,15,15,15]],\"altc\":[2,2,2,2],\"altd\":[2,2,2,2]}");
-  JsonObjectRef root = doc.as<JsonObject>();
+  JsonObjectRef root = doc.as<JsonObjectRef>();
 
   SECTION("Success") {
     REQUIRE(error == DeserializationError::Ok);

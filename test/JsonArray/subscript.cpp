@@ -67,12 +67,12 @@ TEST_CASE("JsonArray::operator[]") {
 
   SECTION("nested object") {
     DynamicJsonDocument doc2;
-    JsonObjectRef obj = doc2.to<JsonObject>();
+    JsonObjectRef obj = doc2.to<JsonObjectRef>();
 
     _array[0] = obj;
 
     REQUIRE(obj == _array[0].as<JsonObject&>());
-    REQUIRE(obj == _array[0].as<JsonObject>());  // <- short hand
+    REQUIRE(obj == _array[0].as<JsonObjectRef>());  // <- short hand
     // REQUIRE(obj == _array[0].as<const JsonObject&>());
     // REQUIRE(obj == _array[0].as<const JsonObject>());  // <- short hand
     REQUIRE(true == _array[0].is<JsonObject&>());
@@ -94,7 +94,7 @@ TEST_CASE("JsonArray::operator[]") {
   SECTION("object subscript") {
     const char* str = "hello";
     DynamicJsonDocument doc2;
-    JsonObjectRef obj = doc2.to<JsonObject>();
+    JsonObjectRef obj = doc2.to<JsonObjectRef>();
 
     obj["x"] = str;
 

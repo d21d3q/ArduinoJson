@@ -317,7 +317,8 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
       Internals::is_same<
           typename Internals::remove_const<
               typename Internals::remove_reference<T>::type>::type,
-          JsonObject>::value,
+          JsonObject>::value ||
+          Internals::is_same<T, JsonObjectRef>::value,
       bool>::type
   is() const {
     return variantIsObject();

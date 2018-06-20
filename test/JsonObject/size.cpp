@@ -8,7 +8,7 @@
 
 TEST_CASE("JsonObject::size()") {
   DynamicJsonDocument doc;
-  JsonObjectRef obj = doc.to<JsonObject>();
+  JsonObjectRef obj = doc.to<JsonObjectRef>();
 
   SECTION("initial size is zero") {
     REQUIRE(0 == obj.size());

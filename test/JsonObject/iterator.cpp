@@ -9,7 +9,7 @@ using namespace Catch::Matchers;
 
 TEST_CASE("JsonObject::begin()/end()") {
   StaticJsonDocument<JSON_OBJECT_SIZE(2)> doc;
-  JsonObjectRef obj = doc.to<JsonObject>();
+  JsonObjectRef obj = doc.to<JsonObjectRef>();
   obj["ab"] = 12;
   obj["cd"] = 34;
 

@@ -49,6 +49,6 @@ TEST_CASE("JsonVariant undefined") {
   }
 
   SECTION("AsObjectWrapperReturnInvalid") {
-    REQUIRE(JsonObject::invalid() == variant.as<JsonObject>());
+    REQUIRE(JsonObjectRef() == variant.as<JsonObjectRef>());
   }
 }

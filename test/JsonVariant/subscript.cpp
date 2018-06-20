@@ -8,7 +8,7 @@
 TEST_CASE("JsonVariant::operator[]") {
   SECTION("Array") {
     DynamicJsonDocument doc;
-    JsonArray& array = doc.to<JsonArray>();
+    JsonArrayRef array = doc.to<JsonArray>();
     array.add("element at index 0");
     array.add("element at index 1");
 
@@ -26,7 +26,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("Object") {
     DynamicJsonDocument doc;
-    JsonObject& object = doc.to<JsonObject>();
+    JsonObjectRef object = doc.to<JsonObject>();
     object["a"] = "element at key \"a\"";
     object["b"] = "element at key \"b\"";
 
@@ -55,7 +55,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("ObjectSetValue") {
     DynamicJsonDocument doc;
-    JsonObject& obj = doc.to<JsonObject>();
+    JsonObjectRef obj = doc.to<JsonObject>();
     JsonVariant var = obj;
     var["hello"] = "world";
     REQUIRE(1 == var.size());
@@ -64,7 +64,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("ArraySetValue") {
     DynamicJsonDocument doc;
-    JsonArray& arr = doc.to<JsonArray>();
+    JsonArrayRef arr = doc.to<JsonArray>();
     arr.add("hello");
     JsonVariant var = arr;
     var[0] = "world";

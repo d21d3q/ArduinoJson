@@ -87,7 +87,7 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
 template <typename TImpl>
 inline JsonArraySubscript JsonVariantSubscripts<TImpl>::operator[](
     size_t index) {
-  return impl()->template as<JsonArray>()[index];
+  return impl()->template as<JsonArrayRef>()[index];
 }
 
 template <typename TImpl>

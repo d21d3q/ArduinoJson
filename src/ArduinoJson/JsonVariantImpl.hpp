@@ -17,11 +17,10 @@
 
 namespace ArduinoJson {
 
-inline JsonVariant::JsonVariant(JsonArrayRef array_ref) {
-  JsonArray *array = array_ref._array;
-  if (array->success()) {
+inline JsonVariant::JsonVariant(JsonArrayRef array) {
+  if (array.success()) {
     _type = Internals::JSON_ARRAY;
-    _content.asArray = array;
+    _content.asArray = array._array;
   } else {
     _type = Internals::JSON_UNDEFINED;
   }
@@ -37,9 +36,9 @@ inline JsonVariant::JsonVariant(JsonObjectRef object_ref) {
   }
 }
 
-inline JsonArray &JsonVariant::variantAsArray() const {
+inline JsonArrayRef JsonVariant::variantAsArray() const {
   if (_type == Internals::JSON_ARRAY) return *_content.asArray;
-  return JsonArray::invalid();
+  return JsonArrayRef();
 }
 
 inline JsonObject &JsonVariant::variantAsObject() const {

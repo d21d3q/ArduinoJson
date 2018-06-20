@@ -9,6 +9,8 @@
 #include "Strings/StringTraits.hpp"
 
 namespace ArduinoJson {
+class JsonArrayRef;
+
 namespace Internals {
 
 template <typename TImpl>
@@ -124,8 +126,8 @@ class JsonVariantComparisons {
       return as<JsonInteger>() == right.template as<JsonInteger>();
     if (is<JsonFloat>() && right.template is<JsonFloat>())
       return as<JsonFloat>() == right.template as<JsonFloat>();
-    if (is<JsonArray>() && right.template is<JsonArray>())
-      return as<JsonArray>() == right.template as<JsonArray>();
+    if (is<JsonArrayRef>() && right.template is<JsonArrayRef>())
+      return as<JsonArrayRef>() == right.template as<JsonArrayRef>();
     if (is<JsonObject>() && right.template is<JsonObject>())
       return as<JsonObject>() == right.template as<JsonObject>();
     if (is<char *>() && right.template is<char *>())

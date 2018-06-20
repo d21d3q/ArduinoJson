@@ -154,15 +154,6 @@ class JsonArray : public Internals::ReferenceType,
     return i;
   }
 
-  // Exports a 2D array
-  template <typename T, size_t N1, size_t N2>
-  void copyTo(T (&array)[N1][N2]) const {
-    size_t i = 0;
-    for (const_iterator it = begin(); it != end() && i < N1; ++it) {
-      it->as<JsonArray>().copyTo(array[i++]);
-    }
-  }
-
   template <typename Visitor>
   void visit(Visitor &visitor) const {
     return visitor.acceptArray(*this);

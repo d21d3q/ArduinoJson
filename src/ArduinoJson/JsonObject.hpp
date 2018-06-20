@@ -283,7 +283,7 @@ class JsonObject : public Internals::ReferenceType,
   }
 
   template <typename TStringRef>
-  JsonArray& createNestedArray_impl(TStringRef key);
+  JsonArrayRef createNestedArray_impl(TStringRef key);
 
   template <typename TStringRef>
   JsonObject& createNestedObject_impl(TStringRef key);

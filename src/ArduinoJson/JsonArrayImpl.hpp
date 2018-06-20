@@ -20,6 +20,7 @@ inline JsonArray &JsonArray::createNestedArray() {
 }
 
 inline JsonObjectRef JsonArrayRef::createNestedObject() {
+  if (!_array) return JsonObjectRef();
   return _array->createNestedObject();
 }
 

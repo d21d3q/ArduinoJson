@@ -81,16 +81,19 @@ class JsonArrayRef {
     return _array->copyFrom(array);
   }
 
+  // Exports a 1D array
   template <typename T, size_t N>
   size_t copyTo(T (&array)[N]) const {
-    if (!_array) return 0;
-    return _array->copyTo(array, N);
+    return copyTo(array, N);
   }
 
+  // Exports a 1D array
   template <typename T>
   size_t copyTo(T* array, size_t len) const {
-    if (!_array) return 0;
-    return _array->copyTo(array, len);
+    size_t i = 0;
+    for (const_iterator it = begin(); it != end() && i < len; ++it)
+      array[i++] = *it;
+    return i;
   }
 
   // Exports a 2D array

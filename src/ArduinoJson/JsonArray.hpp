@@ -139,21 +139,6 @@ class JsonArray : public Internals::ReferenceType,
     return ok;
   }
 
-  // Exports a 1D array
-  template <typename T, size_t N>
-  size_t copyTo(T (&array)[N]) const {
-    return copyTo(array, N);
-  }
-
-  // Exports a 1D array
-  template <typename T>
-  size_t copyTo(T *array, size_t len) const {
-    size_t i = 0;
-    for (const_iterator it = begin(); it != end() && i < len; ++it)
-      array[i++] = *it;
-    return i;
-  }
-
   template <typename Visitor>
   void visit(Visitor &visitor) const {
     return visitor.acceptArray(*this);
@@ -174,13 +159,4 @@ class JsonArray : public Internals::ReferenceType,
     return Internals::ValueSaver<TValueRef>::save(_buffer, *it, value);
   }
 };
-
-namespace Internals {
-template <>
-struct JsonVariantDefault<JsonArray> {
-  static JsonArray &get() {
-    return JsonArray::invalid();
-  }
-};
-}  // namespace Internals
 }  // namespace ArduinoJson

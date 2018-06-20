@@ -22,6 +22,7 @@ class JsonArrayRef {
   typedef JsonArray::const_iterator const_iterator;
 
   JsonArrayRef() : _array(0) {}
+  JsonArrayRef(JsonArray* arr) : _array(arr) {}
   JsonArrayRef(JsonArray& arr) : _array(&arr) {}
 
   // Adds the specified value at the end of the array.

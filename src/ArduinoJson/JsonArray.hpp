@@ -91,7 +91,7 @@ class JsonArray : public Internals::ReferenceType,
   }
 
   // Creates a JsonArray and adds a reference at the end of the array.
-  JsonArray &createNestedArray();
+  JsonArray *createNestedArray();
 
   // Creates a JsonObject and adds a reference at the end of the array.
   JsonObject &createNestedObject();

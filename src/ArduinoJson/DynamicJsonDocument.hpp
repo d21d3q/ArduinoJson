@@ -39,7 +39,7 @@ class DynamicJsonDocument {
   to() {
     clear();
     JsonObject* object = new (&_buffer) JsonObject(&_buffer);
-    if (!object) return JsonObject::invalid();
+    if (!object) return JsonObjectRef();
     _root = object;
     return *object;
   }
@@ -51,7 +51,7 @@ class DynamicJsonDocument {
   to() {
     clear();
     JsonArray* array = new (&_buffer) JsonArray(&_buffer);
-    if (!array) return JsonArray::invalid();
+    if (!array) return JsonArrayRef();
     _root = array;
     return *array;
   }

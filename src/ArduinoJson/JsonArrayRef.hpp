@@ -18,9 +18,21 @@ class JsonArrayRef {
   JsonArrayRef() : _array(&JsonArray::invalid()) {}
   JsonArrayRef(JsonArray& arr) : _array(&arr) {}
 
+  // Adds the specified value at the end of the array.
+  //
+  // bool add(TValue);
+  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
+  //          std::string, String, JsonArray, JsonObject
   template <typename T>
   bool add(const T& value) {
-    return _array->add(value);
+    return _array->add_impl<const T&>(value);
+  }
+  //
+  // bool add(TValue);
+  // TValue = char*, const char*, const FlashStringHelper*
+  template <typename T>
+  bool add(T* value) {
+    return _array->add_impl<T*>(value);
   }
 
   iterator begin() {
@@ -98,9 +110,21 @@ class JsonArrayRef {
     _array->remove(index);
   }
 
+  // Sets the value at specified index.
+  //
+  // bool add(size_t index, const TValue&);
+  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
+  //          std::string, String, JsonArray, JsonObject
   template <typename T>
   bool set(size_t index, const T& value) {
-    return _array->set(index, value);
+    return _array->set_impl<const T&>(index, value);
+  }
+  //
+  // bool add(size_t index, TValue);
+  // TValue = char*, const char*, const FlashStringHelper*
+  template <typename T>
+  bool set(size_t index, T* value) {
+    return _array->set_impl<T*>(index, value);
   }
 
   size_t size() const {

@@ -31,6 +31,8 @@ class JsonObject : public Internals::ReferenceType,
                    public Internals::NonCopyable,
                    public Internals::List<JsonPair>,
                    public Internals::JsonBufferAllocated {
+  friend class JsonObjectRef;
+
  public:
   // Create an empty JsonArray attached to the specified JsonBuffer.
   // You should not use this constructor directly.

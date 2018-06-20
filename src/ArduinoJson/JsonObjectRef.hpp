@@ -26,8 +26,19 @@ class JsonObjectRef {
     return _object->begin();
   }
 
-  template <typename T>
-  bool containsKey(const T& key) const {
+  // Tells weither the specified key is present and associated with a value.
+  //
+  // bool containsKey(TKey);
+  // TKey = const std::string&, const String&
+  template <typename TString>
+  bool containsKey(const TString& key) const {
+    return _object->containsKey(key);
+  }
+  //
+  // bool containsKey(TKey);
+  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
+  template <typename TString>
+  bool containsKey(TString* key) const {
     return _object->containsKey(key);
   }
 
@@ -39,25 +50,77 @@ class JsonObjectRef {
     return _object->end();
   }
 
-  template <typename TKey>
-  JsonArrayRef createNestedArray(const TKey& key) {
-    return _object->createNestedArray(key);
+  // Creates and adds a JsonArray.
+  //
+  // JsonArray& createNestedArray(TKey);
+  // TKey = const std::string&, const String&
+  template <typename TString>
+  JsonArray& createNestedArray(const TString& key) {
+    return _object->createNestedArray_impl<const TString&>(key);
+  }
+  // JsonArray& createNestedArray(TKey);
+  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
+  template <typename TString>
+  JsonArray& createNestedArray(TString* key) {
+    return _object->createNestedArray_impl<TString*>(key);
   }
 
-  template <typename TKey>
-  JsonObjectRef createNestedObject(const TKey& key) {
-    return _object->createNestedObject(key);
+  // Creates and adds a JsonObject.
+  //
+  // JsonObject& createNestedObject(TKey);
+  // TKey = const std::string&, const String&
+  template <typename TString>
+  JsonObject& createNestedObject(const TString& key) {
+    return _object->createNestedObject_impl<const TString&>(key);
+  }
+  //
+  // JsonObject& createNestedObject(TKey);
+  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
+  template <typename TString>
+  JsonObject& createNestedObject(TString* key) {
+    return _object->createNestedObject_impl<TString*>(key);
   }
 
+  // Gets the value associated with the specified key.
+  //
+  // TValue get<TValue>(TKey) const;
+  // TKey = const std::string&, const String&
+  // TValue = bool, char, long, int, short, float, double,
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(
       const TString& key) const {
-    return _object->get<TValue>(key);
+    return _object->get_impl<const TString&, TValue>(key);
+  }
+  //
+  // TValue get<TValue>(TKey) const;
+  // TKey = char*, const char*, const FlashStringHelper*
+  // TValue = bool, char, long, int, short, float, double,
+  //          std::string, String, JsonArray, JsonObject
+  template <typename TValue, typename TString>
+  typename Internals::JsonVariantAs<TValue>::type get(TString* key) const {
+    return _object->get_impl<TString*, TValue>(key);
   }
 
+  // Checks the type of the value associated with the specified key.
+  //
+  //
+  // bool is<TValue>(TKey) const;
+  // TKey = const std::string&, const String&
+  // TValue = bool, char, long, int, short, float, double,
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool is(const TString& key) const {
-    return _object->is<TValue>(key);
+    return _object->is_impl<const TString&, TValue>(key);
+  }
+  //
+  // bool is<TValue>(TKey) const;
+  // TKey = char*, const char*, const FlashStringHelper*
+  // TValue = bool, char, long, int, short, float, double,
+  //          std::string, String, JsonArray, JsonObject
+  template <typename TValue, typename TString>
+  bool is(TString* key) const {
+    return _object->is_impl<TString*, TValue>(key);
   }
 
   // Gets or sets the value associated with the specified key.
@@ -103,14 +166,56 @@ class JsonObjectRef {
     _object->remove(it);
   }
 
-  template <typename TKey>
-  void remove(const TKey& key) {
+  // Removes the specified key and the associated value.
+  //
+  // void remove(TKey);
+  // TKey = const std::string&, const String&
+  template <typename TString>
+  void remove(const TString& key) {
+    _object->remove(key);
+  }
+  //
+  // void remove(TKey);
+  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
+  template <typename TString>
+  void remove(TString* key) {
     _object->remove(key);
   }
 
-  template <typename TKey, typename TValue>
-  bool set(const TKey& key, const TValue& value) {
-    return _object->set(key, value);
+  // Sets the specified key with the specified value.
+  //
+  // bool set(TKey, TValue);
+  // TKey = const std::string&, const String&
+  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
+  //          std::string, String, JsonArray, JsonObject
+  template <typename TValue, typename TString>
+  bool set(const TString& key, const TValue& value) {
+    return _object->set_impl<const TString&, const TValue&>(key, value);
+  }
+  //
+  // bool set(TKey, TValue);
+  // TKey = const std::string&, const String&
+  // TValue = char*, const char*, const FlashStringHelper*
+  template <typename TValue, typename TString>
+  bool set(const TString& key, TValue* value) {
+    return _object->set_impl<const TString&, TValue*>(key, value);
+  }
+  //
+  // bool set(TKey, const TValue&);
+  // TKey = char*, const char*, const FlashStringHelper*
+  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
+  //          std::string, String, JsonArray, JsonObject
+  template <typename TValue, typename TString>
+  bool set(TString* key, const TValue& value) {
+    return _object->set_impl<TString*, const TValue&>(key, value);
+  }
+  //
+  // bool set(TKey, TValue);
+  // TKey = char*, const char*, const FlashStringHelper*
+  // TValue = char*, const char*, const FlashStringHelper*
+  template <typename TValue, typename TString>
+  bool set(TString* key, TValue* value) {
+    return _object->set_impl<TString*, TValue*>(key, value);
   }
 
   size_t size() const {

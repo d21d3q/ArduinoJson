@@ -30,6 +30,8 @@ class JsonArray : public Internals::ReferenceType,
                   public Internals::NonCopyable,
                   public Internals::List<JsonVariant>,
                   public Internals::JsonBufferAllocated {
+  friend class JsonArrayRef;
+
  public:
   explicit JsonArray(Internals::JsonBuffer *buf) throw()
       : Internals::List<JsonVariant>(buf) {}
@@ -56,14 +58,6 @@ class JsonArray : public Internals::ReferenceType,
   bool add(T *value) {
     return add_impl<T *>(value);
   }
-  //
-  // bool add(TValue value, uint8_t decimals);
-  // TValue = float, double
-  template <typename T>
-  DEPRECATED("Second argument is not supported anymore")
-  bool add(T value, uint8_t) {
-    return add_impl<const JsonVariant &>(JsonVariant(value));
-  }
 
   // Sets the value at specified index.
   //
@@ -80,15 +74,6 @@ class JsonArray : public Internals::ReferenceType,
   template <typename T>
   bool set(size_t index, T *value) {
     return set_impl<T *>(index, value);
-  }
-  //
-  // bool set(size_t index, TValue value, uint8_t decimals);
-  // TValue = float, double
-  template <typename T>
-  typename Internals::enable_if<Internals::is_floating_point<T>::value,
-                                bool>::type
-  set(size_t index, T value, uint8_t decimals) {
-    return set_impl<const JsonVariant &>(index, JsonVariant(value, decimals));
   }
 
   // Gets the value at the specified index.

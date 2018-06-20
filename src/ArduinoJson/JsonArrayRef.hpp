@@ -5,8 +5,11 @@
 #pragma once
 
 #include "./JsonArray.hpp"
+#include "JsonArraySubscript.hpp"
 
 namespace ArduinoJson {
+
+class JsonObjectRef;
 
 class JsonArrayRef {
   friend class JsonVariant;
@@ -86,10 +89,7 @@ class JsonArrayRef {
     return _array->createNestedArray();
   }
 
-  JsonObject& createNestedObject() {
-    return _array->createNestedObject();
-  }
-
+  JsonObjectRef createNestedObject();
   const Internals::JsonArraySubscript operator[](size_t index) const {
     return _array->operator[](index);
   }

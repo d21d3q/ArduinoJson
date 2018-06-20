@@ -55,13 +55,13 @@ class JsonObjectRef {
   // JsonArray& createNestedArray(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
-  JsonArray& createNestedArray(const TString& key) {
+  JsonArrayRef createNestedArray(const TString& key) {
     return _object->createNestedArray_impl<const TString&>(key);
   }
   // JsonArray& createNestedArray(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
-  JsonArray& createNestedArray(TString* key) {
+  JsonArrayRef createNestedArray(TString* key) {
     return _object->createNestedArray_impl<TString*>(key);
   }
 
@@ -70,14 +70,14 @@ class JsonObjectRef {
   // JsonObject& createNestedObject(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
-  JsonObject& createNestedObject(const TString& key) {
+  JsonObjectRef createNestedObject(const TString& key) {
     return _object->createNestedObject_impl<const TString&>(key);
   }
   //
   // JsonObject& createNestedObject(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
-  JsonObject& createNestedObject(TString* key) {
+  JsonObjectRef createNestedObject(TString* key) {
     return _object->createNestedObject_impl<TString*>(key);
   }
 

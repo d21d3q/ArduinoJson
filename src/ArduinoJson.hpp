@@ -14,10 +14,10 @@
 #include "ArduinoJson/MsgPack/MsgPackSerializer.hpp"
 #include "ArduinoJson/StaticJsonDocument.hpp"
 
-#include "ArduinoJson/JsonArrayImpl.hpp"
 #include "ArduinoJson/JsonObjectImpl.hpp"
 
 #include "ArduinoJson/JsonArrayRef.hpp"
 #include "ArduinoJson/JsonObjectRef.hpp"
 
+#include "ArduinoJson/JsonArrayImpl.hpp"
 #include "ArduinoJson/JsonVariantImpl.hpp"

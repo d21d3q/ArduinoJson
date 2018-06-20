@@ -18,7 +18,7 @@ void setup() {
   String input =
       "{\"sensor\":\"gps\",\"time\":1351824120,\"data\":[48.756080,2.302038]}";
   deserializeJson(doc, input);
-  JsonObject& obj = doc.as<JsonObject>();
+  JsonObjectRef obj = doc.as<JsonObject>();
 
   // You can use a String to get an element of a JsonObject
   // No duplication is done.

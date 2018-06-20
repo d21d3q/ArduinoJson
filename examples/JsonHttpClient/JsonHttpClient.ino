@@ -84,7 +84,7 @@ void setup() {
   }
 
   // Extract values
-  JsonObject& root = doc.as<JsonObject>();
+  JsonObjectRef root = doc.as<JsonObject>();
   Serial.println(F("Response:"));
   Serial.println(root["sensor"].as<char*>());
   Serial.println(root["time"].as<char*>());

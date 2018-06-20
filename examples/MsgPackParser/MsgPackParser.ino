@@ -55,7 +55,7 @@ void setup() {
   }
 
   // Get the root object in the document
-  JsonObject& root = doc.as<JsonObject>();
+  JsonObjectRef root = doc.as<JsonObject>();
 
   // Fetch values.
   //

@@ -75,9 +75,7 @@ TEST_CASE("JsonObject::operator[]") {
     obj["hello"] = obj2;
 
     REQUIRE(obj2 == obj["hello"].as<JsonObjectRef>());
-    REQUIRE(obj2 == obj["hello"].as<JsonObjectRef>());  // <- short hand
-    // REQUIRE(obj2 == obj["hello"].as<const JsonObjectRef>());
-    // REQUIRE(obj2 == obj["hello"].as<const JsonObject>());  // <- short hand
+    REQUIRE(obj2 == obj["hello"].as<const JsonObjectRef>());
     REQUIRE(true == obj["hello"].is<JsonObjectRef>());
     REQUIRE(true == obj["hello"].is<JsonObjectRef>());
     REQUIRE(true == obj["hello"].is<const JsonObjectRef>());

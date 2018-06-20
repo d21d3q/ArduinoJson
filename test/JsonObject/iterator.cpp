@@ -14,7 +14,7 @@ TEST_CASE("JsonObject::begin()/end()") {
   obj["cd"] = 34;
 
   SECTION("NonConstIterator") {
-    JsonObject::iterator it = obj.begin();
+    JsonObjectRef::iterator it = obj.begin();
     REQUIRE(obj.end() != it);
     REQUIRE_THAT(it->key, Equals("ab"));
     REQUIRE(12 == it->value);
@@ -36,7 +36,7 @@ TEST_CASE("JsonObject::begin()/end()") {
 
   SECTION("ConstIterator") {
     const JsonObjectRef const_object = obj;
-    JsonObject::const_iterator it = const_object.begin();
+    JsonObjectRef::const_iterator it = const_object.begin();
 
     REQUIRE(const_object.end() != it);
     REQUIRE_THAT(it->key, Equals("ab"));

@@ -26,10 +26,30 @@ inline JsonVariant::JsonVariant(const JsonArray &array) {
   }
 }
 
+inline JsonVariant::JsonVariant(JsonArrayRef array_ref) {
+  JsonArray *array = array_ref._array;
+  if (array->success()) {
+    _type = Internals::JSON_ARRAY;
+    _content.asArray = array;
+  } else {
+    _type = Internals::JSON_UNDEFINED;
+  }
+}
+
 inline JsonVariant::JsonVariant(const JsonObject &object) {
   if (object.success()) {
     _type = Internals::JSON_OBJECT;
     _content.asObject = const_cast<JsonObject *>(&object);
+  } else {
+    _type = Internals::JSON_UNDEFINED;
+  }
+}
+
+inline JsonVariant::JsonVariant(JsonObjectRef object_ref) {
+  JsonObject *object = object_ref._object;
+  if (object->success()) {
+    _type = Internals::JSON_OBJECT;
+    _content.asObject = object;
   } else {
     _type = Internals::JSON_UNDEFINED;
   }

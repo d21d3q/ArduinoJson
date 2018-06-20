@@ -234,9 +234,4 @@ class JsonObjectRef {
  private:
   JsonObject* _object;
 };
-
-inline JsonVariant::JsonVariant(JsonObjectRef object) {
-  _content.asObject = object._object;
-  _type = Internals::JSON_OBJECT;
-}
 }  // namespace ArduinoJson

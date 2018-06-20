@@ -72,9 +72,7 @@ TEST_CASE("JsonArray::operator[]") {
     _array[0] = obj;
 
     REQUIRE(obj == _array[0].as<JsonObjectRef>());
-    REQUIRE(obj == _array[0].as<JsonObjectRef>());  // <- short hand
-    // REQUIRE(obj == _array[0].as<const JsonObjectRef>());
-    // REQUIRE(obj == _array[0].as<const JsonObject>());  // <- short hand
+    REQUIRE(obj == _array[0].as<const JsonObjectRef>());  // <- short hand
     REQUIRE(true == _array[0].is<JsonObjectRef>());
     REQUIRE(false == _array[0].is<int>());
   }

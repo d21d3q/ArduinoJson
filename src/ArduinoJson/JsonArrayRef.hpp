@@ -143,9 +143,4 @@ class JsonArrayRef {
  private:
   JsonArray* _array;
 };
-
-inline JsonVariant::JsonVariant(JsonArrayRef array) {
-  _content.asArray = array._array;
-  _type = Internals::JSON_ARRAY;
-}
 }  // namespace ArduinoJson

@@ -38,7 +38,7 @@ TEST_CASE("JsonVariant::success()") {
   }
 
   SECTION("ReturnsFalse_WhenInvalidObject") {
-    JsonVariant variant = JsonObject::invalid();
+    JsonVariant variant = JsonObjectRef();
     REQUIRE(false == variant.success());
   }
 }

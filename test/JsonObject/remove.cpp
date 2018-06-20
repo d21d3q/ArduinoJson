@@ -31,7 +31,7 @@ TEST_CASE("JsonObject::remove()") {
     obj["b"] = 1;
     obj["c"] = 2;
 
-    for (JsonObject::iterator it = obj.begin(); it != obj.end(); ++it) {
+    for (JsonObjectRef::iterator it = obj.begin(); it != obj.end(); ++it) {
       if (it->value == 1) obj.remove(it);
     }
 

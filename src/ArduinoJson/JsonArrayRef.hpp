@@ -63,22 +63,33 @@ class JsonArrayRef {
     return _array->end();
   }
 
+  // Imports a 1D array
   template <typename T, size_t N>
   bool copyFrom(T (&array)[N]) {
-    if (!_array) return false;
-    return _array->copyFrom(array, N);
+    return copyFrom(array, N);
   }
 
+  // Imports a 1D array
   template <typename T>
   bool copyFrom(T* array, size_t len) {
-    if (!_array) return false;
-    return _array->copyFrom(array, len);
+    bool ok = true;
+    for (size_t i = 0; i < len; i++) {
+      ok &= add(array[i]);
+    }
+    return ok;
   }
 
+  // Imports a 2D array
   template <typename T, size_t N1, size_t N2>
   bool copyFrom(T (&array)[N1][N2]) {
-    if (!_array) return false;
-    return _array->copyFrom(array);
+    bool ok = true;
+    for (size_t i = 0; i < N1; i++) {
+      JsonArrayRef nestedArray = createNestedArray();
+      for (size_t j = 0; j < N2; j++) {
+        ok &= nestedArray.add(array[i][j]);
+      }
+    }
+    return ok;
   }
 
   // Exports a 1D array

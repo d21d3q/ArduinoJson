@@ -110,35 +110,6 @@ class JsonArray : public Internals::ReferenceType,
     return instance;
   }
 
-  // Imports a 1D array
-  template <typename T, size_t N>
-  bool copyFrom(T (&array)[N]) {
-    return copyFrom(array, N);
-  }
-
-  // Imports a 1D array
-  template <typename T>
-  bool copyFrom(T *array, size_t len) {
-    bool ok = true;
-    for (size_t i = 0; i < len; i++) {
-      ok &= add(array[i]);
-    }
-    return ok;
-  }
-
-  // Imports a 2D array
-  template <typename T, size_t N1, size_t N2>
-  bool copyFrom(T (&array)[N1][N2]) {
-    bool ok = true;
-    for (size_t i = 0; i < N1; i++) {
-      JsonArray &nestedArray = createNestedArray();
-      for (size_t j = 0; j < N2; j++) {
-        ok &= nestedArray.add(array[i][j]);
-      }
-    }
-    return ok;
-  }
-
   template <typename Visitor>
   void visit(Visitor &visitor) const {
     return visitor.acceptArray(*this);

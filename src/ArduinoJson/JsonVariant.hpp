@@ -366,7 +366,7 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
 
  private:
   JsonArrayRef variantAsArray() const;
-  JsonObject &variantAsObject() const;
+  JsonObjectRef variantAsObject() const;
   const char *variantAsString() const;
   template <typename T>
   T variantAsFloat() const;

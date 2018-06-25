@@ -11,6 +11,7 @@
 
 namespace ArduinoJson {
 class JsonArrayRef;
+class JsonObjectRef;
 namespace Internals {
 
 // Forward declarations.
@@ -26,7 +27,7 @@ class JsonVariantSubscripts {
   // Returns 0 if the variant is neither an array nor an object
   size_t size() const {
     return impl()->template as<JsonArrayRef>().size() +
-           impl()->template as<JsonObject>().size();
+           impl()->template as<JsonObjectRef>().size();
   }
 
   // Mimics an array.
@@ -46,27 +47,21 @@ class JsonVariantSubscripts {
   FORCE_INLINE
       typename enable_if<StringTraits<TString>::has_equals,
                          const JsonObjectSubscript<const TString &> >::type
-      operator[](const TString &key) const {
-    return impl()->template as<JsonObject>()[key];
-  }
+      operator[](const TString &key) const;
   //
   // const JsonObjectSubscript operator[](TKey) const;
   // TKey = const std::string&, const String&
   template <typename TString>
   FORCE_INLINE typename enable_if<StringTraits<TString>::has_equals,
                                   JsonObjectSubscript<const TString &> >::type
-  operator[](const TString &key) {
-    return impl()->template as<JsonObject>()[key];
-  }
+  operator[](const TString &key);
   //
   // JsonObjectSubscript operator[](TKey);
   // TKey = const char*, const char[N], const FlashStringHelper*
   template <typename TString>
   FORCE_INLINE typename enable_if<StringTraits<const TString *>::has_equals,
                                   JsonObjectSubscript<const TString *> >::type
-  operator[](const TString *key) {
-    return impl()->template as<JsonObject>()[key];
-  }
+  operator[](const TString *key);
   //
   // JsonObjectSubscript operator[](TKey);
   // TKey = const char*, const char[N], const FlashStringHelper*
@@ -74,9 +69,7 @@ class JsonVariantSubscripts {
   FORCE_INLINE
       typename enable_if<StringTraits<TString *>::has_equals,
                          const JsonObjectSubscript<const TString *> >::type
-      operator[](const TString *key) const {
-    return impl()->template as<JsonObject>()[key];
-  }
+      operator[](const TString *key) const;
 
  private:
   const TImpl *impl() const {

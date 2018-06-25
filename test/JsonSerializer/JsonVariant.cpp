@@ -14,8 +14,8 @@ void check(JsonVariant variant, const std::string &expected) {
 }
 
 TEST_CASE("serializeJson(JsonVariant)") {
-  SECTION("Empty") {
-    check(JsonVariant(), "");
+  SECTION("undefined") {
+    check(JsonVariant(), "undefined");
   }
 
   SECTION("Null") {

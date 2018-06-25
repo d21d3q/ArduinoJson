@@ -29,7 +29,6 @@ TEST_CASE("Undefined JsonArrayRef") {
   SECTION("PrintToWritesBrackets") {
     char buffer[32];
     serializeJson(JsonArrayRef(), buffer, sizeof(buffer));
-    // REQUIRE_THAT(buffer, Equals("[]")); // TODO
-    REQUIRE_THAT(buffer, Equals(""));
+    REQUIRE_THAT(buffer, Equals("undefined"));
   }
 }

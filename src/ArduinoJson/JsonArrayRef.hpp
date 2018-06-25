@@ -187,8 +187,10 @@ class JsonArrayRef {
 
   template <typename Visitor>
   void visit(Visitor& visitor) const {
-    if (!_array) return;
-    return _array->visit(visitor);
+    if (_array)
+      return _array->visit(visitor);
+    else
+      visitor.acceptUndefined();
   }
 
  private:

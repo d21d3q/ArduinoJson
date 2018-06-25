@@ -19,5 +19,5 @@ class NonCopyable {
   // copy operator is private
   NonCopyable& operator=(const NonCopyable&);
 };
-}
-}
+}  // namespace Internals
+}  // namespace ArduinoJson

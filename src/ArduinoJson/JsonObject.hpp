@@ -39,23 +39,6 @@ class JsonObject : public Internals::ReferenceType,
   explicit JsonObject(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
 
-  // Gets or sets the value associated with the specified key.
-  //
-  // JsonObjectSubscript operator[](TKey)
-  // TKey = const std::string&, const String&
-  template <typename TString>
-  Internals::JsonObjectSubscript<const TString&> operator[](
-      const TString& key) {
-    return Internals::JsonObjectSubscript<const TString&>(*this, key);
-  }
-  //
-  // JsonObjectSubscript operator[](TKey)
-  // TKey = char*, const char*, char[], const char[N], const FlashStringHelper*
-  template <typename TString>
-  Internals::JsonObjectSubscript<TString*> operator[](TString* key) {
-    return Internals::JsonObjectSubscript<TString*>(*this, key);
-  }
-
   // Gets the value associated with the specified key.
   //
   // const JsonObjectSubscript operator[](TKey) const;
@@ -272,13 +255,4 @@ class JsonObject : public Internals::ReferenceType,
   template <typename TStringRef>
   JsonObject* createNestedObject_impl(TStringRef key);
 };
-
-namespace Internals {
-template <>
-struct JsonVariantDefault<JsonObject> {
-  static JsonObject& get() {
-    return JsonObject::invalid();
-  }
-};
-}  // namespace Internals
 }  // namespace ArduinoJson

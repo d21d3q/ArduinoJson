@@ -21,4 +21,5 @@
 
 #include "ArduinoJson/JsonArrayImpl.hpp"
 #include "ArduinoJson/JsonArraySubscript.hpp"
+#include "ArduinoJson/JsonObjectSubscript.hpp"
 #include "ArduinoJson/JsonVariantImpl.hpp"

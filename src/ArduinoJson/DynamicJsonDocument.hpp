@@ -38,10 +38,9 @@ class DynamicJsonDocument {
                                 JsonObjectRef>::type
   to() {
     clear();
-    JsonObject* object = new (&_buffer) JsonObject(&_buffer);
-    if (!object) return JsonObjectRef();
+    JsonObjectRef object(new (&_buffer) JsonObject(&_buffer));
     _root = object;
-    return *object;
+    return object;
   }
 
   // JsonArrayRef to<JsonArrayRef>()
@@ -50,10 +49,9 @@ class DynamicJsonDocument {
                                 JsonArrayRef>::type
   to() {
     clear();
-    JsonArray* array = new (&_buffer) JsonArray(&_buffer);
-    if (!array) return JsonArrayRef();
+    JsonArrayRef array(new (&_buffer) JsonArray(&_buffer));
     _root = array;
-    return *array;
+    return array;
   }
 
   // JsonVariant& to<JsonVariant>()

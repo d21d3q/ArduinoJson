@@ -12,11 +12,10 @@
 namespace ArduinoJson {
 
 template <typename TStringRef>
-inline JsonArrayRef JsonObject::createNestedArray_impl(TStringRef key) {
+inline JsonArray *JsonObject::createNestedArray_impl(TStringRef key) {
   JsonArray *array = new (_buffer) JsonArray(_buffer);
-  if (!array) return JsonArrayRef();
-  set(key, array);
-  return *array;
+  if (array) set(key, array);
+  return array;
 }
 
 template <typename TStringRef>

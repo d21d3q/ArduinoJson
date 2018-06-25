@@ -94,7 +94,7 @@ class JsonArray : public Internals::ReferenceType,
   JsonArray *createNestedArray();
 
   // Creates a JsonObject and adds a reference at the end of the array.
-  JsonObject &createNestedObject();
+  JsonObject *createNestedObject();
 
   // Removes element at specified index.
   void remove(size_t index) {

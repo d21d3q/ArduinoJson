@@ -159,13 +159,13 @@ class JsonObject : public Internals::ReferenceType,
   // JsonArray& createNestedArray(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
-  JsonArray& createNestedArray(const TString& key) {
+  JsonArray* createNestedArray(const TString& key) {
     return createNestedArray_impl<const TString&>(key);
   }
   // JsonArray& createNestedArray(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
-  JsonArray& createNestedArray(TString* key) {
+  JsonArray* createNestedArray(TString* key) {
     return createNestedArray_impl<TString*>(key);
   }
 
@@ -267,7 +267,7 @@ class JsonObject : public Internals::ReferenceType,
   }
 
   template <typename TStringRef>
-  JsonArrayRef createNestedArray_impl(TStringRef key);
+  JsonArray* createNestedArray_impl(TStringRef key);
 
   template <typename TStringRef>
   JsonObject* createNestedObject_impl(TStringRef key);

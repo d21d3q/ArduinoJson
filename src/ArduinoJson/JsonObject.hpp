@@ -187,11 +187,6 @@ class JsonObject : public Internals::ReferenceType,
   // void remove(iterator)
   using Internals::List<JsonPair>::remove;
 
-  template <typename Visitor>
-  void visit(Visitor& visitor) const {
-    return visitor.acceptObject(*this);
-  }
-
  private:
   // Returns the list node that matches the specified key.
   template <typename TStringRef>

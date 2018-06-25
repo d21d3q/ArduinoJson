@@ -253,9 +253,9 @@ class JsonObjectRef {
   template <typename Visitor>
   void visit(Visitor& visitor) const {
     if (_object)
-      return _object->visit(visitor);
+      visitor.acceptObject(*this);
     else
-      visitor.acceptUndefined();
+      return visitor.acceptUndefined();
   }
 
  private:

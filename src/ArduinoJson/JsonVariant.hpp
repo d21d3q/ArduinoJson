@@ -339,10 +339,10 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
         return visitor.acceptFloat(_content.asFloat);
 
       case JSON_ARRAY:
-        return visitor.acceptArray(*_content.asArray);
+        return visitor.acceptArray(_content.asArray);
 
       case JSON_OBJECT:
-        return visitor.acceptObject(*_content.asObject);
+        return visitor.acceptObject(_content.asObject);
 
       case JSON_STRING:
         return visitor.acceptString(_content.asString);

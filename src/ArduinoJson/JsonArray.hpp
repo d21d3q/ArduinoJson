@@ -22,9 +22,6 @@ namespace ArduinoJson {
 // Forward declarations
 class JsonObject;
 class JsonBuffer;
-namespace Internals {
-class JsonArraySubscript;
-}
 
 class JsonArray : public Internals::ReferenceType,
                   public Internals::NonCopyable,
@@ -35,12 +32,6 @@ class JsonArray : public Internals::ReferenceType,
  public:
   explicit JsonArray(Internals::JsonBuffer *buf) throw()
       : Internals::List<JsonVariant>(buf) {}
-
-  // Gets the value at the specified index
-  const Internals::JsonArraySubscript operator[](size_t index) const;
-
-  // Gets or sets the value at specified index
-  Internals::JsonArraySubscript operator[](size_t index);
 
   // Adds the specified value at the end of the array.
   //
@@ -101,11 +92,6 @@ class JsonArray : public Internals::ReferenceType,
     remove(begin() += index);
   }
   using Internals::List<JsonVariant>::remove;
-
-  template <typename Visitor>
-  void visit(Visitor &visitor) const {
-    return visitor.acceptArray(*this);
-  }
 
  private:
   template <typename TValueRef>

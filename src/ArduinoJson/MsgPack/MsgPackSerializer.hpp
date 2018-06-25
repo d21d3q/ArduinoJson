@@ -36,7 +36,7 @@ class MsgPackSerializer {
     }
   }
 
-  void acceptArray(const JsonArray& array) {
+  void acceptArray(const JsonArrayRef& array) {
     size_t n = array.size();
     if (n < 0x10) {
       writeByte(uint8_t(0x90 + array.size()));
@@ -53,7 +53,7 @@ class MsgPackSerializer {
     }
   }
 
-  void acceptObject(const JsonObject& object) {
+  void acceptObject(const JsonObjectRef& object) {
     size_t n = object.size();
     if (n < 0x10) {
       writeByte(uint8_t(0x80 + n));

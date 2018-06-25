@@ -20,10 +20,9 @@ inline JsonArrayRef JsonObject::createNestedArray_impl(TStringRef key) {
 }
 
 template <typename TStringRef>
-inline JsonObject &JsonObject::createNestedObject_impl(TStringRef key) {
+inline JsonObject *JsonObject::createNestedObject_impl(TStringRef key) {
   JsonObject *object = new (_buffer) JsonObject(_buffer);
-  if (!object) return JsonObject::invalid();
-  set(key, object);
-  return *object;
+  if (object) set(key, object);
+  return object;
 }
 }  // namespace ArduinoJson

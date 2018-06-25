@@ -169,22 +169,6 @@ class JsonObject : public Internals::ReferenceType,
     return createNestedArray_impl<TString*>(key);
   }
 
-  // Creates and adds a JsonObject.
-  //
-  // JsonObject& createNestedObject(TKey);
-  // TKey = const std::string&, const String&
-  template <typename TString>
-  JsonObject& createNestedObject(const TString& key) {
-    return createNestedObject_impl<const TString&>(key);
-  }
-  //
-  // JsonObject& createNestedObject(TKey);
-  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
-  template <typename TString>
-  JsonObject& createNestedObject(TString* key) {
-    return createNestedObject_impl<TString*>(key);
-  }
-
   // Tells weither the specified key is present and associated with a value.
   //
   // bool containsKey(TKey);
@@ -286,7 +270,7 @@ class JsonObject : public Internals::ReferenceType,
   JsonArrayRef createNestedArray_impl(TStringRef key);
 
   template <typename TStringRef>
-  JsonObject& createNestedObject_impl(TStringRef key);
+  JsonObject* createNestedObject_impl(TStringRef key);
 };
 
 namespace Internals {

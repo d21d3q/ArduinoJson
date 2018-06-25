@@ -16,7 +16,6 @@ class JsonObjectRef {
   typedef JsonObject::const_iterator const_iterator;
 
   JsonObjectRef() : _object(0) {}
-  JsonObjectRef(JsonObject& object) : _object(&object) {}
   JsonObjectRef(JsonObject* object) : _object(object) {}
 
   iterator begin() {

@@ -36,12 +36,12 @@ inline JsonVariant::JsonVariant(JsonObjectRef object) {
 }
 
 inline JsonArrayRef JsonVariant::variantAsArray() const {
-  if (_type == Internals::JSON_ARRAY) return *_content.asArray;
+  if (_type == Internals::JSON_ARRAY) return _content.asArray;
   return JsonArrayRef();
 }
 
 inline JsonObjectRef JsonVariant::variantAsObject() const {
-  if (_type == Internals::JSON_OBJECT) return *_content.asObject;
+  if (_type == Internals::JSON_OBJECT) return _content.asObject;
   return JsonObjectRef();
 }
 

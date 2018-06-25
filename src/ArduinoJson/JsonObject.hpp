@@ -187,14 +187,6 @@ class JsonObject : public Internals::ReferenceType,
   // void remove(iterator)
   using Internals::List<JsonPair>::remove;
 
-  // Returns a reference an invalid JsonObject.
-  // This object is meant to replace a NULL pointer.
-  // This is used when memory allocation or JSON parsing fail.
-  static JsonObject& invalid() {
-    static JsonObject instance(NULL);
-    return instance;
-  }
-
   template <typename Visitor>
   void visit(Visitor& visitor) const {
     return visitor.acceptObject(*this);

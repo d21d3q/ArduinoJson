@@ -246,8 +246,7 @@ class JsonObjectRef {
   }
 
   bool success() const {
-    if (!_object) return false;
-    return _object->success();
+    return _object != 0;
   }
 
   template <typename Visitor>

@@ -182,7 +182,7 @@ class JsonArrayRef {
   }
 
   bool success() const {
-    return _array;
+    return _array != 0;
   }
 
   template <typename Visitor>

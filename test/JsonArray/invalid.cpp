@@ -8,27 +8,28 @@
 using namespace Catch::Matchers;
 
 TEST_CASE("Undefined JsonArrayRef") {
+  JsonArrayRef array;
+
   SECTION("SubscriptFails") {
-    REQUIRE_FALSE(JsonArrayRef()[0].success());
+    REQUIRE_FALSE(array[0].success());
   }
 
   SECTION("AddFails") {
-    JsonArrayRef array = JsonArrayRef();
     array.add(1);
     REQUIRE(0 == array.size());
   }
 
   SECTION("CreateNestedArrayFails") {
-    REQUIRE_FALSE(JsonArrayRef().createNestedArray().success());
+    REQUIRE_FALSE(array.createNestedArray().success());
   }
 
   SECTION("CreateNestedObjectFails") {
-    REQUIRE_FALSE(JsonArrayRef().createNestedObject().success());
+    REQUIRE_FALSE(array.createNestedObject().success());
   }
 
   SECTION("PrintToWritesBrackets") {
     char buffer[32];
-    serializeJson(JsonArrayRef(), buffer, sizeof(buffer));
+    serializeJson(array, buffer, sizeof(buffer));
     REQUIRE_THAT(buffer, Equals("undefined"));
   }
 }

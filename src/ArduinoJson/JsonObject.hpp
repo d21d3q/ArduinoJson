@@ -21,11 +21,8 @@
 namespace ArduinoJson {
 
 // Forward declarations
-class JsonArray;
 namespace Internals {
 class JsonBuffer;
-template <typename>
-class JsonObjectSubscript;
 }  // namespace Internals
 
 class JsonObject : public Internals::ReferenceType,
@@ -39,26 +36,6 @@ class JsonObject : public Internals::ReferenceType,
   // You should not use this constructor directly.
   explicit JsonObject(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
-
-  // Gets the value associated with the specified key.
-  //
-  // const JsonObjectSubscript operator[](TKey) const;
-  // TKey = const std::string&, const String&
-  template <typename TString>
-  const Internals::JsonObjectSubscript<const TString&> operator[](
-      const TString& key) const {
-    return Internals::JsonObjectSubscript<const TString&>(
-        *const_cast<JsonObject*>(this), key);
-  }
-  //
-  // const JsonObjectSubscript operator[](TKey) const;
-  // TKey = const char*, const char[N], const FlashStringHelper*
-  template <typename TString>
-  const Internals::JsonObjectSubscript<TString*> operator[](
-      TString* key) const {
-    return Internals::JsonObjectSubscript<TString*>(
-        *const_cast<JsonObject*>(this), key);
-  }
 
   // Sets the specified key with the specified value.
   //

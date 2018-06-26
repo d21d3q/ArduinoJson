@@ -103,8 +103,8 @@ class JsonDeserializer {
   DeserializationError parseObject(JsonVariant &variant) {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
 
-    JsonObject *object = new (_buffer) JsonObject(_buffer);
-    if (!object) return DeserializationError::NoMemory;
+    JsonObjectRef object(_buffer);
+    if (!object.success()) return DeserializationError::NoMemory;
     variant = object;
 
     // Check opening brace
@@ -137,7 +137,7 @@ class JsonDeserializer {
       err = parse(value);
       _nestingLimit++;
       if (err) return err;
-      if (!object->set(key, value)) return DeserializationError::NoMemory;
+      if (!object.set(key, value)) return DeserializationError::NoMemory;
 
       // Skip spaces
       err = skipSpacesAndComments();

@@ -17,6 +17,8 @@ class JsonObjectRef {
 
   JsonObjectRef() : _object(0) {}
   JsonObjectRef(JsonObject* object) : _object(object) {}
+  JsonObjectRef(Internals::JsonBuffer* buf)
+      : _object(new (buf) JsonObject(buf)) {}
 
   iterator begin() {
     if (!_object) return iterator();

@@ -38,7 +38,7 @@ class DynamicJsonDocument {
                                 JsonObjectRef>::type
   to() {
     clear();
-    JsonObjectRef object(new (&_buffer) JsonObject(&_buffer));
+    JsonObjectRef object(&_buffer);
     _root = object;
     return object;
   }

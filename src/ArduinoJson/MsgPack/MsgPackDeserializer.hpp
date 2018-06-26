@@ -267,13 +267,13 @@ class MsgPackDeserializer {
   }
 
   DeserializationError readObject(JsonVariant &variant, size_t n) {
-    JsonObject *object = new (_buffer) JsonObject(_buffer);
-    if (!object) return DeserializationError::NoMemory;
+    JsonObjectRef object(_buffer);
+    if (!object.success()) return DeserializationError::NoMemory;
     variant = object;
-    return readObject(*object, n);
+    return readObject(object, n);
   }
 
-  DeserializationError readObject(JsonObject &object, size_t n) {
+  DeserializationError readObject(JsonObjectRef object, size_t n) {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
     --_nestingLimit;
     for (; n; --n) {

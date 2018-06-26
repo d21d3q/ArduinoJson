@@ -49,7 +49,7 @@ class DynamicJsonDocument {
                                 JsonArrayRef>::type
   to() {
     clear();
-    JsonArrayRef array(new (&_buffer) JsonArray(&_buffer));
+    JsonArrayRef array(&_buffer);
     _root = array;
     return array;
   }

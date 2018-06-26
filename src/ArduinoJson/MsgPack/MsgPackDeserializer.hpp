@@ -240,13 +240,13 @@ class MsgPackDeserializer {
   }
 
   DeserializationError readArray(JsonVariant &variant, size_t n) {
-    JsonArray *array = new (_buffer) JsonArray(_buffer);
-    if (!array) return DeserializationError::NoMemory;
+    JsonArrayRef array(_buffer);
+    if (!array.success()) return DeserializationError::NoMemory;
     variant = array;
-    return readArray(*array, n);
+    return readArray(array, n);
   }
 
-  DeserializationError readArray(JsonArray &array, size_t n) {
+  DeserializationError readArray(JsonArrayRef array, size_t n) {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
     --_nestingLimit;
     for (; n; --n) {

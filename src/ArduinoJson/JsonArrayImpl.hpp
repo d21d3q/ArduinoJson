@@ -13,9 +13,8 @@ namespace ArduinoJson {
 
 inline JsonArrayRef JsonArrayRef::createNestedArray() {
   if (!_array) return JsonArrayRef();
-  Internals::JsonBuffer* buf = _array->_buffer;
-  JsonArray* array = new (buf) JsonArray(buf);
-  if (array) add(array);
+  JsonArrayRef array(_array->_buffer);
+  if (array.success()) add(array);
   return array;
 }
 

@@ -23,6 +23,7 @@ class JsonArrayRef {
 
   JsonArrayRef() : _array(0) {}
   JsonArrayRef(JsonArray* arr) : _array(arr) {}
+  JsonArrayRef(Internals::JsonBuffer* buf) : _array(new (buf) JsonArray(buf)) {}
 
   // Adds the specified value at the end of the array.
   //

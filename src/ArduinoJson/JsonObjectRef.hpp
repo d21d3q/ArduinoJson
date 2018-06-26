@@ -58,19 +58,17 @@ class JsonObjectRef {
 
   // Creates and adds a JsonArray.
   //
-  // JsonArray& createNestedArray(TKey);
+  // JsonArrayRef createNestedArray(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
   JsonArrayRef createNestedArray(const TString& key) {
-    if (!_object) return JsonArrayRef();
-    return _object->createNestedArray_impl<const TString&>(key);
+    return createNestedArray_impl<const TString&>(key);
   }
-  // JsonArray& createNestedArray(TKey);
+  // JsonArrayRef createNestedArray(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
   JsonArrayRef createNestedArray(TString* key) {
-    if (!_object) return JsonArrayRef();
-    return _object->createNestedArray_impl<TString*>(key);
+    return createNestedArray_impl<TString*>(key);
   }
 
   // Creates and adds a JsonObject.
@@ -80,15 +78,14 @@ class JsonObjectRef {
   template <typename TString>
   JsonObjectRef createNestedObject(const TString& key) {
     if (!_object) return JsonObjectRef();
-    return _object->createNestedObject_impl<const TString&>(key);
+    return createNestedObject_impl<const TString&>(key);
   }
   //
   // JsonObject& createNestedObject(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
   JsonObjectRef createNestedObject(TString* key) {
-    if (!_object) return JsonObjectRef();
-    return _object->createNestedObject_impl<TString*>(key);
+    return createNestedObject_impl<TString*>(key);
   }
 
   // Gets the value associated with the specified key.
@@ -257,6 +254,12 @@ class JsonObjectRef {
   }
 
  private:
+  template <typename TStringRef>
+  JsonArrayRef createNestedArray_impl(TStringRef key);
+
+  template <typename TStringRef>
+  JsonObjectRef createNestedObject_impl(TStringRef key);
+
   JsonObject* _object;
 };
 }  // namespace ArduinoJson

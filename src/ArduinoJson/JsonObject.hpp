@@ -137,21 +137,6 @@ class JsonObject : public Internals::ReferenceType,
     return is_impl<TString*, TValue>(key);
   }
 
-  // Creates and adds a JsonArray.
-  //
-  // JsonArray& createNestedArray(TKey);
-  // TKey = const std::string&, const String&
-  template <typename TString>
-  JsonArray* createNestedArray(const TString& key) {
-    return createNestedArray_impl<const TString&>(key);
-  }
-  // JsonArray& createNestedArray(TKey);
-  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
-  template <typename TString>
-  JsonArray* createNestedArray(TString* key) {
-    return createNestedArray_impl<TString*>(key);
-  }
-
   // Tells weither the specified key is present and associated with a value.
   //
   // bool containsKey(TKey);
@@ -235,11 +220,5 @@ class JsonObject : public Internals::ReferenceType,
     const_iterator it = findKey<TStringRef>(key);
     return it != end() ? it->value.is<TValue>() : false;
   }
-
-  template <typename TStringRef>
-  JsonArray* createNestedArray_impl(TStringRef key);
-
-  template <typename TStringRef>
-  JsonObject* createNestedObject_impl(TStringRef key);
 };
 }  // namespace ArduinoJson

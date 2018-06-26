@@ -142,14 +142,15 @@ class JsonArrayRef {
     return it != end() ? it->is<T>() : false;
   }
 
+  // Removes element at specified position.
   void remove(iterator it) {
     if (!_array) return;
     _array->remove(it);
   }
 
+  // Removes element at specified index.
   void remove(size_t index) {
-    if (!_array) return;
-    _array->remove(index);
+    remove(begin() += index);
   }
 
   // Sets the value at specified index.

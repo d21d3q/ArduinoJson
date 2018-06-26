@@ -75,19 +75,6 @@ class JsonArray : public Internals::ReferenceType,
     return it != end() ? it->as<T>() : Internals::JsonVariantDefault<T>::get();
   }
 
-  // Check the type of the value at specified index.
-  template <typename T>
-  bool is(size_t index) const {
-    const_iterator it = begin() += index;
-    return it != end() ? it->is<T>() : false;
-  }
-
-  // Removes element at specified index.
-  void remove(size_t index) {
-    remove(begin() += index);
-  }
-  using Internals::List<JsonVariant>::remove;
-
  private:
   template <typename TValueRef>
   bool set_impl(size_t index, TValueRef value) {

@@ -21,7 +21,10 @@ namespace ArduinoJson {
 
 // Forward declarations
 class JsonObject;
+
+namespace Internals {
 class JsonBuffer;
+}
 
 class JsonArray : public Internals::ReferenceType,
                   public Internals::NonCopyable,
@@ -80,12 +83,6 @@ class JsonArray : public Internals::ReferenceType,
     const_iterator it = begin() += index;
     return it != end() ? it->is<T>() : false;
   }
-
-  // Creates a JsonArray and adds a reference at the end of the array.
-  JsonArray *createNestedArray();
-
-  // Creates a JsonObject and adds a reference at the end of the array.
-  JsonObject *createNestedObject();
 
   // Removes element at specified index.
   void remove(size_t index) {

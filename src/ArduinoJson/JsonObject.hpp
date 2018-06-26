@@ -21,11 +21,11 @@ namespace ArduinoJson {
 
 // Forward declarations
 class JsonArray;
-class JsonBuffer;
 namespace Internals {
+class JsonBuffer;
 template <typename>
 class JsonObjectSubscript;
-}
+}  // namespace Internals
 
 class JsonObject : public Internals::ReferenceType,
                    public Internals::NonCopyable,

@@ -117,11 +117,7 @@ class JsonArrayRef {
     }
   }
 
-  JsonArrayRef createNestedArray() {
-    if (!_array) return JsonArrayRef();
-    return _array->createNestedArray();
-  }
-
+  JsonArrayRef createNestedArray();
   JsonObjectRef createNestedObject();
 
   Internals::JsonArraySubscript operator[](size_t index);

@@ -37,42 +37,6 @@ class JsonObject : public Internals::ReferenceType,
   explicit JsonObject(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
 
-  // Sets the specified key with the specified value.
-  //
-  // bool set(TKey, TValue);
-  // TKey = const std::string&, const String&
-  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename TValue, typename TString>
-  bool set(const TString& key, const TValue& value) {
-    return set_impl<const TString&, const TValue&>(key, value);
-  }
-  //
-  // bool set(TKey, TValue);
-  // TKey = const std::string&, const String&
-  // TValue = char*, const char*, const FlashStringHelper*
-  template <typename TValue, typename TString>
-  bool set(const TString& key, TValue* value) {
-    return set_impl<const TString&, TValue*>(key, value);
-  }
-  //
-  // bool set(TKey, const TValue&);
-  // TKey = char*, const char*, const FlashStringHelper*
-  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename TValue, typename TString>
-  bool set(TString* key, const TValue& value) {
-    return set_impl<TString*, const TValue&>(key, value);
-  }
-  //
-  // bool set(TKey, TValue);
-  // TKey = char*, const char*, const FlashStringHelper*
-  // TValue = char*, const char*, const FlashStringHelper*
-  template <typename TValue, typename TString>
-  bool set(TString* key, TValue* value) {
-    return set_impl<TString*, TValue*>(key, value);
-  }
-
   // Gets the value associated with the specified key.
   //
   // TValue get<TValue>(TKey) const;
@@ -150,26 +114,6 @@ class JsonObject : public Internals::ReferenceType,
     const_iterator it = findKey<TStringRef>(key);
     return it != end() ? it->value.as<TValue>()
                        : Internals::JsonVariantDefault<TValue>::get();
-  }
-
-  template <typename TStringRef, typename TValueRef>
-  bool set_impl(TStringRef key, TValueRef value) {
-    // ignore null key
-    if (Internals::StringTraits<TStringRef>::is_null(key)) return false;
-
-    // search a matching key
-    iterator it = findKey<TStringRef>(key);
-    if (it == end()) {
-      // add the key
-      it = Internals::List<JsonPair>::add();
-      if (it == end()) return false;
-      bool key_ok =
-          Internals::ValueSaver<TStringRef>::save(_buffer, it->key, key);
-      if (!key_ok) return false;
-    }
-
-    // save the value
-    return Internals::ValueSaver<TValueRef>::save(_buffer, it->value, value);
   }
 };
 }  // namespace ArduinoJson

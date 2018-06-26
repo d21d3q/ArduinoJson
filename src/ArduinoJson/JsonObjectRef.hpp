@@ -204,8 +204,7 @@ class JsonObjectRef {
   //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool set(const TString& key, const TValue& value) {
-    if (!_object) return false;
-    return _object->set_impl<const TString&, const TValue&>(key, value);
+    return set_impl<const TString&, const TValue&>(key, value);
   }
   //
   // bool set(TKey, TValue);
@@ -213,8 +212,7 @@ class JsonObjectRef {
   // TValue = char*, const char*, const FlashStringHelper*
   template <typename TValue, typename TString>
   bool set(const TString& key, TValue* value) {
-    if (!_object) return false;
-    return _object->set_impl<const TString&, TValue*>(key, value);
+    return set_impl<const TString&, TValue*>(key, value);
   }
   //
   // bool set(TKey, const TValue&);
@@ -223,8 +221,7 @@ class JsonObjectRef {
   //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool set(TString* key, const TValue& value) {
-    if (!_object) return false;
-    return _object->set_impl<TString*, const TValue&>(key, value);
+    return set_impl<TString*, const TValue&>(key, value);
   }
   //
   // bool set(TKey, TValue);
@@ -232,8 +229,7 @@ class JsonObjectRef {
   // TValue = char*, const char*, const FlashStringHelper*
   template <typename TValue, typename TString>
   bool set(TString* key, TValue* value) {
-    if (!_object) return false;
-    return _object->set_impl<TString*, TValue*>(key, value);
+    return set_impl<TString*, TValue*>(key, value);
   }
 
   size_t size() const {
@@ -259,6 +255,29 @@ class JsonObjectRef {
 
   template <typename TStringRef>
   JsonObjectRef createNestedObject_impl(TStringRef key);
+
+  template <typename TStringRef, typename TValueRef>
+  bool set_impl(TStringRef key, TValueRef value) {
+    if (!_object) return false;
+
+    // ignore null key
+    if (Internals::StringTraits<TStringRef>::is_null(key)) return false;
+
+    // search a matching key
+    iterator it = _object->findKey<TStringRef>(key);
+    if (it == end()) {
+      // add the key
+      it = _object->add();
+      if (it == end()) return false;
+      bool key_ok = Internals::ValueSaver<TStringRef>::save(_object->_buffer,
+                                                            it->key, key);
+      if (!key_ok) return false;
+    }
+
+    // save the value
+    return Internals::ValueSaver<TValueRef>::save(_object->_buffer, it->value,
+                                                  value);
+  }
 
   template <typename TStringRef, typename TValue>
   bool is_impl(TStringRef key) const {

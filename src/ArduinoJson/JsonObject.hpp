@@ -15,7 +15,8 @@
 // Returns the size (in bytes) of an object with n elements.
 // Can be very handy to determine the size of a StaticJsonBuffer.
 #define JSON_OBJECT_SIZE(NUMBER_OF_ELEMENTS) \
-  (sizeof(JsonObject) + (NUMBER_OF_ELEMENTS) * sizeof(JsonObject::node_type))
+  (sizeof(ArduinoJson::JsonObject) +         \
+   (NUMBER_OF_ELEMENTS) * sizeof(ArduinoJson::JsonObject::node_type))
 
 namespace ArduinoJson {
 

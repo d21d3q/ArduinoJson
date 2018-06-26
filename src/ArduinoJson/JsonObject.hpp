@@ -94,27 +94,6 @@ class JsonObject : public Internals::ReferenceType,
     return get_impl<TString*, TValue>(key);
   }
 
-  // Checks the type of the value associated with the specified key.
-  //
-  //
-  // bool is<TValue>(TKey) const;
-  // TKey = const std::string&, const String&
-  // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename TValue, typename TString>
-  bool is(const TString& key) const {
-    return is_impl<const TString&, TValue>(key);
-  }
-  //
-  // bool is<TValue>(TKey) const;
-  // TKey = char*, const char*, const FlashStringHelper*
-  // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename TValue, typename TString>
-  bool is(TString* key) const {
-    return is_impl<TString*, TValue>(key);
-  }
-
   // Tells weither the specified key is present and associated with a value.
   //
   // bool containsKey(TKey);
@@ -191,12 +170,6 @@ class JsonObject : public Internals::ReferenceType,
 
     // save the value
     return Internals::ValueSaver<TValueRef>::save(_buffer, it->value, value);
-  }
-
-  template <typename TStringRef, typename TValue>
-  bool is_impl(TStringRef key) const {
-    const_iterator it = findKey<TStringRef>(key);
-    return it != end() ? it->value.is<TValue>() : false;
   }
 };
 }  // namespace ArduinoJson

@@ -122,8 +122,7 @@ class JsonObjectRef {
   //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool is(const TString& key) const {
-    if (!_object) return false;
-    return _object->is_impl<const TString&, TValue>(key);
+    return is_impl<const TString&, TValue>(key);
   }
   //
   // bool is<TValue>(TKey) const;
@@ -132,8 +131,7 @@ class JsonObjectRef {
   //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool is(TString* key) const {
-    if (!_object) return false;
-    return _object->is_impl<TString*, TValue>(key);
+    return is_impl<TString*, TValue>(key);
   }
 
   // Gets or sets the value associated with the specified key.
@@ -261,6 +259,13 @@ class JsonObjectRef {
 
   template <typename TStringRef>
   JsonObjectRef createNestedObject_impl(TStringRef key);
+
+  template <typename TStringRef, typename TValue>
+  bool is_impl(TStringRef key) const {
+    if (!_object) return false;
+    const_iterator it = _object->findKey<TStringRef>(key);
+    return it != end() ? it->value.is<TValue>() : false;
+  }
 
   JsonObject* _object;
 };

@@ -126,9 +126,7 @@ class JsonDeserializer {
 
       // Skip spaces
       err = skipSpacesAndComments();
-      if (err) return err;
-
-      // Colon
+      if (err) return err;  // Colon
       if (!eat(':')) return DeserializationError::InvalidInput;
 
       // Parse value

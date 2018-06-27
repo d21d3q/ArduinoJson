@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "./JsonObject.hpp"
+#include "./JsonObjectData.hpp"
 
 namespace ArduinoJson {
 
@@ -12,13 +12,13 @@ class JsonObjectRef {
   friend class JsonVariant;
 
  public:
-  typedef Internals::JsonObject::iterator iterator;
-  typedef Internals::JsonObject::const_iterator const_iterator;
+  typedef Internals::JsonObjectData::iterator iterator;
+  typedef Internals::JsonObjectData::const_iterator const_iterator;
 
   JsonObjectRef() : _object(0) {}
-  JsonObjectRef(Internals::JsonObject* object) : _object(object) {}
+  JsonObjectRef(Internals::JsonObjectData* object) : _object(object) {}
   JsonObjectRef(Internals::JsonBuffer* buf)
-      : _object(new (buf) Internals::JsonObject(buf)) {}
+      : _object(new (buf) Internals::JsonObjectData(buf)) {}
 
   iterator begin() {
     if (!_object) return iterator();
@@ -59,19 +59,15 @@ class JsonObjectRef {
   // JsonArrayRef createNestedArray(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
-  JsonArrayRef createNestedArray(const TString& key) {
-    return createNestedArray_impl<const TString&>(key);
-  }
+  JsonArrayRef createNestedArray(const TString& key);
   // JsonArrayRef createNestedArray(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
-  JsonArrayRef createNestedArray(TString* key) {
-    return createNestedArray_impl<TString*>(key);
-  }
+  JsonArrayRef createNestedArray(TString* key);
 
-  // Creates and adds a JsonObject.
+  // Creates and adds a JsonObjectData.
   //
-  // JsonObject& createNestedObject(TKey);
+  // JsonObjectData& createNestedObject(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
   JsonObjectRef createNestedObject(const TString& key) {
@@ -79,7 +75,7 @@ class JsonObjectRef {
     return createNestedObject_impl<const TString&>(key);
   }
   //
-  // JsonObject& createNestedObject(TKey);
+  // JsonObjectData& createNestedObject(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
   JsonObjectRef createNestedObject(TString* key) {
@@ -91,7 +87,7 @@ class JsonObjectRef {
   // TValue get<TValue>(TKey) const;
   // TKey = const std::string&, const String&
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArray, JsonObjectData
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(
       const TString& key) const {
@@ -101,7 +97,7 @@ class JsonObjectRef {
   // TValue get<TValue>(TKey) const;
   // TKey = char*, const char*, const FlashStringHelper*
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArray, JsonObjectData
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(TString* key) const {
     return get_impl<TString*, TValue>(key);
@@ -113,7 +109,7 @@ class JsonObjectRef {
   // bool is<TValue>(TKey) const;
   // TKey = const std::string&, const String&
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArray, JsonObjectData
   template <typename TValue, typename TString>
   bool is(const TString& key) const {
     return is_impl<const TString&, TValue>(key);
@@ -122,7 +118,7 @@ class JsonObjectRef {
   // bool is<TValue>(TKey) const;
   // TKey = char*, const char*, const FlashStringHelper*
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArray, JsonObjectData
   template <typename TValue, typename TString>
   bool is(TString* key) const {
     return is_impl<TString*, TValue>(key);
@@ -193,7 +189,7 @@ class JsonObjectRef {
   // bool set(TKey, TValue);
   // TKey = const std::string&, const String&
   // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArray, JsonObjectData
   template <typename TValue, typename TString>
   bool set(const TString& key, const TValue& value) {
     return set_impl<const TString&, const TValue&>(key, value);
@@ -210,7 +206,7 @@ class JsonObjectRef {
   // bool set(TKey, const TValue&);
   // TKey = char*, const char*, const FlashStringHelper*
   // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArray, JsonObjectData
   template <typename TValue, typename TString>
   bool set(TString* key, const TValue& value) {
     return set_impl<TString*, const TValue&>(key, value);
@@ -310,6 +306,6 @@ class JsonObjectRef {
                                                   value);
   }
 
-  Internals::JsonObject* _object;
+  Internals::JsonObjectData* _object;
 };
 }  // namespace ArduinoJson

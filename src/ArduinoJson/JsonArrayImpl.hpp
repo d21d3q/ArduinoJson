@@ -6,7 +6,6 @@
 
 #include "JsonArray.hpp"
 #include "JsonArrayRef.hpp"
-#include "JsonObject.hpp"
 #include "JsonObjectRef.hpp"
 
 namespace ArduinoJson {

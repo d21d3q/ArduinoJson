@@ -13,7 +13,7 @@ namespace Internals {
 
 // A singly linked list of T.
 // The linked list is composed of ListNode<T>.
-// It is derived by JsonArray and JsonObject
+// It is derived by JsonArray and JsonObjectData
 template <typename T>
 class List {
  public:
@@ -38,7 +38,7 @@ class List {
   }
 
   // Returns the numbers of elements in the list.
-  // For a JsonObject, it would return the number of key-value pairs
+  // For a JsonObjectData, it would return the number of key-value pairs
   size_t size() const {
     size_t nodeCount = 0;
     for (node_type *node = _firstNode; node; node = node->next) nodeCount++;

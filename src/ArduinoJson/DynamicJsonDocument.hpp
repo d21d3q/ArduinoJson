@@ -5,7 +5,7 @@
 #pragma once
 
 #include "JsonArray.hpp"
-#include "JsonObject.hpp"
+#include "JsonObjectRef.hpp"
 #include "JsonVariant.hpp"
 #include "Memory/DynamicJsonBuffer.hpp"
 

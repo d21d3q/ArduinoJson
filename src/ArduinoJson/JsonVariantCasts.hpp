@@ -18,11 +18,6 @@ class JsonVariantCasts {
     return impl()->template as<JsonArray &>();
   }
 
-  // Gets the variant as an object.
-  FORCE_INLINE operator JsonObject &() const {
-    return impl()->template as<JsonObject &>();
-  }
-
   template <typename T>
   FORCE_INLINE operator T() const {
     return impl()->template as<T>();

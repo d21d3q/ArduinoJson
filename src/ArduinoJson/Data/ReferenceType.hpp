@@ -7,7 +7,8 @@
 namespace ArduinoJson {
 namespace Internals {
 
-// A type that is meant to be used by reference only (JsonArray and JsonObject)
+// A type that is meant to be used by reference only (JsonArray and
+// JsonObject)
 class ReferenceType {
  public:
   bool operator==(const ReferenceType& other) const {
@@ -20,5 +21,5 @@ class ReferenceType {
     return this != &other;
   }
 };
-}
-}
+}  // namespace Internals
+}  // namespace ArduinoJson

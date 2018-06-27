@@ -6,7 +6,7 @@
 
 #include "Configuration.hpp"
 #include "JsonArray.hpp"
-#include "JsonObject.hpp"
+#include "JsonObjectData.hpp"
 #include "JsonVariant.hpp"
 #include "Numbers/isFloat.hpp"
 #include "Numbers/isInteger.hpp"

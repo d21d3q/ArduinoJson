@@ -244,8 +244,7 @@ class JsonObjectRef {
  private:
   template <typename TStringRef>
   bool containsKey_impl(TStringRef key) const {
-    if (!_object) return false;
-    return findKey<TStringRef>(key) != _object->end();
+    return findKey<TStringRef>(key) != end();
   }
 
   template <typename TStringRef>
@@ -271,17 +270,15 @@ class JsonObjectRef {
   template <typename TStringRef, typename TValue>
   typename Internals::JsonVariantAs<TValue>::type get_impl(
       TStringRef key) const {
-    if (!_object) return Internals::JsonVariantDefault<TValue>::get();
-    JsonObject::const_iterator it = findKey<TStringRef>(key);
-    return it != _object->end() ? it->value.as<TValue>()
-                                : Internals::JsonVariantDefault<TValue>::get();
+    const_iterator it = findKey<TStringRef>(key);
+    return it != end() ? it->value.as<TValue>()
+                       : Internals::JsonVariantDefault<TValue>::get();
   }
 
   template <typename TStringRef, typename TValue>
   bool is_impl(TStringRef key) const {
-    if (!_object) return false;
-    JsonObject::const_iterator it = findKey<TStringRef>(key);
-    return it != _object->end() ? it->value.is<TValue>() : false;
+    const_iterator it = findKey<TStringRef>(key);
+    return it != end() ? it->value.is<TValue>() : false;
   }
 
   template <typename TStringRef>

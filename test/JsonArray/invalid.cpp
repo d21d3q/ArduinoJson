@@ -7,8 +7,8 @@
 
 using namespace Catch::Matchers;
 
-TEST_CASE("Undefined JsonArrayRef") {
-  JsonArrayRef array;
+TEST_CASE("Undefined JsonArray") {
+  JsonArray array;
 
   SECTION("SubscriptFails") {
     REQUIRE_FALSE(array[0].success());

@@ -11,7 +11,7 @@
 
 #include "ArduinoJson/JsonObjectImpl.hpp"
 
-#include "ArduinoJson/JsonArrayRef.hpp"
+#include "ArduinoJson/JsonArray.hpp"
 #include "ArduinoJson/JsonObjectRef.hpp"
 
 #include "ArduinoJson/JsonArrayImpl.hpp"

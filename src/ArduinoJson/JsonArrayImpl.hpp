@@ -4,19 +4,19 @@
 
 #pragma once
 
-#include "JsonArrayRef.hpp"
+#include "JsonArray.hpp"
 #include "JsonObjectRef.hpp"
 
 namespace ArduinoJson {
 
-inline JsonArrayRef JsonArrayRef::createNestedArray() {
-  if (!_array) return JsonArrayRef();
-  JsonArrayRef array(_array->_buffer);
+inline JsonArray JsonArray::createNestedArray() {
+  if (!_array) return JsonArray();
+  JsonArray array(_array->_buffer);
   if (array.success()) add(array);
   return array;
 }
 
-inline JsonObjectRef JsonArrayRef::createNestedObject() {
+inline JsonObjectRef JsonArray::createNestedObject() {
   if (!_array) return JsonObjectRef();
   JsonObjectRef object(_array->_buffer);
   if (object.success()) add(object);

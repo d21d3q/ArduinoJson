@@ -16,7 +16,7 @@ namespace ArduinoJson {
 namespace Internals {
 class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
  public:
-  FORCE_INLINE JsonArraySubscript(JsonArrayRef array, size_t index)
+  FORCE_INLINE JsonArraySubscript(JsonArray array, size_t index)
       : _array(array), _index(index) {}
 
   FORCE_INLINE JsonArraySubscript& operator=(const JsonArraySubscript& src) {
@@ -80,28 +80,28 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
   }
 
  private:
-  JsonArrayRef _array;
+  JsonArray _array;
   const size_t _index;
 };
 
 template <typename TImpl>
 inline JsonArraySubscript JsonVariantSubscripts<TImpl>::operator[](
     size_t index) {
-  return impl()->template as<JsonArrayRef>()[index];
+  return impl()->template as<JsonArray>()[index];
 }
 
 template <typename TImpl>
 inline const JsonArraySubscript JsonVariantSubscripts<TImpl>::operator[](
     size_t index) const {
-  return impl()->template as<JsonArrayRef>()[index];
+  return impl()->template as<JsonArray>()[index];
 }
 }  // namespace Internals
 
-inline Internals::JsonArraySubscript JsonArrayRef::operator[](size_t index) {
+inline Internals::JsonArraySubscript JsonArray::operator[](size_t index) {
   return Internals::JsonArraySubscript(*this, index);
 }
 
-inline const Internals::JsonArraySubscript JsonArrayRef::operator[](
+inline const Internals::JsonArraySubscript JsonArray::operator[](
     size_t index) const {
   return Internals::JsonArraySubscript(*this, index);
 }

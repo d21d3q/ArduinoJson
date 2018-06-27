@@ -192,9 +192,9 @@ TEST_CASE("deserialize JSON object") {
       DeserializationError err = deserializeJson(doc, jsonString);
       JsonObjectRef obj = doc.as<JsonObjectRef>();
 
-      JsonArrayRef array1 = obj["ab"];
-      const JsonArrayRef array2 = obj["cd"];
-      JsonArrayRef array3 = obj["ef"];
+      JsonArray array1 = obj["ab"];
+      const JsonArray array2 = obj["cd"];
+      JsonArray array3 = obj["ef"];
 
       REQUIRE(err == DeserializationError::Ok);
 

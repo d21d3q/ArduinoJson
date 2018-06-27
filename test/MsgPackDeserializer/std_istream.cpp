@@ -14,7 +14,7 @@ TEST_CASE("deserializeMsgPack(std::istream&)") {
     DeserializationError err = deserializeMsgPack(doc, input);
 
     REQUIRE(err == DeserializationError::Ok);
-    JsonArrayRef arr = doc.as<JsonArrayRef>();
+    JsonArray arr = doc.as<JsonArray>();
     REQUIRE(arr[0] == 0);
     REQUIRE(arr[1] == 2);
   }

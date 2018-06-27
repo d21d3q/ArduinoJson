@@ -203,7 +203,7 @@ TEST_CASE("JsonVariant::as()") {
 
   SECTION("ArrayAsString") {
     DynamicJsonDocument doc;
-    JsonArrayRef arr = doc.to<JsonArrayRef>();
+    JsonArray arr = doc.to<JsonArray>();
     arr.add(4);
     arr.add(2);
 
@@ -213,11 +213,11 @@ TEST_CASE("JsonVariant::as()") {
 
   SECTION("ArrayAsJsonArray") {
     DynamicJsonDocument doc;
-    JsonArrayRef arr = doc.to<JsonArrayRef>();
+    JsonArray arr = doc.to<JsonArray>();
 
     JsonVariant variant = arr;
-    REQUIRE(arr == variant.as<JsonArrayRef>());
-    REQUIRE(arr == variant.as<JsonArrayRef>());  // <- shorthand
+    REQUIRE(arr == variant.as<JsonArray>());
+    REQUIRE(arr == variant.as<JsonArray>());  // <- shorthand
   }
 
   SECTION("ObjectAsJsonObject") {

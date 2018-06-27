@@ -7,7 +7,7 @@
 
 TEST_CASE("JsonArray::remove()") {
   DynamicJsonDocument doc;
-  JsonArrayRef _array = doc.to<JsonArrayRef>();
+  JsonArray _array = doc.to<JsonArray>();
   _array.add(1);
   _array.add(2);
   _array.add(3);
@@ -37,7 +37,7 @@ TEST_CASE("JsonArray::remove()") {
   }
 
   SECTION("RemoveFirstByIterator") {
-    JsonArrayRef::iterator it = _array.begin();
+    JsonArray::iterator it = _array.begin();
     _array.remove(it);
 
     REQUIRE(2 == _array.size());
@@ -46,7 +46,7 @@ TEST_CASE("JsonArray::remove()") {
   }
 
   SECTION("RemoveMiddleByIterator") {
-    JsonArrayRef::iterator it = _array.begin();
+    JsonArray::iterator it = _array.begin();
     ++it;
     _array.remove(it);
 
@@ -56,7 +56,7 @@ TEST_CASE("JsonArray::remove()") {
   }
 
   SECTION("RemoveLastByIterator") {
-    JsonArrayRef::iterator it = _array.begin();
+    JsonArray::iterator it = _array.begin();
     ++it;
     ++it;
     _array.remove(it);

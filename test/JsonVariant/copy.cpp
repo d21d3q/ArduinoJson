@@ -54,12 +54,12 @@ TEST_CASE("JsonVariant copy") {
 
   SECTION("ArraysAreCopiedByReference") {
     DynamicJsonDocument doc;
-    JsonArrayRef array = doc.to<JsonArrayRef>();
+    JsonArray array = doc.to<JsonArray>();
 
     _variant1 = array;
 
     array.add("world");
 
-    REQUIRE(1 == _variant1.as<JsonArrayRef>().size());
+    REQUIRE(1 == _variant1.as<JsonArray>().size());
   }
 }

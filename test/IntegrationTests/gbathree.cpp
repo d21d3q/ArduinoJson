@@ -81,7 +81,7 @@ TEST_CASE("Gbathree") {
   SECTION("Pulses") {
     // "pulses":[50,50,50]
 
-    JsonArrayRef array = root["pulses"];
+    JsonArray array = root["pulses"];
     REQUIRE(array.success());
 
     REQUIRE(3 == array.size());
@@ -94,7 +94,7 @@ TEST_CASE("Gbathree") {
   SECTION("Act") {
     // "act":[2,1,2,2]
 
-    JsonArrayRef array = root["act"];
+    JsonArray array = root["act"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -107,12 +107,12 @@ TEST_CASE("Gbathree") {
   SECTION("Detectors") {
     // "detectors":[[34,34,34,34],[34,34,34,34],[34,34,34,34],[34,34,34,34]]
 
-    JsonArrayRef array = root["detectors"];
+    JsonArray array = root["detectors"];
     REQUIRE(array.success());
     REQUIRE(4 == array.size());
 
     for (size_t i = 0; i < 4; i++) {
-      JsonArrayRef nestedArray = array[i];
+      JsonArray nestedArray = array[i];
       REQUIRE(4 == nestedArray.size());
 
       for (size_t j = 0; j < 4; j++) {
@@ -124,7 +124,7 @@ TEST_CASE("Gbathree") {
   SECTION("Alta") {
     // alta:[2,2,2,2]
 
-    JsonArrayRef array = root["alta"];
+    JsonArray array = root["alta"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -137,7 +137,7 @@ TEST_CASE("Gbathree") {
   SECTION("Altb") {
     // altb:[2,2,2,2]
 
-    JsonArrayRef array = root["altb"];
+    JsonArray array = root["altb"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -150,12 +150,12 @@ TEST_CASE("Gbathree") {
   SECTION("Measlights") {
     // "measlights":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,15,15]]
 
-    JsonArrayRef array = root["measlights"];
+    JsonArray array = root["measlights"];
     REQUIRE(array.success());
     REQUIRE(4 == array.size());
 
     for (size_t i = 0; i < 4; i++) {
-      JsonArrayRef nestedArray = array[i];
+      JsonArray nestedArray = array[i];
 
       REQUIRE(4 == nestedArray.size());
 
@@ -168,12 +168,12 @@ TEST_CASE("Gbathree") {
   SECTION("Measlights2") {
     // "measlights2":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,15,15]]
 
-    JsonArrayRef array = root["measlights2"];
+    JsonArray array = root["measlights2"];
     REQUIRE(array.success());
     REQUIRE(4 == array.size());
 
     for (size_t i = 0; i < 4; i++) {
-      JsonArrayRef nestedArray = array[i];
+      JsonArray nestedArray = array[i];
       REQUIRE(4 == nestedArray.size());
 
       for (size_t j = 0; j < 4; j++) {
@@ -185,7 +185,7 @@ TEST_CASE("Gbathree") {
   SECTION("Altc") {
     // altc:[2,2,2,2]
 
-    JsonArrayRef array = root["altc"];
+    JsonArray array = root["altc"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());
@@ -198,7 +198,7 @@ TEST_CASE("Gbathree") {
   SECTION("Altd") {
     // altd:[2,2,2,2]
 
-    JsonArrayRef array = root["altd"];
+    JsonArray array = root["altd"];
     REQUIRE(array.success());
 
     REQUIRE(4 == array.size());

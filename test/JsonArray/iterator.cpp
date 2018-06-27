@@ -8,7 +8,7 @@
 template <typename TIterator>
 static void run_iterator_test() {
   StaticJsonDocument<JSON_ARRAY_SIZE(2)> doc;
-  JsonArrayRef array = doc.to<JsonArrayRef>();
+  JsonArray array = doc.to<JsonArray>();
   array.add(12);
   array.add(34);
 
@@ -28,10 +28,10 @@ static void run_iterator_test() {
 
 TEST_CASE("JsonArray::begin()/end()") {
   SECTION("Mutable") {
-    run_iterator_test<JsonArrayRef::iterator>();
+    run_iterator_test<JsonArray::iterator>();
   }
 
   SECTION("Const") {
-    run_iterator_test<JsonArrayRef::const_iterator>();
+    run_iterator_test<JsonArray::const_iterator>();
   }
 }

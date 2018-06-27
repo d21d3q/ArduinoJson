@@ -20,10 +20,10 @@ class JsonSerializer {
     _writer.writeFloat(value);
   }
 
-  void acceptArray(const JsonArrayRef &array) {
+  void acceptArray(const JsonArray &array) {
     _writer.beginArray();
 
-    JsonArrayRef::const_iterator it = array.begin();
+    JsonArray::const_iterator it = array.begin();
     while (it != array.end()) {
       it->visit(*this);
 
@@ -108,7 +108,7 @@ size_t measureJson(const TSource &source) {
 }
 
 #if ARDUINOJSON_ENABLE_STD_STREAM
-inline std::ostream &operator<<(std::ostream &os, const JsonArrayRef &source) {
+inline std::ostream &operator<<(std::ostream &os, const JsonArray &source) {
   serializeJson(source, os);
   return os;
 }

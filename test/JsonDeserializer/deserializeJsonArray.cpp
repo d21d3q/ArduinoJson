@@ -10,7 +10,7 @@ TEST_CASE("deserialize JSON array") {
 
   SECTION("An empty array") {
     DeserializationError err = deserializeJson(doc, "[]");
-    JsonArrayRef arr = doc.as<JsonArrayRef>();
+    JsonArray arr = doc.as<JsonArray>();
 
     REQUIRE(err == DeserializationError::Ok);
     REQUIRE(0 == arr.size());
@@ -19,7 +19,7 @@ TEST_CASE("deserialize JSON array") {
   SECTION("Spaces") {
     SECTION("Before the opening bracket") {
       DeserializationError err = deserializeJson(doc, "  []");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(0 == arr.size());
@@ -27,7 +27,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Before first value") {
       DeserializationError err = deserializeJson(doc, "[ \t\r\n42]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -36,7 +36,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("After first value") {
       DeserializationError err = deserializeJson(doc, "[42 \t\r\n]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -47,7 +47,7 @@ TEST_CASE("deserialize JSON array") {
   SECTION("Values types") {
     SECTION("On integer") {
       DeserializationError err = deserializeJson(doc, "[42]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -56,7 +56,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Two integers") {
       DeserializationError err = deserializeJson(doc, "[42,84]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -66,7 +66,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Double") {
       DeserializationError err = deserializeJson(doc, "[4.2,1e2]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -76,7 +76,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Unsigned long") {
       DeserializationError err = deserializeJson(doc, "[4294967295]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -85,7 +85,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Boolean") {
       DeserializationError err = deserializeJson(doc, "[true,false]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -95,7 +95,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Null") {
       DeserializationError err = deserializeJson(doc, "[null,null]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -108,7 +108,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("Double quotes") {
       DeserializationError err =
           deserializeJson(doc, "[ \"hello\" , \"world\" ]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -118,7 +118,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Single quotes") {
       DeserializationError err = deserializeJson(doc, "[ 'hello' , 'world' ]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -128,7 +128,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("No quotes") {
       DeserializationError err = deserializeJson(doc, "[ hello , world ]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -138,7 +138,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Double quotes (empty strings)") {
       DeserializationError err = deserializeJson(doc, "[\"\",\"\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -148,7 +148,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Single quotes (empty strings)") {
       DeserializationError err = deserializeJson(doc, "[\'\',\'\']");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -179,7 +179,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("Before opening bracket") {
       DeserializationError err =
           deserializeJson(doc, "/*COMMENT*/  [\"hello\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -189,7 +189,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("After opening bracket") {
       DeserializationError err =
           deserializeJson(doc, "[/*COMMENT*/ \"hello\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -198,7 +198,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("Before closing bracket") {
       DeserializationError err = deserializeJson(doc, "[\"hello\"/*COMMENT*/]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -207,7 +207,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("After closing bracket") {
       DeserializationError err = deserializeJson(doc, "[\"hello\"]/*COMMENT*/");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -217,7 +217,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("Before comma") {
       DeserializationError err =
           deserializeJson(doc, "[\"hello\"/*COMMENT*/,\"world\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -228,7 +228,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("After comma") {
       DeserializationError err =
           deserializeJson(doc, "[\"hello\",/*COMMENT*/ \"world\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -256,7 +256,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("Before opening bracket") {
       DeserializationError err =
           deserializeJson(doc, "//COMMENT\n\t[\"hello\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -265,7 +265,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("After opening bracket") {
       DeserializationError err = deserializeJson(doc, "[//COMMENT\n\"hello\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -275,7 +275,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("Before closing bracket") {
       DeserializationError err =
           deserializeJson(doc, "[\"hello\"//COMMENT\r\n]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -284,7 +284,7 @@ TEST_CASE("deserialize JSON array") {
 
     SECTION("After closing bracket") {
       DeserializationError err = deserializeJson(doc, "[\"hello\"]//COMMENT\n");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(1 == arr.size());
@@ -294,7 +294,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("Before comma") {
       DeserializationError err =
           deserializeJson(doc, "[\"hello\"//COMMENT\n,\"world\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -305,7 +305,7 @@ TEST_CASE("deserialize JSON array") {
     SECTION("After comma") {
       DeserializationError err =
           deserializeJson(doc, "[\"hello\",//COMMENT\n\"world\"]");
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(2 == arr.size());
@@ -372,7 +372,7 @@ TEST_CASE("deserialize JSON array") {
           " [ { \"a\" : 1 , \"b\" : 2 } , { \"c\" : 3 , \"d\" : 4 } ] ";
 
       DeserializationError err = deserializeJson(doc, jsonString);
-      JsonArrayRef arr = doc.as<JsonArrayRef>();
+      JsonArray arr = doc.as<JsonArray>();
 
       JsonObjectRef object1 = arr[0];
       const JsonObjectRef object2 = arr[1];
@@ -399,7 +399,7 @@ TEST_CASE("deserialize JSON array") {
   SECTION("Should clear the JsonArray") {
     deserializeJson(doc, "[1,2,3,4]");
     deserializeJson(doc, "[]");
-    JsonArrayRef arr = doc.as<JsonArrayRef>();
+    JsonArray arr = doc.as<JsonArray>();
 
     REQUIRE(arr.size() == 0);
     REQUIRE(doc.memoryUsage() == JSON_ARRAY_SIZE(0));

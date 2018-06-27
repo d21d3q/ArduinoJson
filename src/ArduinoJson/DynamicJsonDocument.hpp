@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "JsonArrayRef.hpp"
+#include "JsonArray.hpp"
 #include "JsonObjectRef.hpp"
 #include "JsonVariant.hpp"
 #include "Memory/DynamicJsonBuffer.hpp"
@@ -43,13 +43,13 @@ class DynamicJsonDocument {
     return object;
   }
 
-  // JsonArrayRef to<JsonArrayRef>()
+  // JsonArray to<JsonArray>()
   template <typename T>
-  typename Internals::enable_if<Internals::is_same<T, JsonArrayRef>::value,
-                                JsonArrayRef>::type
+  typename Internals::enable_if<Internals::is_same<T, JsonArray>::value,
+                                JsonArray>::type
   to() {
     clear();
-    JsonArrayRef array(&_buffer);
+    JsonArray array(&_buffer);
     _root = array;
     return array;
   }

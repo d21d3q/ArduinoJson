@@ -286,7 +286,7 @@ TEST_CASE("Variable Length Array") {
       strcpy(vla, "world");
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArrayRef>();
+      JsonArray arr = doc.to<JsonArray>();
       arr.add(vla);
 
       REQUIRE(std::string("world") == arr[0]);
@@ -298,7 +298,7 @@ TEST_CASE("Variable Length Array") {
       strcpy(vla, "world");
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArrayRef>();
+      JsonArray arr = doc.to<JsonArray>();
       arr.add("hello");
       arr.set(0, vla);
 
@@ -313,7 +313,7 @@ TEST_CASE("Variable Length Array") {
       strcpy(vla, "world");
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArrayRef>();
+      JsonArray arr = doc.to<JsonArray>();
       arr.add("hello");
       arr[0].set(vla);
 
@@ -326,7 +326,7 @@ TEST_CASE("Variable Length Array") {
       strcpy(vla, "world");
 
       DynamicJsonDocument doc;
-      JsonArrayRef arr = doc.to<JsonArrayRef>();
+      JsonArray arr = doc.to<JsonArray>();
       arr.add("hello");
       arr[0] = vla;
 

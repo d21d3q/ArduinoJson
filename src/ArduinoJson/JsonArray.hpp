@@ -14,16 +14,16 @@ namespace Internals {
 class JsonArraySubscript;
 }
 
-class JsonArrayRef {
+class JsonArray {
   friend class JsonVariant;
 
  public:
   typedef Internals::JsonArrayData::iterator iterator;
   typedef Internals::JsonArrayData::const_iterator const_iterator;
 
-  JsonArrayRef() : _array(0) {}
-  JsonArrayRef(Internals::JsonArrayData* arr) : _array(arr) {}
-  JsonArrayRef(Internals::JsonBuffer* buf)
+  JsonArray() : _array(0) {}
+  JsonArray(Internals::JsonArrayData* arr) : _array(arr) {}
+  JsonArray(Internals::JsonBuffer* buf)
       : _array(new (buf) Internals::JsonArrayData(buf)) {}
 
   // Adds the specified value at the end of the array.
@@ -82,7 +82,7 @@ class JsonArrayRef {
   bool copyFrom(T (&array)[N1][N2]) {
     bool ok = true;
     for (size_t i = 0; i < N1; i++) {
-      JsonArrayRef nestedArray = createNestedArray();
+      JsonArray nestedArray = createNestedArray();
       for (size_t j = 0; j < N2; j++) {
         ok &= nestedArray.add(array[i][j]);
       }
@@ -111,18 +111,18 @@ class JsonArrayRef {
     if (!_array) return;
     size_t i = 0;
     for (const_iterator it = begin(); it != end() && i < N1; ++it) {
-      it->as<JsonArrayRef>().copyTo(array[i++]);
+      it->as<JsonArray>().copyTo(array[i++]);
     }
   }
 
-  JsonArrayRef createNestedArray();
+  JsonArray createNestedArray();
   JsonObjectRef createNestedObject();
 
   Internals::JsonArraySubscript operator[](size_t index);
 
   const Internals::JsonArraySubscript operator[](size_t index) const;
 
-  bool operator==(const JsonArrayRef& rhs) const {
+  bool operator==(const JsonArray& rhs) const {
     return _array == rhs._array;
   }
 

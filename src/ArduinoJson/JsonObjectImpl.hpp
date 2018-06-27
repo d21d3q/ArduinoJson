@@ -4,25 +4,25 @@
 
 #pragma once
 
-#include "JsonArrayRef.hpp"
+#include "JsonArray.hpp"
 #include "JsonObjectRef.hpp"
 
 namespace ArduinoJson {
 
 template <typename TString>
-inline JsonArrayRef JsonObjectRef::createNestedArray(const TString& key) {
+inline JsonArray JsonObjectRef::createNestedArray(const TString& key) {
   return createNestedArray_impl<const TString&>(key);
 }
 
 template <typename TString>
-inline JsonArrayRef JsonObjectRef::createNestedArray(TString* key) {
+inline JsonArray JsonObjectRef::createNestedArray(TString* key) {
   return createNestedArray_impl<TString*>(key);
 }
 
 template <typename TStringRef>
-inline JsonArrayRef JsonObjectRef::createNestedArray_impl(TStringRef key) {
-  if (!_object) return JsonArrayRef();
-  JsonArrayRef array(_object->_buffer);
+inline JsonArray JsonObjectRef::createNestedArray_impl(TStringRef key) {
+  if (!_object) return JsonArray();
+  JsonArray array(_object->_buffer);
   if (array.success()) set(key, array);
   return array;
 }

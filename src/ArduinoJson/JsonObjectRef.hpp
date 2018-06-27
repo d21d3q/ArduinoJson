@@ -56,14 +56,14 @@ class JsonObjectRef {
 
   // Creates and adds a JsonArray.
   //
-  // JsonArrayRef createNestedArray(TKey);
+  // JsonArray createNestedArray(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
-  JsonArrayRef createNestedArray(const TString& key);
-  // JsonArrayRef createNestedArray(TKey);
+  JsonArray createNestedArray(const TString& key);
+  // JsonArray createNestedArray(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
-  JsonArrayRef createNestedArray(TString* key);
+  JsonArray createNestedArray(TString* key);
 
   // Creates and adds a JsonObject.
   //
@@ -244,7 +244,7 @@ class JsonObjectRef {
   }
 
   template <typename TStringRef>
-  JsonArrayRef createNestedArray_impl(TStringRef key);
+  JsonArray createNestedArray_impl(TStringRef key);
 
   template <typename TStringRef>
   JsonObjectRef createNestedObject_impl(TStringRef key);

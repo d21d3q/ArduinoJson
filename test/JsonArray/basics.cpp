@@ -7,7 +7,7 @@
 
 TEST_CASE("JsonArray basics") {
   DynamicJsonDocument doc;
-  JsonArrayRef array = doc.to<JsonArrayRef>();
+  JsonArray array = doc.to<JsonArray>();
 
   SECTION("SuccessIsTrue") {
     REQUIRE(array.success());
@@ -18,8 +18,8 @@ TEST_CASE("JsonArray basics") {
   }
 
   SECTION("CreateNestedArray") {
-    JsonArrayRef arr = array.createNestedArray();
-    REQUIRE(arr == array[0].as<JsonArrayRef>());
+    JsonArray arr = array.createNestedArray();
+    REQUIRE(arr == array[0].as<JsonArray>());
   }
 
   SECTION("CreateNestedObject") {

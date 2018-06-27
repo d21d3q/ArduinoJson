@@ -66,7 +66,7 @@ class JsonDeserializer {
   DeserializationError parseArray(JsonVariant &variant) {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
 
-    JsonArrayRef array(_buffer);
+    JsonArray array(_buffer);
     if (!array.success()) return DeserializationError::NoMemory;
     variant = array;
 

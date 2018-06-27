@@ -13,7 +13,7 @@ TEST_CASE("deserializeJson(std::istream&)") {
     std::istringstream json(" [ 42 /* comment */ ] ");
 
     DeserializationError err = deserializeJson(doc, json);
-    JsonArrayRef arr = doc.as<JsonArrayRef>();
+    JsonArray arr = doc.as<JsonArray>();
 
     REQUIRE(err == DeserializationError::Ok);
     REQUIRE(1 == arr.size());

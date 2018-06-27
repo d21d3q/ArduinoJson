@@ -36,10 +36,10 @@ class JsonSerializer {
     _writer.endArray();
   }
 
-  void acceptObject(const JsonObjectRef &object) {
+  void acceptObject(const JsonObject &object) {
     _writer.beginObject();
 
-    JsonObjectRef::const_iterator it = object.begin();
+    JsonObject::const_iterator it = object.begin();
     while (it != object.end()) {
       _writer.writeString(it->key);
       _writer.writeColon();
@@ -112,7 +112,7 @@ inline std::ostream &operator<<(std::ostream &os, const JsonArray &source) {
   serializeJson(source, os);
   return os;
 }
-inline std::ostream &operator<<(std::ostream &os, const JsonObjectRef &source) {
+inline std::ostream &operator<<(std::ostream &os, const JsonObject &source) {
   serializeJson(source, os);
   return os;
 }

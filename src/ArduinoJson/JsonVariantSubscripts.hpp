@@ -11,7 +11,7 @@
 
 namespace ArduinoJson {
 class JsonArray;
-class JsonObjectRef;
+class JsonObject;
 namespace Internals {
 
 // Forward declarations.
@@ -27,7 +27,7 @@ class JsonVariantSubscripts {
   // Returns 0 if the variant is neither an array nor an object
   size_t size() const {
     return impl()->template as<JsonArray>().size() +
-           impl()->template as<JsonObjectRef>().size();
+           impl()->template as<JsonObject>().size();
   }
 
   // Mimics an array.

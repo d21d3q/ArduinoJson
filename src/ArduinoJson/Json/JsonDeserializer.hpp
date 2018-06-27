@@ -103,7 +103,7 @@ class JsonDeserializer {
   DeserializationError parseObject(JsonVariant &variant) {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
 
-    JsonObjectRef object(_buffer);
+    JsonObject object(_buffer);
     if (!object.success()) return DeserializationError::NoMemory;
     variant = object;
 

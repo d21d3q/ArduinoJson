@@ -7,7 +7,7 @@
 
 TEST_CASE("JsonObject::containsKey()") {
   DynamicJsonDocument doc;
-  JsonObjectRef obj = doc.to<JsonObjectRef>();
+  JsonObject obj = doc.to<JsonObject>();
 
   SECTION("ContainsKeyReturnsFalseForNonExistingKey") {
     obj.set("hello", 42);

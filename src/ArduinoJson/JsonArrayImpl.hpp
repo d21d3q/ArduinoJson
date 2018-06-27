@@ -5,7 +5,7 @@
 #pragma once
 
 #include "JsonArray.hpp"
-#include "JsonObjectRef.hpp"
+#include "JsonObject.hpp"
 
 namespace ArduinoJson {
 
@@ -16,9 +16,9 @@ inline JsonArray JsonArray::createNestedArray() {
   return array;
 }
 
-inline JsonObjectRef JsonArray::createNestedObject() {
-  if (!_array) return JsonObjectRef();
-  JsonObjectRef object(_array->_buffer);
+inline JsonObject JsonArray::createNestedObject() {
+  if (!_array) return JsonObject();
+  JsonObject object(_array->_buffer);
   if (object.success()) add(object);
   return object;
 }

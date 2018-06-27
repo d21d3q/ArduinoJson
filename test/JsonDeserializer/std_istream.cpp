@@ -24,7 +24,7 @@ TEST_CASE("deserializeJson(std::istream&)") {
     std::istringstream json(" { hello : world // comment\n }");
 
     DeserializationError err = deserializeJson(doc, json);
-    JsonObjectRef obj = doc.as<JsonObjectRef>();
+    JsonObject obj = doc.as<JsonObject>();
 
     REQUIRE(err == DeserializationError::Ok);
     REQUIRE(1 == obj.size());

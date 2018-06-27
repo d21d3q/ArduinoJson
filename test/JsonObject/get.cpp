@@ -9,7 +9,7 @@ using namespace Catch::Matchers;
 
 TEST_CASE("JsonObject::get()") {
   DynamicJsonDocument doc;
-  JsonObjectRef obj = doc.to<JsonObjectRef>();
+  JsonObject obj = doc.to<JsonObject>();
 
   SECTION("GetConstCharPointer_GivenStringLiteral") {
     obj.set("hello", "world");

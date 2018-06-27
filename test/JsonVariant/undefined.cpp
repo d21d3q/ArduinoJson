@@ -37,11 +37,11 @@ TEST_CASE("JsonVariant undefined") {
   }
 
   SECTION("AsObjectReturnInvalid") {
-    REQUIRE(JsonObjectRef() == variant.as<JsonObjectRef>());
+    REQUIRE(JsonObject() == variant.as<JsonObject>());
   }
 
   SECTION("AsConstObjectReturnInvalid") {
-    REQUIRE(JsonObjectRef() == variant.as<const JsonObjectRef>());
+    REQUIRE(JsonObject() == variant.as<const JsonObject>());
   }
 
   SECTION("AsArrayWrapperReturnInvalid") {
@@ -49,6 +49,6 @@ TEST_CASE("JsonVariant undefined") {
   }
 
   SECTION("AsObjectWrapperReturnInvalid") {
-    REQUIRE(JsonObjectRef() == variant.as<JsonObjectRef>());
+    REQUIRE(JsonObject() == variant.as<JsonObject>());
   }
 }

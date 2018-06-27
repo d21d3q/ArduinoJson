@@ -26,7 +26,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("Object") {
     DynamicJsonDocument doc;
-    JsonObjectRef object = doc.to<JsonObjectRef>();
+    JsonObject object = doc.to<JsonObject>();
     object["a"] = "element at key \"a\"";
     object["b"] = "element at key \"b\"";
 
@@ -55,7 +55,7 @@ TEST_CASE("JsonVariant::operator[]") {
 
   SECTION("ObjectSetValue") {
     DynamicJsonDocument doc;
-    JsonObjectRef obj = doc.to<JsonObjectRef>();
+    JsonObject obj = doc.to<JsonObject>();
     JsonVariant var = obj;
     var["hello"] = "world";
     REQUIRE(1 == var.size());

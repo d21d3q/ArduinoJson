@@ -8,16 +8,16 @@
 
 namespace ArduinoJson {
 
-class JsonObjectRef {
+class JsonObject {
   friend class JsonVariant;
 
  public:
   typedef Internals::JsonObjectData::iterator iterator;
   typedef Internals::JsonObjectData::const_iterator const_iterator;
 
-  JsonObjectRef() : _object(0) {}
-  JsonObjectRef(Internals::JsonObjectData* object) : _object(object) {}
-  JsonObjectRef(Internals::JsonBuffer* buf)
+  JsonObject() : _object(0) {}
+  JsonObject(Internals::JsonObjectData* object) : _object(object) {}
+  JsonObject(Internals::JsonBuffer* buf)
       : _object(new (buf) Internals::JsonObjectData(buf)) {}
 
   iterator begin() {
@@ -67,18 +67,18 @@ class JsonObjectRef {
 
   // Creates and adds a JsonObject.
   //
-  // JsonObjectRef createNestedObject(TKey);
+  // JsonObject createNestedObject(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
-  JsonObjectRef createNestedObject(const TString& key) {
-    if (!_object) return JsonObjectRef();
+  JsonObject createNestedObject(const TString& key) {
+    if (!_object) return JsonObject();
     return createNestedObject_impl<const TString&>(key);
   }
   //
-  // JsonObjectRef createNestedObject(TKey);
+  // JsonObject createNestedObject(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
-  JsonObjectRef createNestedObject(TString* key) {
+  JsonObject createNestedObject(TString* key) {
     return createNestedObject_impl<TString*>(key);
   }
 
@@ -159,7 +159,7 @@ class JsonObjectRef {
     return Internals::JsonObjectSubscript<TString*>(*this, key);
   }
 
-  bool operator==(const JsonObjectRef& rhs) const {
+  bool operator==(const JsonObject& rhs) const {
     return _object == rhs._object;
   }
 
@@ -247,7 +247,7 @@ class JsonObjectRef {
   JsonArray createNestedArray_impl(TStringRef key);
 
   template <typename TStringRef>
-  JsonObjectRef createNestedObject_impl(TStringRef key);
+  JsonObject createNestedObject_impl(TStringRef key);
 
   // Returns the list node that matches the specified key.
   template <typename TStringRef>
@@ -260,7 +260,7 @@ class JsonObjectRef {
   }
   template <typename TStringRef>
   const_iterator findKey(TStringRef key) const {
-    return const_cast<JsonObjectRef*>(this)->findKey<TStringRef>(key);
+    return const_cast<JsonObject*>(this)->findKey<TStringRef>(key);
   }
 
   template <typename TStringRef, typename TValue>

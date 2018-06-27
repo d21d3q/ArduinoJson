@@ -374,9 +374,9 @@ TEST_CASE("deserialize JSON array") {
       DeserializationError err = deserializeJson(doc, jsonString);
       JsonArray arr = doc.as<JsonArray>();
 
-      JsonObjectRef object1 = arr[0];
-      const JsonObjectRef object2 = arr[1];
-      JsonObjectRef object3 = arr[2];
+      JsonObject object1 = arr[0];
+      const JsonObject object2 = arr[1];
+      JsonObject object3 = arr[2];
 
       REQUIRE(err == DeserializationError::Ok);
 

@@ -8,7 +8,7 @@
 
 namespace ArduinoJson {
 
-class JsonObjectRef;
+class JsonObject;
 
 namespace Internals {
 class JsonArraySubscript;
@@ -116,7 +116,7 @@ class JsonArray {
   }
 
   JsonArray createNestedArray();
-  JsonObjectRef createNestedObject();
+  JsonObject createNestedObject();
 
   Internals::JsonArraySubscript operator[](size_t index);
 

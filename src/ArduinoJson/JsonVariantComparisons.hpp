@@ -10,7 +10,7 @@
 
 namespace ArduinoJson {
 class JsonArray;
-class JsonObjectRef;
+class JsonObject;
 
 namespace Internals {
 
@@ -129,8 +129,8 @@ class JsonVariantComparisons {
       return as<JsonFloat>() == right.template as<JsonFloat>();
     if (is<JsonArray>() && right.template is<JsonArray>())
       return as<JsonArray>() == right.template as<JsonArray>();
-    if (is<JsonObjectRef>() && right.template is<JsonObjectRef>())
-      return as<JsonObjectRef>() == right.template as<JsonObjectRef>();
+    if (is<JsonObject>() && right.template is<JsonObject>())
+      return as<JsonObject>() == right.template as<JsonObject>();
     if (is<char *>() && right.template is<char *>())
       return StringTraits<const char *>::equals(as<char *>(),
                                                 right.template as<char *>());

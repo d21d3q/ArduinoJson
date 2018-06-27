@@ -22,7 +22,7 @@ class JsonObjectSubscript
   typedef JsonObjectSubscript<TStringRef> this_type;
 
  public:
-  FORCE_INLINE JsonObjectSubscript(JsonObjectRef object, TStringRef key)
+  FORCE_INLINE JsonObjectSubscript(JsonObject object, TStringRef key)
       : _object(object), _key(key) {}
 
   FORCE_INLINE this_type &operator=(const this_type &src) {
@@ -88,7 +88,7 @@ class JsonObjectSubscript
   }
 
  private:
-  JsonObjectRef _object;
+  JsonObject _object;
   TStringRef _key;
 };
 
@@ -97,7 +97,7 @@ template <typename TString>
 inline typename enable_if<StringTraits<TString>::has_equals,
                           const JsonObjectSubscript<const TString &> >::type
     JsonVariantSubscripts<TImpl>::operator[](const TString &key) const {
-  return impl()->template as<JsonObjectRef>()[key];
+  return impl()->template as<JsonObject>()[key];
 }
 
 template <typename TImpl>
@@ -105,7 +105,7 @@ template <typename TString>
 inline typename enable_if<StringTraits<TString>::has_equals,
                           JsonObjectSubscript<const TString &> >::type
     JsonVariantSubscripts<TImpl>::operator[](const TString &key) {
-  return impl()->template as<JsonObjectRef>()[key];
+  return impl()->template as<JsonObject>()[key];
 }
 
 template <typename TImpl>
@@ -113,7 +113,7 @@ template <typename TString>
 inline typename enable_if<StringTraits<const TString *>::has_equals,
                           JsonObjectSubscript<const TString *> >::type
     JsonVariantSubscripts<TImpl>::operator[](const TString *key) {
-  return impl()->template as<JsonObjectRef>()[key];
+  return impl()->template as<JsonObject>()[key];
 }
 
 template <typename TImpl>
@@ -121,7 +121,7 @@ template <typename TString>
 inline typename enable_if<StringTraits<TString *>::has_equals,
                           const JsonObjectSubscript<const TString *> >::type
     JsonVariantSubscripts<TImpl>::operator[](const TString *key) const {
-  return impl()->template as<JsonObjectRef>()[key];
+  return impl()->template as<JsonObject>()[key];
 }
 
 }  // namespace Internals

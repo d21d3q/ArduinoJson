@@ -17,7 +17,7 @@ void checkIsArray(JsonVariant var) {
   REQUIRE_FALSE(var.is<int>());
   REQUIRE_FALSE(var.is<long>());
   REQUIRE_FALSE(var.is<const char*>());
-  REQUIRE_FALSE(var.is<JsonObjectRef>());
+  REQUIRE_FALSE(var.is<JsonObject>());
 }
 
 void checkIsBool(JsonVariant var) {
@@ -29,7 +29,7 @@ void checkIsBool(JsonVariant var) {
   REQUIRE_FALSE(var.is<long>());
   REQUIRE_FALSE(var.is<const char*>());
   REQUIRE_FALSE(var.is<JsonArray>());
-  REQUIRE_FALSE(var.is<JsonObjectRef>());
+  REQUIRE_FALSE(var.is<JsonObject>());
 }
 
 void checkIsFloat(JsonVariant var) {
@@ -41,7 +41,7 @@ void checkIsFloat(JsonVariant var) {
   REQUIRE_FALSE(var.is<long>());
   REQUIRE_FALSE(var.is<const char*>());
   REQUIRE_FALSE(var.is<JsonArray>());
-  REQUIRE_FALSE(var.is<JsonObjectRef>());
+  REQUIRE_FALSE(var.is<JsonObject>());
 }
 
 void checkIsInteger(JsonVariant var) {
@@ -53,7 +53,7 @@ void checkIsInteger(JsonVariant var) {
   REQUIRE_FALSE(var.is<bool>());
   REQUIRE_FALSE(var.is<const char*>());
   REQUIRE_FALSE(var.is<JsonArray>());
-  REQUIRE_FALSE(var.is<JsonObjectRef>());
+  REQUIRE_FALSE(var.is<JsonObject>());
 }
 
 void checkIsString(JsonVariant var) {
@@ -65,7 +65,7 @@ void checkIsString(JsonVariant var) {
   REQUIRE_FALSE(var.is<float>());
   REQUIRE_FALSE(var.is<long>());
   REQUIRE_FALSE(var.is<JsonArray>());
-  REQUIRE_FALSE(var.is<JsonObjectRef>());
+  REQUIRE_FALSE(var.is<JsonObject>());
 }
 
 TEST_CASE("JsonVariant::is()") {

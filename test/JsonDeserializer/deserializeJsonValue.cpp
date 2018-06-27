@@ -91,7 +91,7 @@ TEST_CASE("deserializeJson(DynamicJsonDocument&)") {
     deserializeJson(doc, "[1,2,3]");
     deserializeJson(doc, "{}");
 
-    REQUIRE(doc.is<JsonObjectRef>());
+    REQUIRE(doc.is<JsonObject>());
     REQUIRE(doc.memoryUsage() == JSON_OBJECT_SIZE(0));
   }
 

@@ -8,7 +8,7 @@
 
 TEST_CASE("JsonObject::remove()") {
   DynamicJsonDocument doc;
-  JsonObjectRef obj = doc.to<JsonObjectRef>();
+  JsonObject obj = doc.to<JsonObject>();
 
   SECTION("SizeDecreased_WhenValuesAreRemoved") {
     obj["hello"] = 1;
@@ -31,7 +31,7 @@ TEST_CASE("JsonObject::remove()") {
     obj["b"] = 1;
     obj["c"] = 2;
 
-    for (JsonObjectRef::iterator it = obj.begin(); it != obj.end(); ++it) {
+    for (JsonObject::iterator it = obj.begin(); it != obj.end(); ++it) {
       if (it->value == 1) obj.remove(it);
     }
 

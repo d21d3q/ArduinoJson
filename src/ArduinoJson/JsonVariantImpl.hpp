@@ -26,7 +26,7 @@ inline JsonVariant::JsonVariant(JsonArray array) {
   }
 }
 
-inline JsonVariant::JsonVariant(JsonObjectRef object) {
+inline JsonVariant::JsonVariant(JsonObject object) {
   if (object.success()) {
     _type = Internals::JSON_OBJECT;
     _content.asObject = object._object;
@@ -40,9 +40,9 @@ inline JsonArray JsonVariant::variantAsArray() const {
   return JsonArray();
 }
 
-inline JsonObjectRef JsonVariant::variantAsObject() const {
+inline JsonObject JsonVariant::variantAsObject() const {
   if (_type == Internals::JSON_OBJECT) return _content.asObject;
-  return JsonObjectRef();
+  return JsonObject();
 }
 
 template <typename T>

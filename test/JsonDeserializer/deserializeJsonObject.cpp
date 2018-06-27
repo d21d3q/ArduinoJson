@@ -10,50 +10,50 @@ TEST_CASE("deserialize JSON object") {
 
   SECTION("An empty object") {
     DeserializationError err = deserializeJson(doc, "{}");
-    JsonObjectRef obj = doc.as<JsonObjectRef>();
+    JsonObject obj = doc.as<JsonObject>();
 
     REQUIRE(err == DeserializationError::Ok);
-    REQUIRE(doc.is<JsonObjectRef>());
+    REQUIRE(doc.is<JsonObject>());
     REQUIRE(obj.size() == 0);
   }
 
   SECTION("Quotes") {
     SECTION("Double quotes") {
       DeserializationError err = deserializeJson(doc, "{\"key\":\"value\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
 
     SECTION("Single quotes") {
       DeserializationError err = deserializeJson(doc, "{'key':'value'}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
 
     SECTION("No quotes") {
       DeserializationError err = deserializeJson(doc, "{key:value}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
 
     SECTION("No quotes, allow underscore in key") {
       DeserializationError err = deserializeJson(doc, "{_k_e_y_:42}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["_k_e_y_"] == 42);
     }
@@ -62,40 +62,40 @@ TEST_CASE("deserialize JSON object") {
   SECTION("Spaces") {
     SECTION("Before the key") {
       DeserializationError err = deserializeJson(doc, "{ \"key\":\"value\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
 
     SECTION("After the key") {
       DeserializationError err = deserializeJson(doc, "{\"key\" :\"value\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
 
     SECTION("Before the value") {
       DeserializationError err = deserializeJson(doc, "{\"key\": \"value\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
 
     SECTION("After the value") {
       DeserializationError err = deserializeJson(doc, "{\"key\":\"value\" }");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 1);
       REQUIRE(obj["key"] == "value");
     }
@@ -103,10 +103,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before the colon") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":\"value1\" ,\"key2\":\"value2\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"] == "value1");
       REQUIRE(obj["key2"] == "value2");
@@ -115,10 +115,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After the colon") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":\"value1\" ,\"key2\":\"value2\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"] == "value1");
       REQUIRE(obj["key2"] == "value2");
@@ -129,10 +129,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("String") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":\"value1\",\"key2\":\"value2\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"] == "value1");
       REQUIRE(obj["key2"] == "value2");
@@ -141,10 +141,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Integer") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":42,\"key2\":-42}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"] == 42);
       REQUIRE(obj["key2"] == -42);
@@ -153,10 +153,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Double") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":12.345,\"key2\":-7E89}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"] == 12.345);
       REQUIRE(obj["key2"] == -7E89);
@@ -165,10 +165,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Booleans") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":true,\"key2\":false}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"] == true);
       REQUIRE(obj["key2"] == false);
@@ -177,10 +177,10 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Null") {
       DeserializationError err =
           deserializeJson(doc, "{\"key1\":null,\"key2\":null}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
-      REQUIRE(doc.is<JsonObjectRef>());
+      REQUIRE(doc.is<JsonObject>());
       REQUIRE(obj.size() == 2);
       REQUIRE(obj["key1"].as<char*>() == 0);
       REQUIRE(obj["key2"].as<char*>() == 0);
@@ -190,7 +190,7 @@ TEST_CASE("deserialize JSON object") {
       char jsonString[] = " { \"ab\" : [ 1 , 2 ] , \"cd\" : [ 3 , 4 ] } ";
 
       DeserializationError err = deserializeJson(doc, jsonString);
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       JsonArray array1 = obj["ab"];
       const JsonArray array2 = obj["cd"];
@@ -278,7 +278,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before opening brace") {
       DeserializationError err =
           deserializeJson(doc, "/*COMMENT*/ {\"hello\":\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -287,7 +287,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After opening brace") {
       DeserializationError err =
           deserializeJson(doc, "{/*COMMENT*/\"hello\":\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -296,7 +296,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before colon") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\"/*COMMENT*/:\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -305,7 +305,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After colon") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\":/*COMMENT*/\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -314,7 +314,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before closing brace") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\":\"world\"/*COMMENT*/}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -323,7 +323,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After closing brace") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\":\"world\"}/*COMMENT*/");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -332,7 +332,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before comma") {
       DeserializationError err = deserializeJson(
           doc, "{\"hello\":\"world\"/*COMMENT*/,\"answer\":42}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -342,7 +342,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After comma") {
       DeserializationError err = deserializeJson(
           doc, "{\"hello\":\"world\",/*COMMENT*/\"answer\":42}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -354,7 +354,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before opening brace") {
       DeserializationError err =
           deserializeJson(doc, "//COMMENT\n {\"hello\":\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -363,7 +363,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After opening brace") {
       DeserializationError err =
           deserializeJson(doc, "{//COMMENT\n\"hello\":\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -372,7 +372,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before colon") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\"//COMMENT\n:\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -381,7 +381,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After colon") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\"://COMMENT\n\"world\"}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -390,7 +390,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before closing brace") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\":\"world\"//COMMENT\n}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -399,7 +399,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After closing brace") {
       DeserializationError err =
           deserializeJson(doc, "{\"hello\":\"world\"}//COMMENT\n");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -408,7 +408,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("Before comma") {
       DeserializationError err = deserializeJson(
           doc, "{\"hello\":\"world\"//COMMENT\n,\"answer\":42}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -418,7 +418,7 @@ TEST_CASE("deserialize JSON object") {
     SECTION("After comma") {
       DeserializationError err = deserializeJson(
           doc, "{\"hello\":\"world\",//COMMENT\n\"answer\":42}");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -459,7 +459,7 @@ TEST_CASE("deserialize JSON object") {
 
     SECTION("After closing brace") {
       DeserializationError err = deserializeJson(doc, "{\"hello\":\"world\"}/");
-      JsonObjectRef obj = doc.as<JsonObjectRef>();
+      JsonObject obj = doc.as<JsonObject>();
 
       REQUIRE(err == DeserializationError::Ok);
       REQUIRE(obj["hello"] == "world");
@@ -483,9 +483,9 @@ TEST_CASE("deserialize JSON object") {
   SECTION("Should clear the JsonObject") {
     deserializeJson(doc, "{\"hello\":\"world\"}");
     deserializeJson(doc, "{}");
-    JsonObjectRef obj = doc.as<JsonObjectRef>();
+    JsonObject obj = doc.as<JsonObject>();
 
-    REQUIRE(doc.is<JsonObjectRef>());
+    REQUIRE(doc.is<JsonObject>());
     REQUIRE(obj.size() == 0);
     REQUIRE(doc.memoryUsage() == JSON_OBJECT_SIZE(0));
   }

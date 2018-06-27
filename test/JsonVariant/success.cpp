@@ -26,7 +26,7 @@ TEST_CASE("JsonVariant::success()") {
 
   SECTION("ReturnsTrue_WhenEmptyObject") {
     DynamicJsonDocument doc;
-    JsonObjectRef obj = doc.to<JsonObjectRef>();
+    JsonObject obj = doc.to<JsonObject>();
 
     JsonVariant variant = obj;
     REQUIRE(true == variant.success());
@@ -38,7 +38,7 @@ TEST_CASE("JsonVariant::success()") {
   }
 
   SECTION("ReturnsFalse_WhenInvalidObject") {
-    JsonVariant variant = JsonObjectRef();
+    JsonVariant variant = JsonObject();
     REQUIRE(false == variant.success());
   }
 }

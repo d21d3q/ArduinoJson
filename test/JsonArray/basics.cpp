@@ -23,7 +23,7 @@ TEST_CASE("JsonArray basics") {
   }
 
   SECTION("CreateNestedObject") {
-    JsonObjectRef obj = array.createNestedObject();
-    REQUIRE(obj == array[0].as<JsonObjectRef>());
+    JsonObject obj = array.createNestedObject();
+    REQUIRE(obj == array[0].as<JsonObject>());
   }
 }

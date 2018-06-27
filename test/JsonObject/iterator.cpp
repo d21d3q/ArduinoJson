@@ -9,12 +9,12 @@ using namespace Catch::Matchers;
 
 TEST_CASE("JsonObject::begin()/end()") {
   StaticJsonDocument<JSON_OBJECT_SIZE(2)> doc;
-  JsonObjectRef obj = doc.to<JsonObjectRef>();
+  JsonObject obj = doc.to<JsonObject>();
   obj["ab"] = 12;
   obj["cd"] = 34;
 
   SECTION("NonConstIterator") {
-    JsonObjectRef::iterator it = obj.begin();
+    JsonObject::iterator it = obj.begin();
     REQUIRE(obj.end() != it);
     REQUIRE_THAT(it->key, Equals("ab"));
     REQUIRE(12 == it->value);
@@ -35,8 +35,8 @@ TEST_CASE("JsonObject::begin()/end()") {
   }
 
   SECTION("ConstIterator") {
-    const JsonObjectRef const_object = obj;
-    JsonObjectRef::const_iterator it = const_object.begin();
+    const JsonObject const_object = obj;
+    JsonObject::const_iterator it = const_object.begin();
 
     REQUIRE(const_object.end() != it);
     REQUIRE_THAT(it->key, Equals("ab"));

@@ -230,9 +230,9 @@ TEST_CASE("JsonVariant comparisons") {
 
   SECTION("ObjectInVariant") {
     DynamicJsonDocument doc1;
-    JsonObjectRef obj1 = doc1.to<JsonObjectRef>();
+    JsonObject obj1 = doc1.to<JsonObject>();
     DynamicJsonDocument doc2;
-    JsonObjectRef obj2 = doc2.to<JsonObjectRef>();
+    JsonObject obj2 = doc2.to<JsonObject>();
 
     JsonVariant variant1 = obj1;
     JsonVariant variant2 = obj1;
@@ -247,7 +247,7 @@ TEST_CASE("JsonVariant comparisons") {
 
   SECTION("VariantsOfDifferentTypes") {
     DynamicJsonDocument doc1;
-    JsonObjectRef obj = doc1.to<JsonObjectRef>();
+    JsonObject obj = doc1.to<JsonObject>();
 
     DynamicJsonDocument doc2;
     JsonArray arr = doc2.to<JsonArray>();

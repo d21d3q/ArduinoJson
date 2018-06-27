@@ -18,7 +18,7 @@ namespace ArduinoJson {
 
 // Forward declarations.
 class JsonArray;
-class JsonObjectRef;
+class JsonObject;
 
 // A variant that can be a any value serializable to a JSON value.
 //
@@ -105,7 +105,7 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
   }
 
   JsonVariant(JsonArray array);
-  JsonVariant(JsonObjectRef object);
+  JsonVariant(JsonObject object);
 
   // Get the variant as the specified type.
   //
@@ -173,12 +173,12 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return variantAsArray();
   }
   //
-  // JsonObjectRef as<JsonObjectRef>() const;
-  // const JsonObjectRef as<const JsonObjectRef>() const;
+  // JsonObject as<JsonObject>() const;
+  // const JsonObject as<const JsonObject>() const;
   template <typename T>
   typename Internals::enable_if<
       Internals::is_same<typename Internals::remove_const<T>::type,
-                         JsonObjectRef>::value,
+                         JsonObject>::value,
       T>::type
   as() const {
     return variantAsObject();
@@ -247,12 +247,12 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return variantIsArray();
   }
   //
-  // bool is<JsonObjectRef> const;
-  // bool is<const JsonObjectRef> const;
+  // bool is<JsonObject> const;
+  // bool is<const JsonObject> const;
   template <typename T>
   typename Internals::enable_if<
       Internals::is_same<typename Internals::remove_const<T>::type,
-                         JsonObjectRef>::value,
+                         JsonObject>::value,
       bool>::type
   is() const {
     return variantIsObject();
@@ -298,7 +298,7 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
 
  private:
   JsonArray variantAsArray() const;
-  JsonObjectRef variantAsObject() const;
+  JsonObject variantAsObject() const;
   const char *variantAsString() const;
   template <typename T>
   T variantAsFloat() const;

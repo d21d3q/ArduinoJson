@@ -5,7 +5,7 @@
 #pragma once
 
 #include "Configuration.hpp"
-#include "JsonArray.hpp"
+#include "JsonArrayData.hpp"
 #include "JsonObjectData.hpp"
 #include "JsonVariant.hpp"
 #include "Numbers/isFloat.hpp"

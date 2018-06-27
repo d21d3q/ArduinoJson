@@ -5,7 +5,6 @@
 #pragma once
 
 #include "Data/List.hpp"
-#include "Data/ReferenceType.hpp"
 #include "Data/ValueSaver.hpp"
 #include "JsonVariant.hpp"
 #include "Memory/JsonBufferAllocated.hpp"
@@ -14,22 +13,17 @@
 
 // Returns the size (in bytes) of an array with n elements.
 // Can be very handy to determine the size of a StaticJsonBuffer.
-#define JSON_ARRAY_SIZE(NUMBER_OF_ELEMENTS)    \
-  (sizeof(ArduinoJson::Internals::JsonArray) + \
-   (NUMBER_OF_ELEMENTS) *                      \
-       sizeof(ArduinoJson::Internals::JsonArray::node_type))
+#define JSON_ARRAY_SIZE(NUMBER_OF_ELEMENTS)        \
+  (sizeof(ArduinoJson::Internals::JsonArrayData) + \
+   (NUMBER_OF_ELEMENTS) *                          \
+       sizeof(ArduinoJson::Internals::JsonArrayData::node_type))
 
 namespace ArduinoJson {
-
 namespace Internals {
-class JsonArray : public Internals::ReferenceType,
-                  public Internals::NonCopyable,
-                  public Internals::List<JsonVariant>,
-                  public Internals::JsonBufferAllocated {
-  friend class JsonArrayRef;
-
- public:
-  explicit JsonArray(Internals::JsonBuffer *buf) throw()
+struct JsonArrayData : Internals::NonCopyable,
+                       Internals::List<JsonVariant>,
+                       Internals::JsonBufferAllocated {
+  explicit JsonArrayData(Internals::JsonBuffer *buf) throw()
       : Internals::List<JsonVariant>(buf) {}
 };
 }  // namespace Internals

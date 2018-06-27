@@ -23,7 +23,7 @@ class JsonSerializer {
   void acceptArray(const JsonArrayRef &array) {
     _writer.beginArray();
 
-    JsonArray::const_iterator it = array.begin();
+    JsonArrayRef::const_iterator it = array.begin();
     while (it != array.end()) {
       it->visit(*this);
 

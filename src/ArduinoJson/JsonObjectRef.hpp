@@ -65,9 +65,9 @@ class JsonObjectRef {
   template <typename TString>
   JsonArrayRef createNestedArray(TString* key);
 
-  // Creates and adds a JsonObjectData.
+  // Creates and adds a JsonObject.
   //
-  // JsonObjectData& createNestedObject(TKey);
+  // JsonObjectRef createNestedObject(TKey);
   // TKey = const std::string&, const String&
   template <typename TString>
   JsonObjectRef createNestedObject(const TString& key) {
@@ -75,7 +75,7 @@ class JsonObjectRef {
     return createNestedObject_impl<const TString&>(key);
   }
   //
-  // JsonObjectData& createNestedObject(TKey);
+  // JsonObjectRef createNestedObject(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
   JsonObjectRef createNestedObject(TString* key) {
@@ -87,7 +87,7 @@ class JsonObjectRef {
   // TValue get<TValue>(TKey) const;
   // TKey = const std::string&, const String&
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObjectData
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(
       const TString& key) const {
@@ -97,7 +97,7 @@ class JsonObjectRef {
   // TValue get<TValue>(TKey) const;
   // TKey = char*, const char*, const FlashStringHelper*
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObjectData
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(TString* key) const {
     return get_impl<TString*, TValue>(key);
@@ -109,7 +109,7 @@ class JsonObjectRef {
   // bool is<TValue>(TKey) const;
   // TKey = const std::string&, const String&
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObjectData
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool is(const TString& key) const {
     return is_impl<const TString&, TValue>(key);
@@ -118,7 +118,7 @@ class JsonObjectRef {
   // bool is<TValue>(TKey) const;
   // TKey = char*, const char*, const FlashStringHelper*
   // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObjectData
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool is(TString* key) const {
     return is_impl<TString*, TValue>(key);
@@ -189,7 +189,7 @@ class JsonObjectRef {
   // bool set(TKey, TValue);
   // TKey = const std::string&, const String&
   // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObjectData
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool set(const TString& key, const TValue& value) {
     return set_impl<const TString&, const TValue&>(key, value);
@@ -206,7 +206,7 @@ class JsonObjectRef {
   // bool set(TKey, const TValue&);
   // TKey = char*, const char*, const FlashStringHelper*
   // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObjectData
+  //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   bool set(TString* key, const TValue& value) {
     return set_impl<TString*, const TValue&>(key, value);

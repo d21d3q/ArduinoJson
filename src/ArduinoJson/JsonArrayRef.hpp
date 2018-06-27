@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "./JsonArray.hpp"
+#include "./JsonArrayData.hpp"
 
 namespace ArduinoJson {
 
@@ -18,19 +18,19 @@ class JsonArrayRef {
   friend class JsonVariant;
 
  public:
-  typedef Internals::JsonArray::iterator iterator;
-  typedef Internals::JsonArray::const_iterator const_iterator;
+  typedef Internals::JsonArrayData::iterator iterator;
+  typedef Internals::JsonArrayData::const_iterator const_iterator;
 
   JsonArrayRef() : _array(0) {}
-  JsonArrayRef(Internals::JsonArray* arr) : _array(arr) {}
+  JsonArrayRef(Internals::JsonArrayData* arr) : _array(arr) {}
   JsonArrayRef(Internals::JsonBuffer* buf)
-      : _array(new (buf) Internals::JsonArray(buf)) {}
+      : _array(new (buf) Internals::JsonArrayData(buf)) {}
 
   // Adds the specified value at the end of the array.
   //
   // bool add(TValue);
   // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArrayData, JsonObject
   template <typename T>
   bool add(const T& value) {
     return add_impl<const T&>(value);
@@ -155,7 +155,7 @@ class JsonArrayRef {
   //
   // bool add(size_t index, const TValue&);
   // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
+  //          std::string, String, JsonArrayData, JsonObject
   template <typename T>
   bool set(size_t index, const T& value) {
     if (!_array) return false;
@@ -203,6 +203,6 @@ class JsonArrayRef {
     return Internals::ValueSaver<TValueRef>::save(_array->_buffer, *it, value);
   }
 
-  Internals::JsonArray* _array;
+  Internals::JsonArrayData* _array;
 };
 }  // namespace ArduinoJson

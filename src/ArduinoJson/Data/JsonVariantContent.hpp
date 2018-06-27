@@ -10,7 +10,7 @@
 namespace ArduinoJson {
 namespace Internals {
 // Forward declarations
-class JsonArray;
+class JsonArrayData;
 class JsonObjectData;
 
 // A union that defines the actual content of a JsonVariant.
@@ -19,7 +19,7 @@ union JsonVariantContent {
   JsonFloat asFloat;         // used for double and float
   JsonUInt asInteger;        // used for bool, char, short, int and longs
   const char* asString;      // asString can be null
-  JsonArray* asArray;        // asArray cannot be null
+  JsonArrayData* asArray;    // asArray cannot be null
   JsonObjectData* asObject;  // asObject cannot be null
 };
 }  // namespace Internals

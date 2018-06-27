@@ -13,11 +13,6 @@ namespace Internals {
 template <typename TImpl>
 class JsonVariantCasts {
  public:
-  // Gets the variant as an array.
-  FORCE_INLINE operator JsonArray &() const {
-    return impl()->template as<JsonArray &>();
-  }
-
   template <typename T>
   FORCE_INLINE operator T() const {
     return impl()->template as<T>();

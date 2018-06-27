@@ -19,15 +19,5 @@ struct JsonVariantAs<char*> {
   typedef const char* type;
 };
 
-template <>
-struct JsonVariantAs<JsonArray> {
-  typedef JsonArray& type;
-};
-
-template <>
-struct JsonVariantAs<const JsonArray> {
-  typedef const JsonArray& type;
-};
-
 }  // namespace Internals
 }  // namespace ArduinoJson

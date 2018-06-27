@@ -93,7 +93,7 @@ inline JsonArraySubscript JsonVariantSubscripts<TImpl>::operator[](
 template <typename TImpl>
 inline const JsonArraySubscript JsonVariantSubscripts<TImpl>::operator[](
     size_t index) const {
-  return impl()->template as<JsonArray>()[index];
+  return impl()->template as<JsonArrayRef>()[index];
 }
 }  // namespace Internals
 

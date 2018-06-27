@@ -5,7 +5,6 @@
 #pragma once
 
 #include "Data/List.hpp"
-#include "Data/ReferenceType.hpp"
 #include "Data/ValueSaver.hpp"
 #include "JsonPair.hpp"
 #include "Memory/JsonBufferAllocated.hpp"
@@ -21,12 +20,9 @@
 
 namespace ArduinoJson {
 namespace Internals {
-struct JsonObjectData : Internals::ReferenceType,
-                        Internals::NonCopyable,
+struct JsonObjectData : Internals::NonCopyable,
                         Internals::List<JsonPair>,
                         Internals::JsonBufferAllocated {
-  // Create an empty JsonArray attached to the specified JsonBuffer.
-  // You should not use this constructor directly.
   explicit JsonObjectData(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
 };

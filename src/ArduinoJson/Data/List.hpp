@@ -13,7 +13,7 @@ namespace Internals {
 
 // A singly linked list of T.
 // The linked list is composed of ListNode<T>.
-// It is derived by JsonArray and JsonObjectData
+// It is derived by JsonArrayData and JsonObjectData
 template <typename T>
 class List {
  public:

@@ -99,8 +99,7 @@ class JsonObjectRef {
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(
       const TString& key) const {
-    if (!_object) return Internals::JsonVariantDefault<TValue>::get();
-    return _object->get_impl<const TString&, TValue>(key);
+    return get_impl<const TString&, TValue>(key);
   }
   //
   // TValue get<TValue>(TKey) const;
@@ -109,8 +108,7 @@ class JsonObjectRef {
   //          std::string, String, JsonArray, JsonObject
   template <typename TValue, typename TString>
   typename Internals::JsonVariantAs<TValue>::type get(TString* key) const {
-    if (!_object) return Internals::JsonVariantDefault<TValue>::get();
-    return _object->get_impl<TString*, TValue>(key);
+    return get_impl<TString*, TValue>(key);
   }
 
   // Checks the type of the value associated with the specified key.
@@ -255,6 +253,15 @@ class JsonObjectRef {
 
   template <typename TStringRef>
   JsonObjectRef createNestedObject_impl(TStringRef key);
+
+  template <typename TStringRef, typename TValue>
+  typename Internals::JsonVariantAs<TValue>::type get_impl(
+      TStringRef key) const {
+    if (!_object) return Internals::JsonVariantDefault<TValue>::get();
+    const_iterator it = _object->findKey<TStringRef>(key);
+    return it != end() ? it->value.as<TValue>()
+                       : Internals::JsonVariantDefault<TValue>::get();
+  }
 
   template <typename TStringRef, typename TValueRef>
   bool set_impl(TStringRef key, TValueRef value) {

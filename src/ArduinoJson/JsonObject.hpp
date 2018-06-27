@@ -37,27 +37,6 @@ class JsonObject : public Internals::ReferenceType,
   explicit JsonObject(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
 
-  // Gets the value associated with the specified key.
-  //
-  // TValue get<TValue>(TKey) const;
-  // TKey = const std::string&, const String&
-  // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename TValue, typename TString>
-  typename Internals::JsonVariantAs<TValue>::type get(
-      const TString& key) const {
-    return get_impl<const TString&, TValue>(key);
-  }
-  //
-  // TValue get<TValue>(TKey) const;
-  // TKey = char*, const char*, const FlashStringHelper*
-  // TValue = bool, char, long, int, short, float, double,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename TValue, typename TString>
-  typename Internals::JsonVariantAs<TValue>::type get(TString* key) const {
-    return get_impl<TString*, TValue>(key);
-  }
-
   // Tells weither the specified key is present and associated with a value.
   //
   // bool containsKey(TKey);
@@ -106,14 +85,6 @@ class JsonObject : public Internals::ReferenceType,
   template <typename TStringRef>
   const_iterator findKey(TStringRef key) const {
     return const_cast<JsonObject*>(this)->findKey<TStringRef>(key);
-  }
-
-  template <typename TStringRef, typename TValue>
-  typename Internals::JsonVariantAs<TValue>::type get_impl(
-      TStringRef key) const {
-    const_iterator it = findKey<TStringRef>(key);
-    return it != end() ? it->value.as<TValue>()
-                       : Internals::JsonVariantDefault<TValue>::get();
   }
 };
 }  // namespace ArduinoJson

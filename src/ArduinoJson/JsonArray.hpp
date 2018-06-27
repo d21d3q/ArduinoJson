@@ -34,47 +34,6 @@ class JsonArray : public Internals::ReferenceType,
   explicit JsonArray(Internals::JsonBuffer *buf) throw()
       : Internals::List<JsonVariant>(buf) {}
 
-  // Adds the specified value at the end of the array.
-  //
-  // bool add(TValue);
-  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename T>
-  bool add(const T &value) {
-    return add_impl<const T &>(value);
-  }
-  //
-  // bool add(TValue);
-  // TValue = char*, const char*, const FlashStringHelper*
-  template <typename T>
-  bool add(T *value) {
-    return add_impl<T *>(value);
-  }
-
-  // Sets the value at specified index.
-  //
-  // bool add(size_t index, const TValue&);
-  // TValue = bool, long, int, short, float, double, RawJson, JsonVariant,
-  //          std::string, String, JsonArray, JsonObject
-  template <typename T>
-  bool set(size_t index, const T &value) {
-    return set_impl<const T &>(index, value);
-  }
-  //
-  // bool add(size_t index, TValue);
-  // TValue = char*, const char*, const FlashStringHelper*
-  template <typename T>
-  bool set(size_t index, T *value) {
-    return set_impl<T *>(index, value);
-  }
-
-  // Gets the value at the specified index.
-  template <typename T>
-  typename Internals::JsonVariantAs<T>::type get(size_t index) const {
-    const_iterator it = begin() += index;
-    return it != end() ? it->as<T>() : Internals::JsonVariantDefault<T>::get();
-  }
-
  private:
   template <typename TValueRef>
   bool set_impl(size_t index, TValueRef value) {

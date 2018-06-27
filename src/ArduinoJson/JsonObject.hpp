@@ -53,25 +53,6 @@ class JsonObject : public Internals::ReferenceType,
     return findKey<TString*>(key) != end();
   }
 
-  // Removes the specified key and the associated value.
-  //
-  // void remove(TKey);
-  // TKey = const std::string&, const String&
-  template <typename TString>
-  void remove(const TString& key) {
-    remove(findKey<const TString&>(key));
-  }
-  //
-  // void remove(TKey);
-  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
-  template <typename TString>
-  void remove(TString* key) {
-    remove(findKey<TString*>(key));
-  }
-  //
-  // void remove(iterator)
-  using Internals::List<JsonPair>::remove;
-
  private:
   // Returns the list node that matches the specified key.
   template <typename TStringRef>

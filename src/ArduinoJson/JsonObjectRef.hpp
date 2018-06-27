@@ -182,16 +182,14 @@ class JsonObjectRef {
   // TKey = const std::string&, const String&
   template <typename TString>
   void remove(const TString& key) {
-    if (!_object) return;
-    _object->remove(key);
+    remove_impl<const TString&>(key);
   }
   //
   // void remove(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
   void remove(TString* key) {
-    if (!_object) return;
-    _object->remove(key);
+    remove_impl<TString*>(key);
   }
 
   // Sets the specified key with the specified value.
@@ -291,6 +289,12 @@ class JsonObjectRef {
     if (!_object) return false;
     const_iterator it = _object->findKey<TStringRef>(key);
     return it != end() ? it->value.is<TValue>() : false;
+  }
+
+  template <typename TStringRef>
+  void remove_impl(TStringRef key) {
+    if (!_object) return;
+    _object->remove(_object->findKey<TStringRef>(key));
   }
 
   JsonObject* _object;

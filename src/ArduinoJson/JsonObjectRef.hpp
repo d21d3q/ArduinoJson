@@ -245,7 +245,7 @@ class JsonObjectRef {
   template <typename TStringRef>
   bool containsKey_impl(TStringRef key) const {
     if (!_object) return false;
-    return _object->findKey<TStringRef>(key) != _object->end();
+    return findKey<TStringRef>(key) != _object->end();
   }
 
   template <typename TStringRef>
@@ -254,11 +254,25 @@ class JsonObjectRef {
   template <typename TStringRef>
   JsonObjectRef createNestedObject_impl(TStringRef key);
 
+  // Returns the list node that matches the specified key.
+  template <typename TStringRef>
+  iterator findKey(TStringRef key) {
+    iterator it;
+    for (it = begin(); it != end(); ++it) {
+      if (Internals::StringTraits<TStringRef>::equals(key, it->key)) break;
+    }
+    return it;
+  }
+  template <typename TStringRef>
+  const_iterator findKey(TStringRef key) const {
+    return const_cast<JsonObjectRef*>(this)->findKey<TStringRef>(key);
+  }
+
   template <typename TStringRef, typename TValue>
   typename Internals::JsonVariantAs<TValue>::type get_impl(
       TStringRef key) const {
     if (!_object) return Internals::JsonVariantDefault<TValue>::get();
-    JsonObject::const_iterator it = _object->findKey<TStringRef>(key);
+    JsonObject::const_iterator it = findKey<TStringRef>(key);
     return it != _object->end() ? it->value.as<TValue>()
                                 : Internals::JsonVariantDefault<TValue>::get();
   }
@@ -266,14 +280,14 @@ class JsonObjectRef {
   template <typename TStringRef, typename TValue>
   bool is_impl(TStringRef key) const {
     if (!_object) return false;
-    JsonObject::const_iterator it = _object->findKey<TStringRef>(key);
+    JsonObject::const_iterator it = findKey<TStringRef>(key);
     return it != _object->end() ? it->value.is<TValue>() : false;
   }
 
   template <typename TStringRef>
   void remove_impl(TStringRef key) {
     if (!_object) return;
-    _object->remove(_object->findKey<TStringRef>(key));
+    _object->remove(findKey<TStringRef>(key));
   }
 
   template <typename TStringRef, typename TValueRef>
@@ -284,7 +298,7 @@ class JsonObjectRef {
     if (Internals::StringTraits<TStringRef>::is_null(key)) return false;
 
     // search a matching key
-    iterator it = _object->findKey<TStringRef>(key);
+    iterator it = findKey<TStringRef>(key);
     if (it == end()) {
       // add the key
       it = _object->add();

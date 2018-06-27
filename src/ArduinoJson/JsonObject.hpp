@@ -36,20 +36,5 @@ class JsonObject : public Internals::ReferenceType,
   // You should not use this constructor directly.
   explicit JsonObject(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
-
- private:
-  // Returns the list node that matches the specified key.
-  template <typename TStringRef>
-  iterator findKey(TStringRef key) {
-    iterator it;
-    for (it = begin(); it != end(); ++it) {
-      if (Internals::StringTraits<TStringRef>::equals(key, it->key)) break;
-    }
-    return it;
-  }
-  template <typename TStringRef>
-  const_iterator findKey(TStringRef key) const {
-    return const_cast<JsonObject*>(this)->findKey<TStringRef>(key);
-  }
 };
 }  // namespace ArduinoJson

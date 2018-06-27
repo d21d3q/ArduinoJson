@@ -87,13 +87,12 @@ class List {
   JsonBuffer &buffer() const {
     return *_buffer;
   }
+  JsonBuffer *_buffer;  // TODO!!
 
  protected:
   void clear() {
     _firstNode = 0;
   }
-
-  JsonBuffer *_buffer;
 
  private:
   node_type *_firstNode;

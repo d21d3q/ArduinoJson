@@ -12,13 +12,13 @@ class JsonObjectRef {
   friend class JsonVariant;
 
  public:
-  typedef JsonObject::iterator iterator;
-  typedef JsonObject::const_iterator const_iterator;
+  typedef Internals::JsonObject::iterator iterator;
+  typedef Internals::JsonObject::const_iterator const_iterator;
 
   JsonObjectRef() : _object(0) {}
-  JsonObjectRef(JsonObject* object) : _object(object) {}
+  JsonObjectRef(Internals::JsonObject* object) : _object(object) {}
   JsonObjectRef(Internals::JsonBuffer* buf)
-      : _object(new (buf) JsonObject(buf)) {}
+      : _object(new (buf) Internals::JsonObject(buf)) {}
 
   iterator begin() {
     if (!_object) return iterator();
@@ -310,6 +310,6 @@ class JsonObjectRef {
                                                   value);
   }
 
-  JsonObject* _object;
+  Internals::JsonObject* _object;
 };
 }  // namespace ArduinoJson

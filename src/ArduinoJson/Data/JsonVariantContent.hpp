@@ -11,9 +11,9 @@ namespace ArduinoJson {
 
 // Forward declarations
 class JsonArray;
-class JsonObject;
 
 namespace Internals {
+class JsonObject;
 // A union that defines the actual content of a JsonVariant.
 // The enum JsonVariantType determines which member is in use.
 union JsonVariantContent {
@@ -23,5 +23,5 @@ union JsonVariantContent {
   JsonArray* asArray;    // asArray cannot be null
   JsonObject* asObject;  // asObject cannot be null
 };
-}
-}
+}  // namespace Internals
+}  // namespace ArduinoJson

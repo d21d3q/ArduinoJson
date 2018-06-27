@@ -5,8 +5,6 @@
 #pragma once
 
 namespace ArduinoJson {
-class JsonArray;
-class JsonObject;
 
 namespace Internals {
 
@@ -23,5 +21,5 @@ enum JsonVariantType {
   JSON_OBJECT,            // JsonVariant stores a pointer to a JsonObject
   JSON_FLOAT              // JsonVariant stores a JsonFloat
 };
-}
-}
+}  // namespace Internals
+}  // namespace ArduinoJson

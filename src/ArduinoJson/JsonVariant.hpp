@@ -19,7 +19,6 @@ namespace ArduinoJson {
 // Forward declarations.
 class JsonArray;
 class JsonArrayRef;
-class JsonObject;
 class JsonObjectRef;
 
 // A variant that can be a any value serializable to a JSON value.
@@ -114,11 +113,6 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     _type = Internals::JSON_ARRAY;
   }
 
-  JsonVariant(JsonObject *object) {
-    _content.asObject = object;
-    _type = Internals::JSON_OBJECT;
-  }
-
   // Get the variant as the specified type.
   //
   // char as<char>() const;
@@ -205,30 +199,8 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return variantAsArray();
   }
   //
-  // JsonObject& as<JsonObject> const;
-  // JsonObject& as<JsonObject&> const;
-  template <typename T>
-  typename Internals::enable_if<
-      Internals::is_same<typename Internals::remove_reference<T>::type,
-                         JsonObject>::value,
-      JsonObject &>::type
-  as() const {
-    return variantAsObject();
-  }
-  //
-  // JsonObject& as<const JsonObject> const;
-  // JsonObject& as<const JsonObject&> const;
-  template <typename T>
-  typename Internals::enable_if<
-      Internals::is_same<typename Internals::remove_reference<T>::type,
-                         const JsonObject>::value,
-      const JsonObject &>::type
-  as() const {
-    return variantAsObject();
-  }
-  //
-  // JsonObjectRef as<JsonObjectRef>();
-  // const JsonObjectRef as<const JsonObjectRef>();
+  // JsonObjectRef as<JsonObjectRef>() const;
+  // const JsonObjectRef as<const JsonObjectRef>() const;
   template <typename T>
   typename Internals::enable_if<
       Internals::is_same<typename Internals::remove_const<T>::type,
@@ -308,19 +280,12 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return variantIsArray();
   }
   //
-  // bool is<JsonObject> const;
-  // bool is<JsonObject&> const;
-  // bool is<const JsonObject&> const;
   // bool is<JsonObjectRef> const;
   // bool is<const JsonObjectRef> const;
   template <typename T>
   typename Internals::enable_if<
-      Internals::is_same<
-          typename Internals::remove_const<
-              typename Internals::remove_reference<T>::type>::type,
-          JsonObject>::value ||
-          Internals::is_same<typename Internals::remove_const<T>::type,
-                             JsonObjectRef>::value,
+      Internals::is_same<typename Internals::remove_const<T>::type,
+                         JsonObjectRef>::value,
       bool>::type
   is() const {
     return variantIsObject();

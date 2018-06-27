@@ -20,11 +20,8 @@
 
 namespace ArduinoJson {
 namespace Internals {
-struct JsonArrayData : Internals::NonCopyable,
-                       Internals::List<JsonVariant>,
-                       Internals::JsonBufferAllocated {
-  explicit JsonArrayData(Internals::JsonBuffer *buf) throw()
-      : Internals::List<JsonVariant>(buf) {}
+struct JsonArrayData : List<JsonVariant>, JsonBufferAllocated {
+  explicit JsonArrayData(JsonBuffer *buf) throw() : List<JsonVariant>(buf) {}
 };
 }  // namespace Internals
 }  // namespace ArduinoJson

@@ -32,16 +32,14 @@ class JsonArrayRef {
   //          std::string, String, JsonArray, JsonObject
   template <typename T>
   bool add(const T& value) {
-    if (!_array) return false;
-    return _array->add_impl<const T&>(value);
+    return add_impl<const T&>(value);
   }
   //
   // bool add(TValue);
   // TValue = char*, const char*, const FlashStringHelper*
   template <typename T>
   bool add(T* value) {
-    if (!_array) return false;
-    return _array->add_impl<T*>(value);
+    return add_impl<T*>(value);
   }
 
   iterator begin() {
@@ -55,13 +53,11 @@ class JsonArrayRef {
   }
 
   iterator end() {
-    if (!_array) return iterator();
-    return _array->end();
+    return iterator();
   }
 
   const_iterator end() const {
-    if (!_array) return const_iterator();
-    return _array->end();
+    return const_iterator();
   }
 
   // Imports a 1D array
@@ -162,7 +158,7 @@ class JsonArrayRef {
   template <typename T>
   bool set(size_t index, const T& value) {
     if (!_array) return false;
-    return _array->set_impl<const T&>(index, value);
+    return set_impl<const T&>(index, value);
   }
   //
   // bool add(size_t index, TValue);
@@ -170,7 +166,7 @@ class JsonArrayRef {
   template <typename T>
   bool set(size_t index, T* value) {
     if (!_array) return false;
-    return _array->set_impl<T*>(index, value);
+    return set_impl<T*>(index, value);
   }
 
   size_t size() const {
@@ -191,6 +187,21 @@ class JsonArrayRef {
   }
 
  private:
+  template <typename TValueRef>
+  bool set_impl(size_t index, TValueRef value) {
+    iterator it = begin() += index;
+    if (it == end()) return false;
+    return Internals::ValueSaver<TValueRef>::save(_array->_buffer, *it, value);
+  }
+
+  template <typename TValueRef>
+  bool add_impl(TValueRef value) {
+    if (!_array) return false;
+    iterator it = _array->add();
+    if (it == end()) return false;
+    return Internals::ValueSaver<TValueRef>::save(_array->_buffer, *it, value);
+  }
+
   JsonArray* _array;
 };
 }  // namespace ArduinoJson

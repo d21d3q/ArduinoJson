@@ -33,20 +33,5 @@ class JsonArray : public Internals::ReferenceType,
  public:
   explicit JsonArray(Internals::JsonBuffer *buf) throw()
       : Internals::List<JsonVariant>(buf) {}
-
- private:
-  template <typename TValueRef>
-  bool set_impl(size_t index, TValueRef value) {
-    iterator it = begin() += index;
-    if (it == end()) return false;
-    return Internals::ValueSaver<TValueRef>::save(_buffer, *it, value);
-  }
-
-  template <typename TValueRef>
-  bool add_impl(TValueRef value) {
-    iterator it = Internals::List<JsonVariant>::add();
-    if (it == end()) return false;
-    return Internals::ValueSaver<TValueRef>::save(_buffer, *it, value);
-  }
 };
 }  // namespace ArduinoJson

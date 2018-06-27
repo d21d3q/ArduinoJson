@@ -36,26 +36,22 @@ class JsonObjectRef {
   // TKey = const std::string&, const String&
   template <typename TString>
   bool containsKey(const TString& key) const {
-    if (!_object) return false;
-    return _object->containsKey(key);
+    return containsKey_impl<const TString&>(key);
   }
   //
   // bool containsKey(TKey);
   // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
   template <typename TString>
   bool containsKey(TString* key) const {
-    if (!_object) return false;
-    return _object->containsKey(key);
+    return containsKey_impl<TString*>(key);
   }
 
   iterator end() {
-    if (!_object) return iterator();
-    return _object->end();
+    return iterator();
   }
 
   const_iterator end() const {
-    if (!_object) return const_iterator();
-    return _object->end();
+    return const_iterator();
   }
 
   // Creates and adds a JsonArray.
@@ -247,6 +243,12 @@ class JsonObjectRef {
 
  private:
   template <typename TStringRef>
+  bool containsKey_impl(TStringRef key) const {
+    if (!_object) return false;
+    return _object->findKey<TStringRef>(key) != _object->end();
+  }
+
+  template <typename TStringRef>
   JsonArrayRef createNestedArray_impl(TStringRef key);
 
   template <typename TStringRef>
@@ -256,9 +258,22 @@ class JsonObjectRef {
   typename Internals::JsonVariantAs<TValue>::type get_impl(
       TStringRef key) const {
     if (!_object) return Internals::JsonVariantDefault<TValue>::get();
-    const_iterator it = _object->findKey<TStringRef>(key);
-    return it != end() ? it->value.as<TValue>()
-                       : Internals::JsonVariantDefault<TValue>::get();
+    JsonObject::const_iterator it = _object->findKey<TStringRef>(key);
+    return it != _object->end() ? it->value.as<TValue>()
+                                : Internals::JsonVariantDefault<TValue>::get();
+  }
+
+  template <typename TStringRef, typename TValue>
+  bool is_impl(TStringRef key) const {
+    if (!_object) return false;
+    JsonObject::const_iterator it = _object->findKey<TStringRef>(key);
+    return it != _object->end() ? it->value.is<TValue>() : false;
+  }
+
+  template <typename TStringRef>
+  void remove_impl(TStringRef key) {
+    if (!_object) return;
+    _object->remove(_object->findKey<TStringRef>(key));
   }
 
   template <typename TStringRef, typename TValueRef>
@@ -282,19 +297,6 @@ class JsonObjectRef {
     // save the value
     return Internals::ValueSaver<TValueRef>::save(_object->_buffer, it->value,
                                                   value);
-  }
-
-  template <typename TStringRef, typename TValue>
-  bool is_impl(TStringRef key) const {
-    if (!_object) return false;
-    const_iterator it = _object->findKey<TStringRef>(key);
-    return it != end() ? it->value.is<TValue>() : false;
-  }
-
-  template <typename TStringRef>
-  void remove_impl(TStringRef key) {
-    if (!_object) return;
-    _object->remove(_object->findKey<TStringRef>(key));
   }
 
   JsonObject* _object;

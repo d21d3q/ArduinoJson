@@ -37,22 +37,6 @@ class JsonObject : public Internals::ReferenceType,
   explicit JsonObject(Internals::JsonBuffer* buf) throw()
       : Internals::List<JsonPair>(buf) {}
 
-  // Tells weither the specified key is present and associated with a value.
-  //
-  // bool containsKey(TKey);
-  // TKey = const std::string&, const String&
-  template <typename TString>
-  bool containsKey(const TString& key) const {
-    return findKey<const TString&>(key) != end();
-  }
-  //
-  // bool containsKey(TKey);
-  // TKey = char*, const char*, char[], const char[], const FlashStringHelper*
-  template <typename TString>
-  bool containsKey(TString* key) const {
-    return findKey<TString*>(key) != end();
-  }
-
  private:
   // Returns the list node that matches the specified key.
   template <typename TStringRef>

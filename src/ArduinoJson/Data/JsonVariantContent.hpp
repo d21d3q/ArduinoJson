@@ -8,12 +8,11 @@
 #include "JsonInteger.hpp"
 
 namespace ArduinoJson {
-
+namespace Internals {
 // Forward declarations
 class JsonArray;
-
-namespace Internals {
 class JsonObjectData;
+
 // A union that defines the actual content of a JsonVariant.
 // The enum JsonVariantType determines which member is in use.
 union JsonVariantContent {

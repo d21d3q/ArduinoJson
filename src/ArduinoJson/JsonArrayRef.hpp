@@ -18,12 +18,13 @@ class JsonArrayRef {
   friend class JsonVariant;
 
  public:
-  typedef JsonArray::iterator iterator;
-  typedef JsonArray::const_iterator const_iterator;
+  typedef Internals::JsonArray::iterator iterator;
+  typedef Internals::JsonArray::const_iterator const_iterator;
 
   JsonArrayRef() : _array(0) {}
-  JsonArrayRef(JsonArray* arr) : _array(arr) {}
-  JsonArrayRef(Internals::JsonBuffer* buf) : _array(new (buf) JsonArray(buf)) {}
+  JsonArrayRef(Internals::JsonArray* arr) : _array(arr) {}
+  JsonArrayRef(Internals::JsonBuffer* buf)
+      : _array(new (buf) Internals::JsonArray(buf)) {}
 
   // Adds the specified value at the end of the array.
   //
@@ -202,6 +203,6 @@ class JsonArrayRef {
     return Internals::ValueSaver<TValueRef>::save(_array->_buffer, *it, value);
   }
 
-  JsonArray* _array;
+  Internals::JsonArray* _array;
 };
 }  // namespace ArduinoJson

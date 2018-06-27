@@ -14,16 +14,14 @@
 
 // Returns the size (in bytes) of an array with n elements.
 // Can be very handy to determine the size of a StaticJsonBuffer.
-#define JSON_ARRAY_SIZE(NUMBER_OF_ELEMENTS) \
-  (sizeof(ArduinoJson::JsonArray) +         \
-   (NUMBER_OF_ELEMENTS) * sizeof(ArduinoJson::JsonArray::node_type))
+#define JSON_ARRAY_SIZE(NUMBER_OF_ELEMENTS)    \
+  (sizeof(ArduinoJson::Internals::JsonArray) + \
+   (NUMBER_OF_ELEMENTS) *                      \
+       sizeof(ArduinoJson::Internals::JsonArray::node_type))
 
 namespace ArduinoJson {
 
 namespace Internals {
-class JsonBuffer;
-}
-
 class JsonArray : public Internals::ReferenceType,
                   public Internals::NonCopyable,
                   public Internals::List<JsonVariant>,
@@ -34,4 +32,5 @@ class JsonArray : public Internals::ReferenceType,
   explicit JsonArray(Internals::JsonBuffer *buf) throw()
       : Internals::List<JsonVariant>(buf) {}
 };
+}  // namespace Internals
 }  // namespace ArduinoJson

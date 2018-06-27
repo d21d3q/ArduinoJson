@@ -17,7 +17,6 @@
 namespace ArduinoJson {
 
 // Forward declarations.
-class JsonArray;
 class JsonArrayRef;
 class JsonObjectRef;
 
@@ -108,11 +107,6 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
   JsonVariant(JsonArrayRef array);
   JsonVariant(JsonObjectRef object);
 
-  JsonVariant(JsonArray *array) {
-    _content.asArray = array;
-    _type = Internals::JSON_ARRAY;
-  }
-
   // Get the variant as the specified type.
   //
   // char as<char>() const;
@@ -168,28 +162,8 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return s;
   }
   //
-  // JsonArray& as<JsonArray> const;
-  // JsonArray& as<JsonArray&> const;
-  template <typename T>
-  typename Internals::enable_if<
-      Internals::is_same<typename Internals::remove_reference<T>::type,
-                         JsonArray>::value,
-      JsonArray &>::type
-  as() const {
-    return variantAsArray();
-  }
-  //
-  // const JsonArray& as<const JsonArray&> const;
-  template <typename T>
-  typename Internals::enable_if<
-      Internals::is_same<typename Internals::remove_reference<T>::type,
-                         const JsonArray>::value,
-      const JsonArray &>::type
-  as() const {
-    return variantAsArray();
-  }
-  //
-  // JsonArrayRef as<JsonArrayRef>();
+  // JsonArrayRef as<JsonArrayRef>() const;
+  // const JsonArrayRef as<const JsonArrayRef>() const;
   template <typename T>
   typename Internals::enable_if<
       Internals::is_same<typename Internals::remove_const<T>::type,
@@ -262,19 +236,12 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
     return variantIsString();
   }
   //
-  // bool is<JsonArray> const;
-  // bool is<JsonArray&> const;
-  // bool is<const JsonArray&> const;
   // bool is<JsonArrayRef> const;
   // bool is<const JsonArrayRef> const;
   template <typename T>
   typename Internals::enable_if<
-      Internals::is_same<
-          typename Internals::remove_const<
-              typename Internals::remove_reference<T>::type>::type,
-          JsonArray>::value ||
-          Internals::is_same<typename Internals::remove_const<T>::type,
-                             JsonArrayRef>::value,
+      Internals::is_same<typename Internals::remove_const<T>::type,
+                         JsonArrayRef>::value,
       bool>::type
   is() const {
     return variantIsArray();

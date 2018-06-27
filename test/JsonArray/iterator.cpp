@@ -28,10 +28,10 @@ static void run_iterator_test() {
 
 TEST_CASE("JsonArray::begin()/end()") {
   SECTION("Mutable") {
-    run_iterator_test<JsonArray::iterator>();
+    run_iterator_test<JsonArrayRef::iterator>();
   }
 
   SECTION("Const") {
-    run_iterator_test<JsonArray::const_iterator>();
+    run_iterator_test<JsonArrayRef::const_iterator>();
   }
 }

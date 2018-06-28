@@ -1,6 +1,27 @@
 ArduinoJson: change log
 =======================
 
+HEAD
+----
+
+* Return `JsonArray` and `JsonObject` by value instead of reference (issue #309)
+
+> ### BREAKING CHANGES
+> 
+> Old code:
+>
+> ```c++
+> JsonObject& obj = doc.to<JsonObject>();
+> JsonArray& arr = obj.createNestedArray("key");
+> ```
+> 
+> New code:
+> 
+> ```c++
+> JsonObject obj = doc.to<JsonObject>();
+> JsonArray arr = obj.createNestedArray("key");
+> ```
+
 v6.0.1-beta
 -----------
 

@@ -18,18 +18,18 @@
 namespace ArduinoJson {
 
 inline JsonVariant::JsonVariant(JsonArray array) {
-  if (array.success()) {
+  if (!array.isNull()) {
     _type = Internals::JSON_ARRAY;
-    _content.asArray = array._array;
+    _content.asArray = array._data;
   } else {
     _type = Internals::JSON_UNDEFINED;
   }
 }
 
 inline JsonVariant::JsonVariant(JsonObject object) {
-  if (object.success()) {
+  if (!object.isNull()) {
     _type = Internals::JSON_OBJECT;
-    _content.asObject = object._object;
+    _content.asObject = object._data;
   } else {
     _type = Internals::JSON_UNDEFINED;
   }

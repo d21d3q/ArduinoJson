@@ -241,7 +241,7 @@ class MsgPackDeserializer {
 
   DeserializationError readArray(JsonVariant &variant, size_t n) {
     JsonArray array(_buffer);
-    if (!array.success()) return DeserializationError::NoMemory;
+    if (array.isNull()) return DeserializationError::NoMemory;
     variant = array;
     return readArray(array, n);
   }
@@ -268,7 +268,7 @@ class MsgPackDeserializer {
 
   DeserializationError readObject(JsonVariant &variant, size_t n) {
     JsonObject object(_buffer);
-    if (!object.success()) return DeserializationError::NoMemory;
+    if (object.isNull()) return DeserializationError::NoMemory;
     variant = object;
     return readObject(object, n);
   }

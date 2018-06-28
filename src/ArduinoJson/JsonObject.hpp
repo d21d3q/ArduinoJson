@@ -15,19 +15,19 @@ class JsonObject {
   typedef Internals::JsonObjectData::iterator iterator;
   typedef Internals::JsonObjectData::const_iterator const_iterator;
 
-  JsonObject() : _object(0) {}
-  JsonObject(Internals::JsonObjectData* object) : _object(object) {}
+  JsonObject() : _data(0) {}
+  JsonObject(Internals::JsonObjectData* object) : _data(object) {}
   JsonObject(Internals::JsonBuffer* buf)
-      : _object(new (buf) Internals::JsonObjectData(buf)) {}
+      : _data(new (buf) Internals::JsonObjectData(buf)) {}
 
   iterator begin() {
-    if (!_object) return iterator();
-    return _object->begin();
+    if (!_data) return iterator();
+    return _data->begin();
   }
 
   const_iterator begin() const {
-    if (!_object) return const_iterator();
-    return _object->begin();
+    if (!_data) return const_iterator();
+    return _data->begin();
   }
 
   // Tells weither the specified key is present and associated with a value.
@@ -71,7 +71,7 @@ class JsonObject {
   // TKey = const std::string&, const String&
   template <typename TString>
   JsonObject createNestedObject(const TString& key) {
-    if (!_object) return JsonObject();
+    if (!_data) return JsonObject();
     return createNestedObject_impl<const TString&>(key);
   }
   //
@@ -160,12 +160,12 @@ class JsonObject {
   }
 
   bool operator==(const JsonObject& rhs) const {
-    return _object == rhs._object;
+    return _data == rhs._data;
   }
 
   void remove(iterator it) {
-    if (!_object) return;
-    _object->remove(it);
+    if (!_data) return;
+    _data->remove(it);
   }
 
   // Removes the specified key and the associated value.
@@ -221,17 +221,17 @@ class JsonObject {
   }
 
   size_t size() const {
-    if (!_object) return 0;
-    return _object->size();
+    if (!_data) return 0;
+    return _data->size();
   }
 
-  bool success() const {
-    return _object != 0;
+  bool isNull() const {
+    return _data == 0;
   }
 
   template <typename Visitor>
   void visit(Visitor& visitor) const {
-    if (_object)
+    if (_data)
       visitor.acceptObject(*this);
     else
       return visitor.acceptNull();
@@ -279,13 +279,13 @@ class JsonObject {
 
   template <typename TStringRef>
   void remove_impl(TStringRef key) {
-    if (!_object) return;
-    _object->remove(findKey<TStringRef>(key));
+    if (!_data) return;
+    _data->remove(findKey<TStringRef>(key));
   }
 
   template <typename TStringRef, typename TValueRef>
   bool set_impl(TStringRef key, TValueRef value) {
-    if (!_object) return false;
+    if (!_data) return false;
 
     // ignore null key
     if (Internals::StringTraits<TStringRef>::is_null(key)) return false;
@@ -294,18 +294,18 @@ class JsonObject {
     iterator it = findKey<TStringRef>(key);
     if (it == end()) {
       // add the key
-      it = _object->add();
+      it = _data->add();
       if (it == end()) return false;
-      bool key_ok = Internals::ValueSaver<TStringRef>::save(_object->_buffer,
-                                                            it->key, key);
+      bool key_ok =
+          Internals::ValueSaver<TStringRef>::save(_data->_buffer, it->key, key);
       if (!key_ok) return false;
     }
 
     // save the value
-    return Internals::ValueSaver<TValueRef>::save(_object->_buffer, it->value,
+    return Internals::ValueSaver<TValueRef>::save(_data->_buffer, it->value,
                                                   value);
   }
 
-  Internals::JsonObjectData* _object;
+  Internals::JsonObjectData* _data;
 };
 }  // namespace ArduinoJson

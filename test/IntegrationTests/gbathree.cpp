@@ -82,7 +82,7 @@ TEST_CASE("Gbathree") {
     // "pulses":[50,50,50]
 
     JsonArray array = root["pulses"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
 
     REQUIRE(3 == array.size());
 
@@ -95,7 +95,7 @@ TEST_CASE("Gbathree") {
     // "act":[2,1,2,2]
 
     JsonArray array = root["act"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
 
     REQUIRE(4 == array.size());
     REQUIRE(2 == array[0]);
@@ -108,7 +108,7 @@ TEST_CASE("Gbathree") {
     // "detectors":[[34,34,34,34],[34,34,34,34],[34,34,34,34],[34,34,34,34]]
 
     JsonArray array = root["detectors"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
     REQUIRE(4 == array.size());
 
     for (size_t i = 0; i < 4; i++) {
@@ -125,7 +125,7 @@ TEST_CASE("Gbathree") {
     // alta:[2,2,2,2]
 
     JsonArray array = root["alta"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
 
     REQUIRE(4 == array.size());
 
@@ -138,7 +138,7 @@ TEST_CASE("Gbathree") {
     // altb:[2,2,2,2]
 
     JsonArray array = root["altb"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
 
     REQUIRE(4 == array.size());
 
@@ -151,7 +151,7 @@ TEST_CASE("Gbathree") {
     // "measlights":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,15,15]]
 
     JsonArray array = root["measlights"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
     REQUIRE(4 == array.size());
 
     for (size_t i = 0; i < 4; i++) {
@@ -169,7 +169,7 @@ TEST_CASE("Gbathree") {
     // "measlights2":[[15,15,15,15],[15,15,15,15],[15,15,15,15],[15,15,15,15]]
 
     JsonArray array = root["measlights2"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
     REQUIRE(4 == array.size());
 
     for (size_t i = 0; i < 4; i++) {
@@ -186,7 +186,7 @@ TEST_CASE("Gbathree") {
     // altc:[2,2,2,2]
 
     JsonArray array = root["altc"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
 
     REQUIRE(4 == array.size());
 
@@ -199,7 +199,7 @@ TEST_CASE("Gbathree") {
     // altd:[2,2,2,2]
 
     JsonArray array = root["altd"];
-    REQUIRE(array.success());
+    REQUIRE(array.isNull() == false);
 
     REQUIRE(4 == array.size());
 

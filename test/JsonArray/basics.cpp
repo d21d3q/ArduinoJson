@@ -9,8 +9,8 @@ TEST_CASE("JsonArray basics") {
   DynamicJsonDocument doc;
   JsonArray array = doc.to<JsonArray>();
 
-  SECTION("SuccessIsTrue") {
-    REQUIRE(array.success());
+  SECTION("isNull()") {
+    REQUIRE(array.isNull() == false);
   }
 
   SECTION("InitialSizeIsZero") {

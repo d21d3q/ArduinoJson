@@ -5,15 +5,15 @@
 #include <ArduinoJson.h>
 #include <catch.hpp>
 
-TEST_CASE("JsonVariant::success()") {
+TEST_CASE("JsonVariant::isNull()") {
   SECTION("ReturnsFalse_WhenUndefined") {
     JsonVariant variant;
-    REQUIRE(false == variant.success());
+    REQUIRE(variant.isNull() == true);
   }
 
   SECTION("ReturnsTrue_WhenInteger") {
     JsonVariant variant = 0;
-    REQUIRE(true == variant.success());
+    REQUIRE(variant.isNull() == false);
   }
 
   SECTION("ReturnsTrue_WhenEmptyArray") {
@@ -21,7 +21,7 @@ TEST_CASE("JsonVariant::success()") {
     JsonArray array = doc.to<JsonArray>();
 
     JsonVariant variant = array;
-    REQUIRE(true == variant.success());
+    REQUIRE(variant.isNull() == false);
   }
 
   SECTION("ReturnsTrue_WhenEmptyObject") {
@@ -29,16 +29,16 @@ TEST_CASE("JsonVariant::success()") {
     JsonObject obj = doc.to<JsonObject>();
 
     JsonVariant variant = obj;
-    REQUIRE(true == variant.success());
+    REQUIRE(variant.isNull() == false);
   }
 
   SECTION("ReturnsFalse_WhenInvalidArray") {
     JsonVariant variant = JsonArray();
-    REQUIRE(false == variant.success());
+    REQUIRE(variant.isNull() == true);
   }
 
   SECTION("ReturnsFalse_WhenInvalidObject") {
     JsonVariant variant = JsonObject();
-    REQUIRE(false == variant.success());
+    REQUIRE(variant.isNull() == true);
   }
 }

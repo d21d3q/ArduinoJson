@@ -22,17 +22,9 @@ class List {
   typedef ListIterator<T> iterator;
   typedef ListConstIterator<T> const_iterator;
 
-  // Creates an empty List<T> attached to a JsonBuffer.
-  // The JsonBuffer allows to allocate new nodes.
-  // When buffer is NULL, the List is not able to grow and success() returns
-  // false. This is used to identify bad memory allocations and parsing
-  // failures.
   explicit List(JsonBuffer *buf) : _buffer(buf), _firstNode(NULL) {}
 
-  // Returns true if the object is valid
-  // Would return false in the following situation:
-  // - the memory allocation failed (StaticJsonBuffer was too small)
-  // - the JSON parsing failed
+  // TODO: remove
   bool success() const {
     return _buffer != NULL;
   }

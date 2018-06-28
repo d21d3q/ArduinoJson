@@ -380,9 +380,9 @@ TEST_CASE("deserialize JSON array") {
 
       REQUIRE(err == DeserializationError::Ok);
 
-      REQUIRE(true == object1.success());
-      REQUIRE(true == object2.success());
-      REQUIRE(false == object3.success());
+      REQUIRE(object1.isNull() == false);
+      REQUIRE(object2.isNull() == false);
+      REQUIRE(object3.isNull() == true);
 
       REQUIRE(2 == object1.size());
       REQUIRE(2 == object2.size());

@@ -43,8 +43,8 @@ class JsonArraySubscript : public JsonVariantBase<JsonArraySubscript> {
     return *this;
   }
 
-  FORCE_INLINE bool success() const {
-    return _index < _array.size();
+  FORCE_INLINE bool isNull() const {
+    return _index >= _array.size();
   }
 
   template <typename T>

@@ -67,7 +67,7 @@ class JsonDeserializer {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
 
     JsonArray array(_buffer);
-    if (!array.success()) return DeserializationError::NoMemory;
+    if (array.isNull()) return DeserializationError::NoMemory;
     variant = array;
 
     // Check opening braket
@@ -104,7 +104,7 @@ class JsonDeserializer {
     if (_nestingLimit == 0) return DeserializationError::TooDeep;
 
     JsonObject object(_buffer);
-    if (!object.success()) return DeserializationError::NoMemory;
+    if (object.isNull()) return DeserializationError::NoMemory;
     variant = object;
 
     // Check opening brace

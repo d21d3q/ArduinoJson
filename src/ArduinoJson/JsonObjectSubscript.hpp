@@ -50,8 +50,8 @@ class JsonObjectSubscript
     return *this;
   }
 
-  FORCE_INLINE bool success() const {
-    return _object.containsKey(_key);
+  FORCE_INLINE bool isNull() const {
+    return !_object.containsKey(_key);
   }
 
   template <typename TValue>

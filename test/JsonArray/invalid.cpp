@@ -11,7 +11,7 @@ TEST_CASE("Undefined JsonArray") {
   JsonArray array;
 
   SECTION("SubscriptFails") {
-    REQUIRE_FALSE(array[0].success());
+    REQUIRE(array[0].isNull());
   }
 
   SECTION("AddFails") {
@@ -20,11 +20,11 @@ TEST_CASE("Undefined JsonArray") {
   }
 
   SECTION("CreateNestedArrayFails") {
-    REQUIRE_FALSE(array.createNestedArray().success());
+    REQUIRE(array.createNestedArray().isNull());
   }
 
   SECTION("CreateNestedObjectFails") {
-    REQUIRE_FALSE(array.createNestedObject().success());
+    REQUIRE(array.createNestedObject().isNull());
   }
 
   SECTION("PrintToWritesBrackets") {

@@ -259,8 +259,8 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
   }
 
   // Returns true if the variant has a value
-  bool success() const {
-    return _type != Internals::JSON_UNDEFINED;
+  bool isNull() const {
+    return _type == Internals::JSON_UNDEFINED;
   }
 
   template <typename Visitor>

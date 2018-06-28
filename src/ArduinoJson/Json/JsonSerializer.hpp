@@ -75,8 +75,8 @@ class JsonSerializer {
     _writer.writeBoolean(value);
   }
 
-  void acceptUndefined() {
-    _writer.writeRaw("undefined");
+  void acceptNull() {
+    _writer.writeRaw("null");
   }
 
   size_t bytesWritten() const {

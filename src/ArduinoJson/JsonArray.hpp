@@ -184,7 +184,7 @@ class JsonArray {
     if (_array)
       return visitor.acceptArray(*this);
     else
-      visitor.acceptUndefined();
+      visitor.acceptNull();
   }
 
  private:

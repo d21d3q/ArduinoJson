@@ -234,7 +234,7 @@ class JsonObject {
     if (_object)
       visitor.acceptObject(*this);
     else
-      return visitor.acceptUndefined();
+      return visitor.acceptNull();
   }
 
  private:

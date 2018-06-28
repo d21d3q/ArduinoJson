@@ -292,7 +292,7 @@ class JsonVariant : public Internals::JsonVariantBase<JsonVariant> {
         return visitor.acceptBoolean(_content.asInteger != 0);
 
       default:  // JSON_UNDEFINED
-        return visitor.acceptUndefined();
+        return visitor.acceptNull();
     }
   }
 

@@ -30,6 +30,6 @@ TEST_CASE("Undefined JsonArray") {
   SECTION("PrintToWritesBrackets") {
     char buffer[32];
     serializeJson(array, buffer, sizeof(buffer));
-    REQUIRE_THAT(buffer, Equals("undefined"));
+    REQUIRE_THAT(buffer, Equals("null"));
   }
 }

@@ -27,9 +27,9 @@ TEST_CASE("JsonObject::invalid()") {
     REQUIRE_FALSE(obj.createNestedObject("world").success());
   }
 
-  SECTION("serialize to 'undefined'") {
+  SECTION("serialize to 'null'") {
     char buffer[32];
     serializeJson(obj, buffer, sizeof(buffer));
-    REQUIRE_THAT(buffer, Equals("undefined"));
+    REQUIRE_THAT(buffer, Equals("null"));
   }
 }

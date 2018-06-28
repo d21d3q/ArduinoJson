@@ -10,8 +10,8 @@
 namespace ArduinoJson {
 namespace Internals {
 // Forward declarations
-class JsonArrayData;
-class JsonObjectData;
+struct JsonArrayData;
+struct JsonObjectData;
 
 // A union that defines the actual content of a JsonVariant.
 // The enum JsonVariantType determines which member is in use.
